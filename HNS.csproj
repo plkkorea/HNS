@@ -1,0 +1,70 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\UserFiles\제품사진들\**" />
+    <Content Remove="wwwroot\UserFiles\제품사진들\**" />
+    <EmbeddedResource Remove="wwwroot\UserFiles\제품사진들\**" />
+    <None Remove="wwwroot\UserFiles\제품사진들\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="iTextSharp" Version="5.5.13" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.1.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HNS.BusinessSvcs\HNS.BusinessSvcs.csproj" />
+    <ProjectReference Include="..\HNS.Entities\HNS.Entities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Data\" />
+    <!--<Folder Include="wwwroot\UserFiles\attachment\data_down\option\" />
+    <Folder Include="wwwroot\UserFiles\attachment\data_down\one\" />
+    <Folder Include="wwwroot\UserFiles\attachment\data_down\pcb\" />
+    <Folder Include="wwwroot\UserFiles\attachment\data_down\cad\" />
+    <Folder Include="wwwroot\UserFiles\attachment\technote_down\" />
+    <Folder Include="wwwroot\UserFiles\attachment\connected_down\" />
+    <Folder Include="wwwroot\UserFiles\images\" />
+    <Folder Include="wwwroot\UserFiles\images\techNoteImage\" />
+    <Folder Include="wwwroot\UserFiles\images\ConnectedDeviceImage\" />
+    <Folder Include="wwwroot\UserFiles\images\faqImage\" />
+    <Folder Include="wwwroot\UserFiles\images\noticeImage\" />
+    <Folder Include="wwwroot\UserFiles\images\updateImage\" />-->
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\UserFiles\19792029-61cd-4ab7-992d-6fe7d70f4b71.xlsx" />
+    <None Include="wwwroot\UserFiles\1c81f0e6-bfde-432a-bd4a-5807566d44e5" />
+    <None Include="wwwroot\UserFiles\3cb5d234-0fef-4712-9715-3de5de4b09d8.docx" />
+    <None Include="wwwroot\UserFiles\4bd20411-ac98-47c6-a3cd-16527a28f514.csv" />
+    <None Include="wwwroot\UserFiles\818060c4-ee71-4f72-8c38-5e400d50ad0c" />
+    <None Include="wwwroot\UserFiles\8c94ff8a-4d27-44d1-92d5-34676f6ec1ce.pptx" />
+    <None Include="wwwroot\UserFiles\attachment\connected_down\downloadSameple.xlsx" />
+    <None Include="wwwroot\UserFiles\attachment\data_down\cad\downloadSameple.xlsx" />
+    <None Include="wwwroot\UserFiles\attachment\data_down\one\downloadSameple.xlsx" />
+    <None Include="wwwroot\UserFiles\attachment\data_down\option\downloadSameple.xlsx" />
+    <None Include="wwwroot\UserFiles\attachment\data_down\pcb\downloadSameple.xlsx" />
+    <None Include="wwwroot\UserFiles\attachment\technote_down\downloadSameple.xlsx" />
+    <None Include="wwwroot\UserFiles\c380ef64-b092-47df-87e0-b246980cf03c" />
+    <None Include="wwwroot\UserFiles\cd2411ef-626f-481f-89e3-40f7e3d487a5" />
+    <None Include="wwwroot\UserFiles\images\ConnectedDeviceImage\downloadSameple.xlsx" />
+    <None Include="wwwroot\UserFiles\images\faqImage\downloadSameple.xlsx" />
+    <None Include="wwwroot\UserFiles\images\noticeImage\downloadSameple.xlsx" />
+    <None Include="wwwroot\UserFiles\images\techNoteImage\downloadSameple.xlsx" />
+    <None Include="wwwroot\UserFiles\images\techNoteImage\web_언어팩-수정본.xlsx" />
+    <None Include="wwwroot\UserFiles\images\updateImage\downloadSameple.xlsx" />
+  </ItemGroup>
+
+</Project>

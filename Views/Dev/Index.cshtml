@@ -1,0 +1,34 @@
+﻿@{ 
+    Layout = null;
+}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+    <title>FileManager</title>
+    @*<link href="/Content/themes/jQueryUI_new/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css" />*@
+    <link href="~/Filemanager/window/css/jquery.window.css" rel="stylesheet" />
+    <link href="~/Filemanager/window/css/jquery.window.css" rel="stylesheet" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+    <script src="~/Filemanager/window/jquery.window.min.js"></script>
+    <script src="~/Filemanager/scripts/filemanager.js"></script>
+    <script src="~/Filemanager/plupload/plupload.min.js"></script>
+</head>
+<body>
+
+
+
+
+    <input type="button" class="btn btn-primary" value="Open File Manager in Client Mode" onclick="OpenFileMngr(123,'/files/',true,false,false);" />
+
+
+    <input type="button" class="btn btn-primary" value="Open File Manager in Server Mode" onclick="OpenFileMngr(123,'/files/',true,true,false);" />
+
+
+
+
+
+</body>
+</html>

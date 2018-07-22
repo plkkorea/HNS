@@ -1,0 +1,72 @@
+﻿@model HNS.Entities.PopupLayer
+@{
+    ViewData["Title"] = "Popup Layers";
+    ViewData["BreadCrumb"] = "기타관리,Popup Layers";
+    ViewData["CurrentMenu"] = "기타관리";
+    ViewData["CurrentMenuItem"] = "Popup Layers";
+}
+
+
+<form asp-action="PopupLayersEdit" asp-controller="PopupLayers" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="bbs-write">
+        <dl>
+            <dt>활성화</dt>
+            <dd><input type="checkbox" asp-for="Active" /></dd>
+        </dl>
+        <dl>
+            <dt>게시일</dt>
+            <dd><input type="date" asp-for="StartDate" /></dd>
+        </dl>
+        <dl>
+            <dt>종료일</dt>
+            <dd><input type="date" asp-for="EndDate" /></dd>
+        </dl>
+        <dl>
+            <dt>설명</dt>
+            <dd><input type="text" asp-for="Description" required></dd>
+        </dl>
+
+        <dl class="content" style="height:auto;">
+            <dt>내용</dt>
+            <dd>
+                <textarea asp-for="Content" rows="20"></textarea>
+            </dd>
+        </dl>
+    </div>
+
+
+    @if (Model?.Id > 0)
+    {
+        <div class="btn_confirm01 btn_confirm">
+            <input type="submit" value="수정" class="btn-ty1 light" accesskey="s">
+            <a href="@Url.Action("Index", "PopupLayers")">
+                취소
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="btn_confirm01 btn_confirm">
+            <input type="submit" value="작성" class="btn-ty1 light" accesskey="s">
+            <a href="@Url.Action("Index", "PopupLayers")">
+                취소
+            </a>
+        </div>
+    }
+
+
+</form>
+
+
+@section Scripts
+    {
+    <script src="~/lib/ckeditor/ckeditor.js"></script>
+
+    <script>
+        $(function () {
+            CKEDITOR.replace('Content');
+        })
+    </script>
+
+}

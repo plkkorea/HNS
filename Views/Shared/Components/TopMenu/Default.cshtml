@@ -1,0 +1,288 @@
+﻿@model HNS.Entities.MenuItemViewModel
+
+@{
+    var previousNextLink = (HNS.ViewModels.PreviousNextLink)ViewBag.PreviousNext;
+    int counter = 0;
+    var controllerName = ViewContext.RouteData.Values["Controller"].ToString();
+    var actionName = ViewContext.RouteData.Values["Action"].ToString();
+}
+
+<div id="header">
+    <div class="inner">
+        <div class="top">
+            <h1 class="logo"><a href="@Url.Action("Index","Home")"><img src="~/template/images/logo.png" class="logo1" alt="(주)에이치엔에스" /><img src="~/template/images/logo1.png" class="logo2" alt="(주)에이치엔에스" /></a></h1>
+
+            <div class="tnb_box">
+                <a href="#" class="con" id="purchaser_sub1">구매자</a>
+                <a href="#" class="dev" id="developer_sub1">개발자</a>
+                <a href="/CustomerSupport/Search" class="sch">검색</a>
+                <button type="button" class="_btn _menu _menuon"><img src="~/template/images/top-menu.png" alt="MENU" /></button>
+                <button type="button" class="_btn _menu _menuoff"><img src="~/template/images/nav-close.png" alt="닫기" /></button>
+            </div>
+        </div>
+    </div><!-- //inner -->
+    <div class="gnb_wrap">
+        <h2 class="hide">주메뉴</h2>
+
+        <ul class="_gnb">
+
+            @foreach (var m in Model.MenuItem.Children)
+            {
+                <li>
+                    @if (m.IsCurrentPage || string.IsNullOrWhiteSpace(m.ControllerName))
+                    {
+                        if (m.RedirectToMenuId.HasValue)
+                        {
+                            <a href="@Url.Action(m.RedirectToMenu.ActionName, m.RedirectToMenu.ControllerName)">@m.Text</a>
+                        }
+                        else if (m.IsCurrentPage)
+                        {
+                            <a href="javascript:;" style="color: #121c3a; font-weight: 600;">@m.Text</a>
+                        }
+                        else
+                        {
+                            <a href="javascript:;">@m.Text</a>
+                        }
+                    }
+                    else
+                    {
+                        <a href="@Url.Action(m.ActionName, m.ControllerName)">@m.Text</a>
+                    }
+                    @if (m.Children.Count > 0)
+                    {
+                        <ul>
+                            @foreach (var child1 in m.Children)
+                            {
+                                @if (child1.IsCurrentPage || string.IsNullOrWhiteSpace(child1.ControllerName))
+                                {
+                                    if (child1.IsCurrentPage)
+                                    {
+                                        <li><a href="javascript:;" style="color: #121c3a; font-weight: 600;">@child1.Text</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a href="javascript:;">@child1.Text</a></li>
+                                    }
+                                }
+                                else
+                                {
+                                    <li><a href="@Url.Action(child1.ActionName, child1.ControllerName)">@child1.Text</a></li>
+                                }
+                            }
+                        </ul>
+                    }
+                </li>
+            }
+
+        </ul>
+
+        <div class="btn_gnb_fix">
+            <input type="checkbox" id="gnb_fix" name="gnb_fix" class="btn_gnb_chk" />
+            <label for="gnb_fix"></label>
+        </div>
+    </div><!-- //inner  -->
+</div><!-- //header -->
+<nav id="_nav">
+    <div class="_inner">
+        <ul class="_gnb">
+            <li>
+                <a href="#" onclick="refresh()">회사소개</a>
+                <ul>
+                    <li><a href="#">인사말</a></li>
+                    <li><a href="#">사업분야</a></li>
+                    <li><a href="#">연혁</a></li>
+                    <li><a href="#">연락처 및 위치</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">하드웨어</a>
+                <ul>
+                    <li><a href="#">제품 응용분야</a></li>
+                    <li><a href="#">제품 라인업</a></li>
+                    <li><a href="#">제품 비교검색</a></li>
+                    <li><a href="#">IEC1000-Series</a></li>
+                    <li><a href="#">IEC667-Series</a></li>
+                    <li><a href="#">IEC266-Series</a></li>
+                    <li><a href="#">Smart I/O - Series</a></li>
+                    <li><a href="#">기타옵션 제품</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">소프트웨어</a>
+                <ul>
+                    <li><a href="#">SmartX Framework 소개</a></li>
+                    <li><a href="#">개발 툴</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">개발문의</a>
+                <ul>
+                    <li><a href="#">개발안내</a></li>
+                    <li><a href="#">UI 디자인</a></li>
+                    <li><a href="#">개발자 프로모션</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">자료실</a>
+                <ul>
+                    <li><a href="#">제품관련</a></li>
+                    <li><a href="#">SmartX Framework 관련</a></li>
+                    <li><a href="#">도면 및 승인원</a></li>
+                    <li><a href="#">Tech Note</a></li>
+                    <li><a href="#">Connectd Device</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">커뮤니티</a>
+                <ul>
+                    <li><a href="#">공지사항</a></li>
+                    <li><a href="#">자주하는 질문</a></li>
+                    <li><a href="#">Q&amp;A</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">고객지원</a>
+                <ul>
+                    <li><a href="#">A/S 안내</a></li>
+                    <li><a href="#">원격기술지원</a></li>
+                    <li><a href="#">제품 구매안내</a></li>
+                    <li><a href="#">통합검색</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav><!-- //_nav -->
+
+
+@if (controllerName != "Home" && actionName != "Index")
+{
+    <div id="_svis">
+        <div class="_inner_wrap">
+            <img src="~/template/images/svis-dummy.gif" alt="DUMMY" />
+            <div class="_inner">
+                <dl>
+                    <dt>
+                        @Model.PageTitleKorean
+                    </dt>
+                    <dd>@Model.PageTitleEnglish</dd>
+                </dl>
+            </div>
+
+            <div class="svis_arrow">
+                @if (Model.PreviousLink != null)
+                {
+                    <a href="@Url.Action(Model.PreviousLink.ActionName, Model.PreviousLink.ControllerName)" class="prev">
+                        <span>@Model.PreviousLink.Text</span>
+                    </a>
+                }
+                @if (Model.NextLink != null)
+                {
+                    <a href="@Url.Action(Model.NextLink.ActionName, Model.NextLink.ControllerName)" class="next">
+                        <span>@Model.NextLink.Text</span>
+                    </a>
+                }
+            </div>
+
+        </div><!-- //_inner_wrap -->
+    </div><!-- //_svis -->
+
+    <div id="_snav">
+        <div class="_snb">
+            <ul class="_inner" class="__p">
+                <li><a href="@Url.Action("Index", "Home")"><img src="~/template/images/ico-home.gif" alt="HOME" /></a></li>
+                <li class="_ov _ov1">
+
+                    @if (Model.SubMenus1.Count > 0)
+                    {
+                        var first = Model.SubMenus1.FirstOrDefault();
+
+                        <a href="#">@first.Text</a>
+
+                        <ul>
+                            @{
+                                Model.SubMenus1.Remove(first);
+                            }
+
+                            @foreach (var subMenu1 in Model.SubMenus1)
+                            {
+                                if (subMenu1.RedirectToMenuId.HasValue && !subMenu1.IsCurrentPage)
+                                {
+                                    <li>
+                                        <a href="@Url.Action(subMenu1.RedirectToMenu.ActionName, subMenu1.RedirectToMenu.ControllerName)">@subMenu1.Text</a>
+                                    </li>
+                                }
+                                else if (subMenu1.IsCurrentPage || string.IsNullOrWhiteSpace(subMenu1.ControllerName))
+                                {
+                                    <li><a href="javascript:;">@subMenu1.Text</a></li>
+                                }
+                                else
+                                {
+                                    if (subMenu1.RedirectToMenuId.HasValue)
+                                    {
+                                        <a href="@Url.Action(subMenu1.RedirectToMenu.ActionName, subMenu1.RedirectToMenu.ControllerName)">@subMenu1.Text</a>
+                                    }
+                                    else
+                                    {
+                                        <li><a href="@(string.IsNullOrWhiteSpace(subMenu1.ControllerName) ? "javascript:;" : Url.Action(subMenu1.ActionName, subMenu1.ControllerName))">@subMenu1.Text</a></li>
+                                    }
+                                }
+                            }
+
+                        </ul>
+                    }
+
+                </li>
+                <li class="_ov _ov2">
+                    @if (Model.SubMenus2.Count > 0)
+                    {
+                        var first = Model.SubMenus2.FirstOrDefault();
+                        <a href="#" class="active">@first.Text</a>
+
+                        <ul>
+                            @{
+                                Model.SubMenus2.Remove(first);
+                            }
+                            @foreach (var subMenu2 in Model.SubMenus2)
+                            {
+                                if (subMenu2.IsCurrentPage || string.IsNullOrWhiteSpace(subMenu2.ControllerName))
+                                {
+                                    <li><a href="javascript:;">@subMenu2.Text</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="@(string.IsNullOrWhiteSpace(subMenu2.ControllerName) ? "javascript:;" : Url.Action(subMenu2.ActionName, subMenu2.ControllerName))">@subMenu2.Text</a></li>
+                                }
+                            }
+                        </ul>
+                    }
+
+
+                    @*<ul>
+                            <li><a href="#">서브메뉴3</a></li>
+                            <li><a href="#">서브메뉴3</a></li>
+                            <li><a href="#">서브메뉴3</a></li>
+                            <li><a href="#">서브메뉴4</a></li>
+                        </ul>*@
+                </li>
+            </ul>
+        </div><!-- //_snb -->
+
+        @if (controllerName == "ReferenceRoom" && actionName == "SmartxRelated")
+        {
+            Html.RenderPartial("~/Views/Shared/SubSubMenus/SmartxRelated.cshtml");
+        }
+        else if (controllerName == "ReferenceRoom" && actionName == "ProductRelated")
+        {
+            Html.RenderPartial("~/Views/Shared/SubSubMenus/ProductRelated.cshtml");
+        }
+        else if (controllerName == "Hardware" && actionName == "Option")
+        {
+            Html.RenderPartial("~/Views/Shared/SubSubMenus/Option.cshtml");
+        }
+        else if (controllerName == "ReferenceRoom" && actionName == "DrawingNApprover")
+        {
+            Html.RenderPartial("~/Views/Shared/SubSubMenus/DrawingNApprover.cshtml");
+        }
+
+    </div>
+}

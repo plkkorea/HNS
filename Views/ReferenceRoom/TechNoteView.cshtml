@@ -1,0 +1,180 @@
+﻿@model HNS.Entities.TechNote
+@{
+    ViewData["Title"] = "TechNote View";
+    HNS.Entities.PrevNext prevNext = new HNS.Entities.PrevNext();
+}
+
+<!-- 서브 컨텐츠 // 이 위까지 공통 -->
+<div class="sub_content notice">
+    <div class="_inner">
+        <div class="technoteview_top">
+            <strong class="tit">자료 참고 안내</strong>
+            <span class="red">1. 본 자료실의 모든 자료 저작권은 ㈜에이치앤에스에 있습니다. </span>
+            <p class="txt mb30">본 자료는 개발하시는데 참고자료 용도로 사용하실 수 있으며 저작권 표시 없이 복사,게재, 출판 하실 수 없습니다. 외부 게재 사용 시 반드시 출처 항목에 회사명과 사이트 주소를 반드시 명시해 주시기 바랍니다.<br />[표기 예] 출처 : ㈜에이치앤에스(www.hnsts.co.kr) 또는 ㈜HNS(www.hnsts.co.kr)</p>
+            <span class="red">2. 제품 개발 시 내용과 예제 코드는 수정 및 검증작업을 직접 하셔야 하며 문제 발생에 대한 책임은 ㈜HNS사와 무관합니다.</span>
+            <p class="txt">본사는 자료를 최신내용으로 유지하기 위해 노력하고 있으며 제공되는 정보의 오류 및 내용이 정확하지 않을 경우 사전 공지 없이 업데이트 될 수 있습니다. 자료의 문제점 발견 시 본사로 문의주시면 검토하여 자료를 수정하도록 하겠습니다. </p>
+
+        </div>
+        <div class="notview_top">
+            <!-- 사용자 -->
+            @if (ViewBag.NextPrev != null)
+            {
+                prevNext = ViewBag.NextPrev;
+            }
+
+            <a href="@Url.Action("TechNoteView", "ReferenceRoom", new { id=prevNext.Prev })" class="go_prev">이전</a>
+            <a href="@Url.Action("TechNote", "ReferenceRoom")" class="go_list">목록</a>
+            <a href="@Url.Action("TechNoteView", "ReferenceRoom", new { id=prevNext.Next })" class="go_next">다음</a>
+        </div>
+        @if (User.IsInRole("Administrators"))
+        {
+            <div class="notview_top">
+                <!-- 관리자 -->
+                @*Delete Button*@
+                <a href="@Url.Action("TechNoteDelete", "ReferenceRoom", new { id = Model.Id })" class="go_prev" onclick="return confirm('삭제 하시겠습니까?');">삭제</a>
+                @*Edit Button*@
+                <a href="@Url.Action("TechNoteEdit", "ReferenceRoom", new { id = Model.Id })" class="go_next">수정</a>
+            </div>
+        }
+        <!-- .go_pop : 게시판 비밀번호 팝업 창 클래스 // 팝업 창 코드는 푸터 위에 -->
+
+        <div class="technote_box">
+            <strong class="bigtit">@Model.m_title</strong>
+            <div class="info">
+                <span class="stit">작성일</span>
+                <span class="desc">@Model.m_date.ToString("yyyy-MM-dd")</span>
+                <em></em>
+                <span class="stit">수정일</span>
+                <span class="desc">@Model.m_date_modified.ToString("yyyy-MM-dd")</span>
+                <em></em>
+                <span class="stit">조회수</span>
+                <span class="desc">@Model.m_read</span>
+            </div><!-- //info -->
+            <table class="technoteview_tbl">
+                <colgroup>
+                    <col class="tbl1" />
+                    <col class="tbl2" />
+                </colgroup>
+                <tr>
+                    <th scope="row">분류</th>
+                    <td>@Model.m_classifications.Replace(",", ", ")</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="vt">적용<br class="__t" /> 플랫폼</th>
+                    <td>
+                        <ul class="chk">
+                            <li><label><input type="checkbox" name="applicableFramework" disabled value="IEC266" @(Model.applicableFramework.Contains("IEC266") ? "checked" : "") />&nbsp; IEC266</label></li>
+                            <li><label><input type="checkbox" name="applicableFramework" disabled value="IEC667" @(Model.applicableFramework.Contains("IEC667") ? "checked" : "") />&nbsp; IEC667</label></li>
+                            <li><label><input type="checkbox" name="applicableFramework" disabled value="IEC1000" @(Model.applicableFramework.Contains("IEC1000") ? "checked" : "") />&nbsp; IEC1000</label></li>
+                            <li><label><input type="checkbox" name="applicableFramework" disabled value="Windows CE 5.0" @(Model.applicableFramework.Contains("Windows CE 5.0") ? "checked" : "") />&nbsp; Windows CE 5.0</label></li>
+                            <li><label><input type="checkbox" name="applicableFramework" disabled value="Windows CE 6.0" @(Model.applicableFramework.Contains("Windows CE 6.0") ? "checked" : "") />&nbsp; Windows CE 6.0</label></li>
+                            <li><label><input type="checkbox" name="applicableFramework" disabled value="Windows CE 7.0" @(Model.applicableFramework.Contains("Windows CE 7.0") ? "checked" : "") />&nbsp; Windows CE 7.0</label></li>
+                            <li><label><input type="checkbox" name="applicableFramework" disabled value=".NET Compact Framework 2.0" @(Model.applicableFramework.Contains(".NET Compact Framework 2.0") ? "checked" : "") />&nbsp; .NET Compact Framework 2.0</label></li>
+                            <li><label><input type="checkbox" name="applicableFramework" disabled value=".NET Compact Framework 3.5" @(Model.applicableFramework.Contains(".NET Compact Framework 3.5") ? "checked" : "") />&nbsp; .NET Compact Framework 3.5</label></li>
+                            <li><label><input type="checkbox" name="applicableFramework" disabled value="C#" @(Model.applicableFramework.Contains("C#") ? "checked" : "") />&nbsp; C#</label></li>
+                            <li><label><input type="checkbox" name="applicableFramework" disabled value="VB.NET" @(Model.applicableFramework.Contains("VB.NET") ? "checked" : "") />&nbsp; VB.NET</label></li>
+                            <li><label><input type="checkbox" name="applicableFramework" disabled value="C++" @(Model.applicableFramework.Contains("C++") ? "checked" : "") />&nbsp; C++</label></li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">키워드</th>
+                    <td>@Model.m_keywords?.Replace(",", ", ")</td>
+                </tr>
+                <tr>
+                    <th scope="row">첨부파일</th>
+                    <td><a href="@Url.Action("DownloadTechNoteFile", "ReferenceRoom", new { id = Model.Id })" class="file_add">@Model.m_file_name</a></td>
+                </tr>
+            </table><!-- //technoteview_tbl -->
+            <div class="content">
+                <!--
+                -technote 템플릿-
+                1. 클래스 명 앞에 'hns_' 가 붙는 곳을 한 단위로 보시면 됩니다.
+                2. template.css로 기존 css와 분리되어 있습니다.
+                -->
+                <!-- .hns_mb10 은 마진 하단의 값이 10px입니다. 불필요시 지우시거나, 응용하여 css 추가하여 사용하시면 됩니다.
+                ex) .hns_mb20 {margin-bottom:20px;}
+                현재는 10부터 5단위로 50까지 만들어 놨습니다. 필요 없으시면 빼시고, br 태그로 처리하시면 됩니다.
+                -->
+                @*<div class="hns_index hns_mb10">
+                        <p class="txt">
+                            @Html.Raw(Model.m_summary)
+                        </p>
+                    </div>*@
+
+
+                @Html.Raw(Model.m_content)
+
+                <!-- //technote 템플릿 -->
+            </div><!-- //content -->
+
+            <div class="technote_code fold">
+                @if (Model.m_displayCodeCSharp)
+                {
+                    <dl class="cnt">
+                        <dt>
+                            <span class="code_tit">C# 예제코드</span>
+                        </dt>
+                        <dd>
+                            <div class="code">
+                                @Html.Raw(Model.m_codeCSharp)
+                            </div>
+                        </dd>
+                    </dl>
+                }
+
+                @if (Model.m_displayCodeVBNet)
+                {
+                    <dl class="cnt">
+                        <dt>
+                            <span class="code_tit">VB.NET 예제코드</span>
+                        </dt>
+                        <dd>
+                            <div class="code">
+                                @Html.Raw(Model.m_codeVBNet)
+                            </div>
+                        </dd>
+                    </dl>
+                }
+                @if (Model.m_displayCodeCPP)
+                {
+                    <dl class="cnt">
+                        <dt>
+                            <span class="code_tit">C++ 예제코드</span>
+                        </dt>
+                        <dd>
+                            <div class="code">
+                                @Html.Raw(Model.m_codeCPP)
+                            </div>
+                        </dd>
+                    </dl>
+                }
+            </div><!-- //technote_code -->
+            @if (!string.IsNullOrWhiteSpace(Model.m_referenceItem))
+            {
+                <div class="technote_ref">
+                    <div class="ref_tit"><span>참고항목</span></div>
+                    <div class="ref_txt">
+                        @Html.Raw(Model.m_referenceItem)
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <!-- 서브에만 들어가는 탑 버튼-->
+    <a href="#" class="go_top"><img src="~/template/images/go_top.png" alt="맨 위로"></a>
+</div><!-- //sub_content -->
+<!-- //서브 컨텐츠 // 이 아래부터 공통 -->
+
+@section Scripts
+    {
+    <script>
+        $(function () {
+            if (document.referrer.toLowerCase().indexOf('/technote') >= 0 &&
+                document.referrer.toLowerCase().indexOf('/technoteedit') == -1 &&
+                document.referrer.toLowerCase().indexOf('/technoteview') == -1) {
+                $('.go_list').attr('href', document.referrer);
+            }
+        })
+    </script>
+}

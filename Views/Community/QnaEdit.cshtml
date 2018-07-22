@@ -1,0 +1,147 @@
+﻿@model HNS.Entities.Qna
+@{
+    ViewData["Title"] = "QnA Edit";
+
+}
+
+<!-- 서브 컨텐츠 // 이 위까지 공통 -->
+<div class="sub_content notice">
+    <div class="_inner">
+        <form asp-action="QnaEdit" asp-controller="Community" method="post" enctype="multipart/form-data">
+            <div class="qna_info">
+                <strong class="tit">Q&amp;A 이용안내</strong>
+                <span class="txt">
+                    1. 질문 작성시 자주하는질문(FAQ)를 먼저 확인해주시기 바랍니다.<br />
+                    2. 작성자는 실명 또는 회사명으로 기재해주시기 바랍니다.<br />
+                    3. 정확한 답변을 위해서 제품명과 개발환경을 꼭 명시해 주세요.(ex : IEC1000Series, Visual Studio 2008 C#)<br />
+                    4. 첨부파일은 압축하여 올려주시기 바랍니다.
+                </span>
+                <p class="warn">필수 항목은 반드시 입력 해주시고 빠른 답변 드리도록 하겠습니다. </p>
+            </div>
+
+            <span class="qnawrite_red">*필수항목</span>
+
+            <table class="qnawrite_tbl">
+                <colgroup>
+                    <col class="tbl1" />
+                    <col class="tbl2" />
+                    <col class="tbl3" />
+                    <col class="tbl4" />
+                </colgroup>
+                <tr>
+                    <th scope="row"><span class="red">작성자</span></th>
+                    <td><input type="text" asp-for="m_name" class="qna_input" required /></td>
+                    <th scope="row"><span>이메일</span></th>
+                    <td><input type="text" asp-for="m_email" class="qna_input" /></td>
+                </tr>
+                <tr>
+                    <th scope="row"><span>제품종류</span></th>
+                    <td>
+                        <select asp-for="m_prod_type" class="qna_sel">
+                            <option value="해당사항 없음">해당사항 없음</option>
+                            <option value="IEC266">IEC266</option>
+                            <option value="IEC266Lite">IEC266Lite</option>
+                            <option value="IEC667">IEC667</option>
+                            <option value="IEC667Lite">IEC667Lite</option>
+                            <option value="IEC1000">IEC1000</option>
+                            <option value="IEC1000Lite">IEC1000Lite</option>
+                            <option value="Smart I/O - series">Smart I/O - series</option>
+                            <option value="기타옵션 제품">기타옵션 제품</option>
+                        </select>
+                    </td>
+                    <th scope="row"><span>개발환경</span></th>
+                    <td>
+                        <select asp-for="m_dev_env" class="qna_sel">
+                            <option value="해당사항 없음">해당사항 없음</option>
+                            <option value="Visual Studio 2005 C#">Visual Studio 2005 C#</option>
+                            <option value="Visual Studio 2005 VB">Visual Studio 2005 VB</option>
+                            <option value="Visual Studio 2005 C++">Visual Studio 2005 C++</option>
+                            <option value="Visual Studio 2008 C#">Visual Studio 2008 C#</option>
+                            <option value="Visual Studio 2008 VB">Visual Studio 2008 VB</option>
+                            <option value="Visual Studio 2008 C++">Visual Studio 2008 C++</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><span class="red">제목</span></th>
+                    <td colspan="3"><input type="text" asp-for="m_title" maxlength="50" class="qna_input" required /></td>
+                </tr>
+                <tr>
+                    <th scope="row" class="vt"><span class="red">내용</span></th>
+                    <td colspan="3">
+                        <textarea class="qna_txt noresize" asp-for="m_content" rows="20" required></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <span>첨부파일</span>
+                    </th>
+                    <td colspan="3">
+                        <div class="fileadd_box">
+                            <label for="file_add">
+                                <input type="text" id="filename" class="" readonly="readonly" placeholder="">
+                                <span class="btn" onclick="$('#m_file_name').click();">파일첨부</span>
+                            </label>
+                            <input type="file" asp-for="m_file_name" id="file_add" title="" class="hide" onchange="fileNameInput()" />
+                        </div>
+                    </td>
+                </tr>
+                @if (Model != null && !string.IsNullOrWhiteSpace(Model.m_file_name))
+                {
+                    <tr>
+                        <th scope="row"></th>
+                        <td>
+                            <div>
+                                <a href="@Url.Action("DownloadQnAFile", "Community", new { id = Model.Id })">@Model.m_file_name</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <th scope="row"><span class="red">비밀번호</span></th>
+                    <td colspan="3">
+                        <input type="password" asp-for="m_passwd" maxlength="50" class="pw" required />
+                    </td>
+                </tr>
+            </table>
+
+
+            @if (Model?.Id > 0)
+            {
+                <!-- 수정일 경우 -->
+                <div class="notwrite_bot">
+                    <button type="submit" class="write">수정</button>
+                    <a href="@Url.Action("Qna", "Community")" class="cancel">취소</a>
+                </div>
+            }
+            else
+            {
+                <div class="notwrite_bot">
+                    <button type="submit" class="write">작성</button>
+                    <a href="@Url.Action("Qna", "Community")" class="cancel">취소</a>
+                </div>
+            }
+            <!-- .go_pop : 게시판 비밀번호 팝업 창 클래스 // 팝업 창 코드는 푸터 위에 -->
+            <!-- //수정일 경우 -->
+
+        </form>
+    </div>
+    <!-- 서브에만 들어가는 탑 버튼-->
+    <a href="#" class="go_top"><img src="~/template/images/go_top.png" alt="맨 위로"></a>
+</div><!-- //sub_content -->
+<!-- //서브 컨텐츠 // 이 아래부터 공통 -->
+<!-- 수정/삭제/버튼 클릭 시 비밀번호 창 페이지 먼저 표시해주세요 -->
+<div class="layer_wrap">
+    <div class="pop_layer">
+        <div class="box">
+            <strong class="tit">비밀번호</strong>
+            <form action="">
+                <input type="password" id="" name="" class="pop_pw" />
+                <div class="btn_box">
+                    <button type="submit" class="pop_ok">확인</button>
+                    <a href="#none" class="pop_close">취소</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

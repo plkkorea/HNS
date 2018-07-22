@@ -1,0 +1,1529 @@
+﻿@model HNS.ViewModels.ProdCompareViewModel
+@{
+    ViewData["Title"] = "Compare";
+}
+
+<div class="sub_content sub02_03">
+    <div class="_inner">
+        <p class="sub_txt sub23_mb">사용환경에 맞는 제품의 선택을 위하여 아래의 각 항목의 사항으로 선택하시면 해당되는 제품으로 비교검색 할 수 있습니다.</p>
+        <form id="prod-compare-form" asp-controller="Hardware" asp-action="Compare" method="post">
+            <div class="sub23_chk sub23_chk1">
+                <span class="tit">LCD 크기 및 해상도</span>
+                <span style="display:none" id="_selectedLcd"></span>
+                <div class="boxwrap">
+                    <ul class="box box1 da option">
+                        <li class="fst">
+                            <label><input type="checkbox" name="LCDSizeAndResolutions" value="None(외부 모니터 별도 구매 Anglog RGB Port,1024x768)">&nbsp; <span class="vam">None(외부 모니터 별도 구매 Anglog RGB Port,1024x768)</span></label>
+                        </li>
+                        <li>
+                            <label><input type="checkbox" name="LCDSizeAndResolutions" value="10.9cm(4.3inch, 480x272)">&nbsp; <span class="vam">10.9cm(4.3inch, 480x272)</span></label>
+                        </li>
+                        <li>
+                            <label><input type="checkbox" name="LCDSizeAndResolutions" value="14.2cm(5.6inch, 640x480)">&nbsp; <span class="vam">14.2cm(5.6inch, 640x480)</span></label>
+                        </li>
+                        <li>
+                            <label><input type="checkbox" name="LCDSizeAndResolutions" value="17.7cm(6.9inch, 800x480)">&nbsp; <span class="vam">17.7cm(6.9inch, 800x480)</span></label>
+                        </li>
+                        <li>
+                            <label><input type="checkbox" name="LCDSizeAndResolutions" value="17.8cm(7inch, 800x480)">&nbsp; <span class="vam">17.8cm(7inch, 800x480)</span></label>
+                        </li>
+                        <li>
+                            <label><input type="checkbox" name="LCDSizeAndResolutions" value="20.3cm(8inch, 800x600)">&nbsp; <span class="vam">20.3cm(8inch, 800x600)</span></label>
+                        </li>
+                        <li>
+                            <label><input type="checkbox" name="LCDSizeAndResolutions" value="25.9cm(10.2inch, 800x480)">&nbsp; <span class="vam">25.9cm(10.2inch, 800x480)</span></label>
+                        </li>
+                        <li>
+                            <label><input type="checkbox" name="LCDSizeAndResolutions" value="26.4cm(10.4inch, 800x600)">&nbsp; <span class="vam">26.4cm(10.4inch, 800x600)</span></label>
+                        </li>
+                        <li>
+                            <label><input type="checkbox" name="LCDSizeAndResolutions" value="26.4cm(10.4inch, 1024x768) ">&nbsp; <span class="vam">26.4cm(10.4inch, 1024x768)</span></label>
+                        </li>
+                        <li>
+                            <label><input type="checkbox" name="LCDSizeAndResolutions" value="38.1cm(15inch, 1024x768)">&nbsp; <span class="vam">38.1cm(15inch, 1024x768)</span></label>
+                        </li>
+                    </ul>
+                    <span class="box1_tit">※ Bezel Type(옵션장착 여부)</span>
+                    <ul class="box box1 option">
+                        @foreach (var bezel in Model.BezelTypes)
+                    {
+                        <li>
+                            <label><input type="checkbox" name="BezelTypes" value="@bezel" />&nbsp; <span class="vam">@bezel</span></label>
+                        </li>
+                }
+                    </ul>
+                    <a href="#none" class="popup posi" data-number="1"><img src="~/template/images/sub23_mark.gif" alt="옵션 B1/B2 Bezel Type 팝업보기" /></a>
+                </div>
+            </div>
+            <div class="sub23_wrap">
+                <span class="list">
+                    <div class="sub23_chk">
+                        <span class="tit">CPU 성능</span>
+                        <div class="boxwrap">
+                            <ul class="box option">
+                                @foreach (var cpu in Model.CPUPerformances)
+                            {
+                                <li>
+                                    <label><input type="checkbox" name="CPUPerformances" value="@cpu" />&nbsp; <span class="vam">@cpu</span></label>
+                                </li>
+                        }
+                            </ul>
+                        </div>
+                    </div>
+                </span>
+                <span class="list">
+                    <div class="sub23_chk">
+                        <span class="tit">확장포트 갯수(Extension Port)</span>
+                        <div class="boxwrap">
+                            <ul class="box box2 option">
+                                @foreach (var extPort in Model.ExtensionPorts2)
+                            {
+                                <li>
+                                    <label><input type="checkbox" name="ExtensionPorts2" value="@extPort" />&nbsp; <span class="ft">@extPort</span></label>
+                                </li>
+                        }
+
+                                @foreach (var extPort in Model.ExtensionPorts1)
+                            {
+                                <li>
+                                    <label><input type="checkbox" name="ExtensionPorts1" value="@extPort" />&nbsp; <span class="ft">@extPort</span></label>
+                                </li>
+                        }
+                            </ul>
+                        </div>
+                    </div>
+                </span>
+                <span class="list">
+                    <div class="sub23_chk">
+                        <span class="tit">유선 LAN</span>
+                        <div class="boxwrap">
+                            <ul class="box option">
+                                @foreach (var lan in Model.WiredLans)
+                            {
+                                <li>
+                                    <label><input type="checkbox" name="WiredLans" value="@lan" />&nbsp; <span class="vam">@lan</span></label>
+                                </li>
+                        }
+                            </ul>
+                        </div>
+                    </div>
+                </span>
+            </div><!-- //sub23_wrap -->
+            <span class="sub23_tit">세부 사양 옵션</span>
+            <div class="sub23_wrap">
+                <span class="list">
+                    <div class="sub23_chk">
+                        <span class="tit">RAM</span>
+                        <div class="boxwrap">
+                            <ul class="box option">
+                                @foreach (var ram in Model.RAMs)
+                            {
+                                <li>
+                                    <label><input type="checkbox" name="RAMs" value="@ram" />&nbsp; <span class="vam">@ram</span></label>
+                                </li>
+                        }
+                            </ul>
+                        </div>
+                    </div>
+                </span>
+                <span class="list">
+                    <div class="sub23_chk">
+                        <span class="tit">Flash</span>
+                        <div class="boxwrap">
+                            <ul class="box option">
+                                @foreach (var flash in Model.Flases)
+                            {
+                                <li>
+                                    <label><input type="checkbox" name="Flases" value="@flash" />&nbsp; <span class="vam">@flash</span></label>
+                                </li>
+                        }
+                            </ul>
+                        </div>
+                    </div>
+                </span>
+                <span class="list">
+                    <div class="sub23_chk">
+                        <span class="tit">전원</span>
+                        <div class="boxwrap">
+                            <ul class="box option">
+                                @foreach (var power in Model.Powers)
+                            {
+                                <li>
+                                    <label><input type="checkbox" name="Powers" value="@power" />&nbsp; <span class="vam">@power</span></label>
+                                </li>
+                        }
+                            </ul>
+                        </div>
+                    </div>
+                </span>
+                <span class="list">
+                    <div class="sub23_chk">
+                        <span class="tit">UART</span>
+                        <div class="boxwrap">
+                            <ul class="box option">
+                                @foreach (var uart in Model.UARTs)
+                            {
+                                <li>
+                                    <label><input type="checkbox" name="UARTs" value="@uart" />&nbsp; <span class="vam">@uart</span></label>
+                                </li>
+                        }
+                            </ul>
+                        </div>
+                    </div>
+                </span>
+                <span class="list">
+                    <div class="sub23_chk">
+                        <span class="tit">RS485</span>
+                        <div class="boxwrap">
+                            <ul class="box option">
+                                @foreach (var rs485 in Model.RS485s)
+                            {
+                                <li>
+                                    <label><input type="checkbox" name="RS485s" value="@rs485" />&nbsp; <span class="vam">@rs485</span></label>
+                                </li>
+                        }
+                            </ul>
+                        </div>
+                    </div>
+                </span>
+                <span class="list">
+                    <div class="sub23_chk">
+                        <span class="tit">ADC</span>
+                        <div class="boxwrap">
+                            <ul class="box option">
+                                @foreach (var adc in Model.ADCs)
+                            {
+                                <li>
+                                    <label><input type="checkbox" name="ADCs" value="@adc" />&nbsp; <span class="vam">@adc</span></label>
+                                </li>
+                        }
+                            </ul>
+                        </div>
+                    </div>
+                </span>
+                <span class="list">
+                    <div class="sub23_chk">
+                        <span class="tit">USB Host</span>
+                        <div class="boxwrap">
+                            <ul class="box option">
+                                @foreach (var usb in Model.USBHosts)
+                            {
+                                <li>
+                                    <label><input type="checkbox" name="USBHosts" value="@usb" />&nbsp; <span class="vam">@usb</span></label>
+                                </li>
+                        }
+                            </ul>
+                        </div>
+                    </div>
+                </span>
+                <span class="list">
+                    <div class="sub23_chk">
+                        <span class="tit">CE 인증</span>
+                        <div class="boxwrap">
+                            <ul class="box option">
+                                @foreach (var ce in Model.CECertifications)
+                            {
+                                <li>
+                                    <label><input type="checkbox" name="CECertifications" value="@ce" />&nbsp; <span class="vam">@ce</span></label>
+                                </li>
+                        }
+                            </ul>
+                        </div>
+                    </div>
+                </span>
+            </div><!-- //sub23_wrap -->
+
+            <span class="sub23_tit">기타옵션 사용 여부</span>
+            <div class="sub23_wrap">
+                <span class="list">
+                    <div class="sub23_chk">
+                        <span class="tit">
+                            Smart I/O - Series
+                            <a href="#none" class="popup posi1" data-number="2"><img src="~/template/images/sub23_mark.gif" alt="Smart I/O - Series 팝업보기" /></a>
+                        </span>
+                        <div class="boxwrap">
+                            <ul class="box option">
+                                @foreach (var smartIO in Model.SmartIOs2)
+                            {
+                                <li>
+                                    <label><input type="checkbox" name="SmartIOs2" value="@smartIO" />&nbsp; <span class="vam">@smartIO</span></label>
+                                </li>
+                        }
+
+                                @foreach (var smartIO in Model.SmartIOs3)
+                            {
+                                <li>
+                                    <label><input type="checkbox" name="SmartIOs3" value="@smartIO" />&nbsp; <span class="vam">@smartIO</span></label>
+                                </li>
+                        }
+                            </ul>
+                        </div>
+                    </div>
+                </span>
+                <span class="list">
+                    <div class="sub23_chk">
+                        <span class="tit">
+                            Smart Video
+                            <a href="#none" class="popup posi1" data-number="3"><img src="~/template/images/sub23_mark.gif" alt="Smart Video 팝업보기" /></a>
+                        </span>
+                        <div class="boxwrap">
+                            <ul class="box option">
+                                @foreach (var smartVid in Model.SmartVideos)
+                            {
+                                <li>
+                                    <label><input type="checkbox" name="SmartVideos" value="@smartVid" />&nbsp; <span class="vam">@smartVid</span></label>
+                                </li>
+                        }
+                            </ul>
+                        </div>
+                    </div>
+                </span>
+                <span class="list">
+                    <div class="sub23_chk">
+                        <span class="tit">
+                            SmartBattery
+                            <a href="#none" class="popup posi1" data-number="4"><img src="~/template/images/sub23_mark.gif" alt="SmartBattery 팝업보기" /></a>
+                        </span>
+                        <div class="boxwrap">
+                            <ul class="box option">
+                                @foreach (var smartBat in Model.SmartBatteries)
+                            {
+                                <li>
+                                    <label><input type="checkbox" name="SmartBatteries" value="@smartBat" />&nbsp; <span class="vam">@smartBat</span></label>
+                                </li>
+                        }
+                            </ul>
+                        </div>
+                    </div>
+                </span>
+            </div><!-- //sub23_wrap -->
+
+            <div class="sub23_result">
+                <span class="tit"><strong id="resultCount">검색결과(0건)</strong> 제품명을 선택하시면 제품 비교를 하실 수 있습니다.<em>(최대 2개까지 선택가능)</em></span>
+                <a href="javascript:;" class="chk_none" id="disSelectAll">선택 전체해제</a>
+            </div>
+            <div class="sub23_resultbox resultSearch">
+                <ul class="result_list">
+                    <li class="chk1">
+                        <!-- 1번은 .chk1 / 2번은 .chk2 추가 -->
+                        <span class="box">
+                            <label><input type="checkbox" id="" name="" value="" />&nbsp; <span class="vam">IEC1000-07NB1</span></label>
+                        </span>
+                    </li>
+                    <li class="chk2">
+                        <span class="box">
+                            <label><input type="checkbox" id="" name="" value="" />&nbsp; <span class="vam">IEC1000-07NB1</span></label>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="box">
+                            <label><input type="checkbox" id="" name="" value="" />&nbsp; <span class="vam">IEC1000-07NB1</span></label>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="box">
+                            <label><input type="checkbox" id="" name="" value="" />&nbsp; <span class="vam">IEC1000-07NB1</span></label>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="box">
+                            <label><input type="checkbox" id="" name="" value="" />&nbsp; <span class="vam">IEC1000-07NB1</span></label>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="box">
+                            <label><input type="checkbox" id="" name="" value="" />&nbsp; <span class="vam">IEC1000-07NB1</span></label>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="box">
+                            <label><input type="checkbox" id="" name="" value="" />&nbsp; <span class="vam">IEC1000-07NB1</span></label>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="box">
+                            <label><input type="checkbox" id="" name="" value="" />&nbsp; <span class="vam">IEC1000-07NB1</span></label>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </form>
+
+        <div class="sub23_slide resultCompare">
+            <div class="slide slide1">
+                <span class="wt"><img src="~/template/images/sub23_slide_wm1.gif" alt="1번" /></span>
+                <div class="top">
+                    <!-- iec1000 : class="name"
+                 iec667 : class="name green"
+                 iec266 : class="name blue" -->
+                    <strong class="name" id="name1">
+                        <span class="opt">옵션 Bezel 장착</span>
+                        IEC1000Lite-104HB2<em class="gray">B1</em>
+                    </strong>
+                    <p class="zoom_info __tn">확대한 이미지를 보시려면 큰 이미지를 클릭해주세요.</p>
+                </div>
+                <div class="mid">
+                    <div class="big big1">
+                        <ul class="roll">
+                            <li><img src="~/template/images/big1.jpg" class="big_modal" /></li>
+                            <li><img src="~/template/images/big2.jpg" class="big_modal" /></li>
+                            <li><img src="~/template/images/big3.jpg" class="big_modal" /></li>
+                            <li><img src="~/template/images/big4.jpg" class="big_modal" /></li>
+                            <li><img src="~/template/images/big5.jpg" class="big_modal" /></li>
+                        </ul>
+                    </div><!-- //_big -->
+                    <div class="slide_pager slide_pager1">
+                        <a data-slide-index="0" href="#none"><img src="~/template/images/big1.jpg" /></a>
+                        <a data-slide-index="1" href="#none"><img src="~/template/images/big2.jpg" /></a>
+                        <a data-slide-index="2" href="#none"><img src="~/template/images/big3.jpg" /></a>
+                        <a data-slide-index="3" href="#none"><img src="~/template/images/big4.jpg" /></a>
+                        <a data-slide-index="4" href="#none"><img src="~/template/images/big5.jpg" /></a>
+                    </div>
+                </div><!-- //mid -->
+                <script>compare_roll1.init();</script>
+                <div class="bot">
+                    <strong class="price" id="price1">판매가 345,000원<span class="vat">(VAT별도)</span></strong>
+                    <a href="#" id="buy1" target="_blank" class="go_buy">구매하기</a>
+                </div><!--- //bot -->
+            </div><!-- //slide1 -->
+
+            <div class="slide slide2">
+                <span class="wt"><img src="~/template/images/sub23_slide_wm2.gif" alt="2번" /></span>
+                <div class="top">
+                    <strong class="name green" id="name2">
+                        <span class="opt">OpenFrameType</span>
+                        IEC667 - 07N<em class="gray">B1</em>
+                    </strong>
+                    <p class="zoom_info __tn">확대한 이미지를 보시려면 큰 이미지를 클릭해주세요.</p>
+                    <!-- 확대 팝업은 푸터위에 -->
+                </div>
+                <div class="mid">
+                    <div class="big big2">
+                        <ul class="roll">
+                            <li><img src="~/template/images/big1.jpg" class="big_modal" /></li>
+                            <li><img src="~/template/images/big2.jpg" class="big_modal" /></li>
+                            <li><img src="~/template/images/big3.jpg" class="big_modal" /></li>
+                            <li><img src="~/template/images/big4.jpg" class="big_modal" /></li>
+                            <li><img src="~/template/images/big5.jpg" class="big_modal" /></li>
+                        </ul>
+                    </div><!-- //_big -->
+                    <div class="slide_pager slide_pager2">
+                        <a data-slide-index="0" href="#none"><img src="~/template/images/big1.jpg" /></a>
+                        <a data-slide-index="1" href="#none"><img src="~/template/images/big2.jpg" /></a>
+                        <a data-slide-index="2" href="#none"><img src="~/template/images/big3.jpg" /></a>
+                        <a data-slide-index="3" href="#none"><img src="~/template/images/big4.jpg" /></a>
+                        <a data-slide-index="4" href="#none"><img src="~/template/images/big5.jpg" /></a>
+                    </div>
+                </div><!-- //mid -->
+                <script>compare_roll2.init();</script>
+                <div class="bot">
+                    <strong class="price" id="price2">판매가 300,000원<span class="vat">(VAT별도)</span></strong>
+                    <a href="#" target="_blank" id="buy2" class="go_buy">구매하기</a>
+                </div><!--- //bot -->
+            </div><!-- //slide2 -->
+        </div><!-- //sub23_slide -->
+
+        <span class="sub_tit resultCompare">제품정보 비교</span>
+        <table class="sub23_tbl sub23_tbl1 resultCompare">
+            <colgroup>
+                <col class="wd1" />
+                <col class="wd2" />
+                <col class="wd2" />
+            </colgroup>
+            <tr>
+                <th></th>
+                <th><span class="tit tit1" id="prodName1">IEC1000-07NB1</span></th>
+                <th><span class="tit tit2" id="prodName2">IEC667-07NB1</span> </th>
+            </tr>
+        </table>
+
+        <span class="sub23_tbltit resultCompare">[SyStem]</span>
+        <table class="sub23_tbl sub23_tbl2 resultCompare specTbl1">
+            <colgroup>
+                <col class="wd1" />
+                <col class="wd2" />
+                <col class="wd2" />
+            </colgroup>
+            <tr class="blue">
+                <th scope="row">CPU</th>
+                <td id="cpu1">Cortex A8 CPU Core 1GHz </td>
+                <td id="cpu2">32Bit RISC ARM1179JZF-667MHz </td>
+            </tr>
+            <tr>
+                <th scope="row">CACHE</th>
+                <td id="cache1"></td>
+                <td id="Cache2"></td>
+            </tr>
+            <tr>
+                <th scope="row">RAM</th>
+                <td id="Ram1"></td>
+                <td id="Ram2"></td>
+            </tr>
+            <tr class="blue">
+                <th scope="row">Flash</th>
+                <td id="flash1">256MB(OS : 129MB / Storage : 127MB)  </td>
+                <td id="flash2">128MB(OS : 63MB / Storage : 65MB) </td>
+            </tr>
+            <tr>
+                <th scope="row">SD Memory</th>
+                <td id="SdMemory1"></td>
+                <td id="SdMemory2"></td>
+            </tr>
+            <tr>
+                <th scope="row">Audio</th>
+                <td id="Audio1"></td>
+                <td id="Audio2"></td>
+            </tr>
+            <tr>
+                <th scope="row">Touch</th>
+                <td id="Touch1"></td>
+                <td id="Touch2"></td>
+            </tr>
+            <tr>
+                <th scope="row">RTC</th>
+                <td id="Rtc1"></td>
+                <td id="Rtc2"></td>
+            </tr>
+            <tr>
+                <th scope="row" english="Power">전원</th>
+                <td id="power1"></td>
+                <td id="power2"></td>
+            </tr>
+            <tr>
+                <th scope="row" english="VoltageRange">전압범위/사용전류</th>
+                <td id="VoltageRange1">DC 12V일 경우 460mA</td>
+                <td id="VoltageRange2">DC 12V일 경우 600mA</td>
+            </tr>
+            <tr>
+                <th scope="row" english="OperatingTemperature">동작온도</th>
+                <td id="OperatingTemperature1"></td>
+                <td id="OperatingTemperature2"></td>
+            </tr>
+            <tr>
+                <th scope="row" english="StorageTemperature">보관온도</th>
+                <td id="StorageTemperature1"></td>
+                <td id="StorageTemperature2"></td>
+            </tr>
+        </table>
+
+        <span class="sub23_tbltit resultCompare">[LCD]</span>
+        <table class="sub23_tbl sub23_tbl2 resultCompare specTbl2">
+            <colgroup>
+                <col class="wd1" />
+                <col class="wd2" />
+                <col class="wd2" />
+            </colgroup>
+            <tr class="blue">
+                <th scope="row">화면크기</th>
+                <td id="lcd1">17.8cm(7inch)</td>
+                <td id="lcd2">17.7cm(6.95inch)</td>
+            </tr>
+            <tr>
+                <th scope="row" english="AspectRatio">화면비율</th>
+                <td id="AspectRatio1"></td>
+                <td id="AspectRatio2"></td>
+            </tr>
+            <tr>
+                <th scope="row" english="Resolution">해상도</th>
+                <td id="Resolution1"></td>
+                <td id="Resolution2"></td>
+            </tr>
+            <tr>
+                <th scope="row" english="Color">Color</th>
+                <td id="Color1"></td>
+                <td id="Color2"></td>
+            </tr>
+            <tr>
+                <th scope="row">Backlight</th>
+                <td id="backlight1"></td>
+                <td id="backlight2"></td>
+            </tr>
+            <tr>
+                <th scope="row" english="Luminance">Luminance</th>
+                <td id="Luminance1"></td>
+                <td id="Luminance2"></td>
+            </tr>
+            <tr>
+                <th scope="row" english="BacklightOnOff">Backlight On/Off</th>
+                <td id="BacklightOnOff1"></td>
+                <td id="BacklightOnOff2"></td>
+            </tr>
+        </table>
+
+        <span class="sub23_tbltit resultCompare">[Communication]</span>
+        <table class="sub23_tbl sub23_tbl2 resultCompare specTbl3">
+            <colgroup>
+                <col class="wd1" />
+                <col class="wd2" />
+                <col class="wd2" />
+            </colgroup>
+            <tr>
+                <th scope="row" english="RS232">RS232</th>
+                <td id="RS2321"></td>
+                <td id="RS2322"></td>
+            </tr>
+            <tr>
+                <th scope="row" english="RS485">RS485</th>
+                <td id="RS4851"></td>
+                <td id="RS4852"></td>
+            </tr>
+            <tr>
+                <th scope="row" english="TTL">TTL</th>
+                <td id="TTL1"></td>
+                <td id="TTL2"></td>
+            </tr>
+            <tr>
+                <th scope="row" english="USBHost">USBHost</th>
+                <td id="USBHost1"></td>
+                <td id="USBHost2"></td>
+            </tr>
+            <tr>
+                <th scope="row" english="USBDevice">USBDevice</th>
+                <td id="USBDevice1"></td>
+                <td id="USBDevice2"></td>
+            </tr>
+            <tr>
+                <th scope="row" english="Ethernet">Ethernet</th>
+                <td id="Ethernet1"></td>
+                <td id="Ethernet2"></td>
+            </tr>
+            <tr>
+                <th scope="row" english="WLAN">WLAN</th>
+                <td id="WLAN1"></td>
+                <td id="WLAN2"></td>
+            </tr>
+            <tr>
+                <th scope="row" english="I2C">I2C</th>
+                <td id="I2C1"></td>
+                <td id="I2C2"></td>
+            </tr>
+            <tr>
+                <th scope="row" english="CameraI_F">CameraI/F</th>
+                <td id="CameraI_F1"></td>
+                <td id="CameraI_F2"></td>
+            </tr>
+        </table>
+
+        <span class="sub23_tbltit resultCompare">[Extension Port]</span>
+        <table class="sub23_tbl sub23_tbl2 resultCompare specTbl4">
+            <colgroup>
+                <col class="wd1" />
+                <col class="wd2" />
+                <col class="wd2" />
+            </colgroup>
+            <tr>
+                <th scope="row" english="Extension_Port_I_II">Extension Port- I, II</th>
+                <td id="Extension_Port_I_II1"></td>
+                <td id="Extension_Port_I_II2"></td>
+            </tr>
+            <tr>
+                <th scope="row" english="GPIO">GPIO</th>
+                <td id="GPIO1"></td>
+                <td id="GPIO2"></td>
+            </tr>
+            <tr>
+                <th scope="row" english="PWM">PWM</th>
+                <td id="PWM1"></td>
+                <td id="PWM2"></td>
+            </tr>
+            <tr>
+                <th scope="row" english="ADConverter">AD Converter</th>
+                <td id="ADConverter1"></td>
+                <td id="ADConverter2"></td>
+            </tr>
+        </table>
+
+        <span class="sub23_tbltit resultCompare">[추가 가능 옵션 제품]</span>
+        <table class="sub23_tbl sub23_tbl2 resultCompare specTbl5">
+            <colgroup>
+                <col class="wd1" />
+                <col class="wd2" />
+                <col class="wd2" />
+            </colgroup>
+            <tr>
+                <th scope="row">
+                    <span>B1/B2 Bezel</span>
+                    <a href="#none" class="popup" data-number="1"><img src="~/template/images/sub23_mark1.gif" alt="B1/B2 Bezel 팝업보기" /></a>
+                </th>
+                <td id="bezel1">●</td>
+                <td id="bezel2">●</td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <span>SmartI/O - II</span>
+                    <a href="#none" class="popup" data-number="2"><img src="~/template/images/sub23_mark1.gif" alt="SmartI/O - II 팝업보기" /></a>
+                </th>
+                <td id="smartIO2_1">●</td>
+                <td id="smartIO2_2">●</td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <span>SmartI/O - III</span>
+                    <a href="#none" class="popup" data-number="2"><img src="~/template/images/sub23_mark1.gif" alt="SmartI/O - III 팝업보기" /></a>
+                </th>
+                <td id="smartIO3_1">●</td>
+                <td id="smartIO3_2">●</td>
+            </tr>
+            <tr class="blue">
+                <th scope="row">
+                    <span>SmartVideo</span>
+                    <a href="#none" class="popup" data-number="3"><img src="~/template/images/sub23_mark1.gif" alt="SmartVideo 팝업보기" /></a>
+                </th>
+                <td id="smartVid1">-</td>
+                <td id="smartVid2">●</td>
+            </tr>
+            <tr class="blue">
+                <th scope="row">
+                    <span>SmartBattery</span>
+                    <a href="#none" class="popup" data-number="4"><img src="~/template/images/sub23_mark1.gif" alt="SmartBattery 팝업보기" /></a>
+                </th>
+                <td id="smartBat1">-</td>
+                <td id="smartBat2">●</td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <span>USB무선랜</span>
+                    <a href="#none" class="popup" data-number="5"><img src="~/template/images/sub23_mark1.gif" alt="USB무선랜 팝업보기" /></a>
+                </th>
+                <td id="USBWlan1">●</td>
+                <td id="USBWlan2">●</td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <span>Pro.라이선스</span>
+                    <a href="#none" class="popup" data-number="6"><img src="~/template/images/sub23_mark1.gif" alt="Pro.라이선스 팝업보기" /></a>
+                </th>
+                <td id="proLicence1">●</td>
+                <td id="proLicence2">●</td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <span>SmartKit</span>
+                    <a href="#none" class="popup" data-number="7"><img src="~/template/images/sub23_mark1.gif" alt="SmartKit 팝업보기" /></a>
+                </th>
+                <td id="smartKit1">●</td>
+                <td id="smartKit2">●</td>
+            </tr>
+            <tr class="blue">
+                <th scope="row">
+                    <span>SN485 Board</span>
+                    <a href="#none" class="popup" data-number="8"><img src="~/template/images/sub23_mark1.gif" alt="SN485 Board 팝업보기" /></a>
+                </th>
+                <td id="sn485_1">-</td>
+                <td id="sn485_2">-</td>
+            </tr>
+        </table>
+
+        <span class="sub23_tbltit resultCompare">[기본정보]</span>
+        <table class="sub23_tbl sub23_tbl2 resultCompare specTbl6">
+            <colgroup>
+                <col class="wd1" />
+                <col class="wd2" />
+                <col class="wd2" />
+            </colgroup>
+            <tr>
+                <th scope="row">제품크기</th>
+                <td id="prodSize1">W 209.6 x H 141.4 x D 45(mm)</td>
+                <td id="prodSize2">w209.6 x h141.4 x D 45(mm)</td>
+            </tr>
+            <tr>
+                <th scope="row">A/S 책임자와 전화번호</th>
+                <td id="contact1">(주)에이치앤에스/02-6402-8001</td>
+                <td id="contact2">(주)에이치앤에스/02-6402-8001</td>
+            </tr>
+        </table>
+    </div>
+    <!-- 서브에만 들어가는 탑 버튼-->
+    <a href="#" class="go_top"><img src="~/template/images/go_top.png" alt="맨 위로"></a>
+</div><!-- //sub_content -->
+<!-- popup -->
+<div class="wraplayer">
+    <div class="overlayer overlayer1 layerwrap1">
+        <a href="#none" class="x_pop"><img src="~/template/images/x_pop.gif" alt="팝업닫기" /></a>
+        <div class="layer layer1">
+            <span class="sub_tit">옵션 B1/B2 Bezel Type</span>
+            <p class="sub_txt">IEC-Series(Open Frame Type)을 B1/B2 Bezel Type 형태로 외형을 변경 할 수 있는 옵션 제품</p>
+            <table class="layer1_tbl">
+                <colgroup>
+                    <col class="w1" />
+                    <col class="w2" />
+                    <col class="w2" />
+                </colgroup>
+                <tr>
+                    <th scope="row" class="none"></th>
+                    <th scope="col" class="none"><img src="~/template/images/pop1_img1.jpg" alt="B1 Bezel Type" /></th>
+                    <th scope="col" class="none"><img src="~/template/images/pop1_img2.jpg" alt="B2 Bezel Type" /></th>
+                </tr>
+                <tr>
+                    <th scope="row">Bezel Type</th>
+                    <th scope="col" class="bl"><span class="red">B1</span> Bezel Type</th>
+                    <th scope="col" class="bl"><span class="red">B2</span> Bezel Type</th>
+                </tr>
+                <tr>
+                    <th scope="row">형태</th>
+                    <td>전면 사출케이스 형태</td>
+                    <td>전면 사출케이스 형태</td>
+                </tr>
+                <tr>
+                    <th scope="row">적용 가능 LCD 크기</th>
+                    <td>10.9cm(4.3inch) ~ 26.4cm(10.4inch)</td>
+                    <td>10.9cm(4.3inch) ~ 26.4cm(10.4inch)</td>
+                </tr>
+                <tr>
+                    <th scope="row">특징</th>
+                    <td>Bezel Type 교체 용이<br />기구설계 가공 시 조립 용이</td>
+                    <td>Bezel Type 교체 용이<br />기구설계 가공 시 조립 용이<br /><span class="red">LCD 보호기능 및 전면 생활 방수</span></td>
+                </tr>
+            </table>
+            <div class="layer_adapt">
+                <div class="tit">
+                    <span>적용가능 <br class="__m"> 제품</span>
+                </div>
+                <div class="txt">
+                    <p>IEC - Series 제품 중 화면 크기 10.9cm(4.3inch) ~ 26.4cm(10.4inch)</p>
+                </div>
+            </div>
+            <div class="layer_btn">
+                <a href="#">자세히 보기</a>
+            </div>
+        </div><!-- //layer1 -->
+    </div><!-- //overlayer1 layerwrap1-->
+    <div class="overlayer overlayer2 layerwrap1">
+        <a href="#none" class="x_pop"><img src="~/template/images/x_pop.gif" alt="팝업닫기" /></a>
+        <div class="layer layer2">
+            <span class="sub_tit">Smart I/O - II, III</span>
+            <p class="sub_txt">IEC-Series(Open Frame THMI와 PLC 기능을 하나의 제품으로 구성되어있는 제품으로써 Smart I/O - II, III를 이용하여  IEC-Series 제품 또는 외부 장치 연동하여 사용할수 있는 장치입니다. 장치 응용프로그램을 보다 쉽게 개발하기 위한 옵션 제품</p>
+            <div class="layer2_box">
+                <div class="img">
+                    <img src="~/template/images/pop2_img1.jpg" alt="Smart I/O - II, III" />
+                </div>
+                <div class="txt">
+                    <strong class="tit">제/품/특/징</strong>
+                    <p class="desc">HMI와 PLC 기능 통합 / 소형(간이)자동화 시스템 구축<br />PLC의 래더로직(Ladder Logic)을 모르시는 PC프로그래머 개발자도 쉽게 제어로직 개발<br />외부기기(장치)들과 별도의 인터페이스 회로 없이 바로 연결 / 비용 절감<br />외부 인터페이스와 내부 전원이 분리되어 구성 <br />자체 전원 공급(Smart I/O - Board 내 소형 SMPS 내장)절연 처리</p>
+                </div>
+            </div>
+            <div class="layer2_imgbox">
+                <img src="~/template/images/pop2_img2.jpg" alt="Smart I/O - II, III" />
+            </div>
+            <table class="layer1_tbl">
+                <colgroup>
+                    <col class="w1" />
+                    <col class="w2" />
+                    <col class="w2" />
+                </colgroup>
+                <tr>
+                    <th scope="row">제품명</th>
+                    <th scope="col" class="bl">Smart I/O - II</th>
+                    <th scope="col" class="bl">Smart I/O - III</th>
+                </tr>
+                <tr>
+                    <th scope="row">기능</th>
+                    <td colspan="2">옵션 Block 사용으로 기능 변경 가능<br />소형 SMPS 내장 / ADC 채널 내장</td>
+                </tr>
+                <tr>
+                    <th scope="row">I/O 채널수</th>
+                    <td>16</td>
+                    <td>48</td>
+                </tr>
+                <tr>
+                    <th scope="row">PWM 채널수</th>
+                    <td>2</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <th scope="row">ADC 채널수</th>
+                    <td>4</td>
+                    <td>4<span class="red">(IEC1000 非 Lite - Series에서만 ADC 채널 수 6)</span></td>
+                </tr>
+                <tr>
+                    <th scope="row">Block 구성</th>
+                    <td>최대 5EA</td>
+                    <td>최대 12EA</td>
+                </tr>
+            </table>
+            <div class="layer_adapt">
+                <div class="tit">
+                    <span>적용가능 <br class="__m"> 제품</span>
+                </div>
+                <div class="txt">
+                    <p>IEC - Series 전 제품</p>
+                </div>
+            </div>
+            <div class="layer_btn">
+                <a href="#">자세히 보기</a>
+            </div>
+            <span class="sub_tit mt50">Smart Block</span>
+            <p class="sub_txt">Block- Series 제품은 독립적인 사용이 불가하며,  Smart I/O - II, III Base Board 제품에 용도에 맞쳐 추가 장착하여 I/O 기능 구성을 조합하여 사용하는 옵션 Block입니다. Block 제품군에 따라 출력(Relay 접점출력, FET출력,12Bite 아날로그출력), 입력(아날로그신호, 무극포토커플러), 통신(RS232 통신절연) 기능을 지원합니다. </p>
+            <div class="layer_btn">
+                <a href="#">자세히 보기</a>
+            </div>
+        </div><!-- //layer2 -->
+    </div><!-- //overlayer2 layerwrap1-->
+    <div class="overlayer overlayer3 layerwrap2">
+        <a href="#none" class="x_pop"><img src="~/template/images/x_pop.gif" alt="팝업닫기" /></a>
+        <div class="layer relayer layer3">
+            <div class="desc">
+                <span class="sub_tit">SmartVideo</span>
+                <p class="sub_txt">IEC667(Lite-Series 미 지원)에서 외부 카메라를 인터페이스 하기 위한 별도의 옵션보드<br class="__t" />NTSC(National Television System Committee)의 신호를 출력하는 카메라만 장착지원</p>
+                <span class="red redtxt">[주의] 카메라는 별도 구입</span>
+                <div class="img __m">
+                    <img src="~/template/images/layer3_img1.jpg" alt="SmartVideo" />
+                </div>
+                <div class="box">
+                    <div class="layer_adapt">
+                        <div class="tit">
+                            <span>적용가능 <br class="__m"> 제품</span>
+                        </div>
+                        <div class="txt">
+                            <p>IEC667 非 Lite - Series</p>
+                        </div>
+                    </div>
+                    <div class="layer_btn">
+                        <a href="#">자세히 보기</a>
+                    </div>
+                </div>
+            </div>
+            <div class="img __p">
+                <img src="~/template/images/layer3_img1.jpg" alt="SmartVideo" />
+            </div>
+        </div><!-- //layer3 -->
+    </div><!-- //overlayer3 layerwrap2-->
+    <div class="overlayer overlayer4 layerwrap2">
+        <a href="#none" class="x_pop"><img src="~/template/images/x_pop.gif" alt="팝업닫기" /></a>
+        <div class="layer relayer layer4">
+            <div class="desc">
+                <span class="sub_tit">SmartBattery</span>
+                <p class="sub_txt">외부 전원으로 리튬이온(Li-ion)충전지를 장착할 수 있는 옵션 제품</p>
+                <span class="red redtxt">[주의] 리튬이온 충전지 및 ON/OFF 스위치는 별도로 구매하셔야 합니다. </span>
+                <div class="img __m">
+                    <img src="~/template/images/layer4_img1.jpg" alt="SmartBattery" />
+                </div>
+                <div class="box">
+                    <div class="layer_adapt">
+                        <div class="tit">
+                            <span>적용가능 <br class="__m"> 제품</span>
+                        </div>
+                        <div class="txt">
+                            <p>IEC Lite - Series</p>
+                        </div>
+                    </div>
+                    <div class="layer_btn">
+                        <a href="#">자세히 보기</a>
+                    </div>
+                </div>
+            </div>
+            <div class="img __p">
+                <img src="~/template/images/layer4_img1.jpg" alt="SmartBattery" />
+            </div>
+        </div><!-- //layer4 -->
+    </div><!-- //overlayer4 layerwrap2-->
+    <div class="overlayer overlayer5 layerwrap2">
+        <a href="#none" class="x_pop"><img src="~/template/images/x_pop.gif" alt="팝업닫기" /></a>
+        <div class="layer relayer layer5">
+            <div class="desc">
+                <span class="sub_tit">USB 무선랜</span>
+                <p class="sub_txt">무선으로 인터넷(WiFi)을 사용할 수 있는 USB Type의 무선 랜카드</p>
+                <span class="red redtxt">[주의] USB 무선랜 사용 시 단독으로만 사용 가능(다른 USB 장치 사용 불가)<br />무선랜 사용 시 기존 아답터의 사용 용량을 대비하여 500mA 사용</span>
+                <div class="img __m">
+                    <img src="~/template/images/layer5_img1.jpg" alt="USB 무선랜" />
+                </div>
+                <div class="box">
+                    <div class="layer_adapt">
+                        <div class="tit">
+                            <span>적용가능 <br class="__m"> 제품</span>
+                        </div>
+                        <div class="txt">
+                            <p>IEC - Series</p>
+                        </div>
+                    </div>
+                    <div class="layer_btn">
+                        <a href="#">자세히 보기</a>
+                    </div>
+                </div>
+            </div>
+            <div class="img __p">
+                <img src="~/template/images/layer5_img1.jpg" alt="USB 무선랜" />
+            </div>
+        </div><!-- //layer5 -->
+    </div><!-- //overlayer5 layerwrap2-->
+    <div class="overlayer overlayer6 layerwrap2">
+        <a href="#none" class="x_pop"><img src="~/template/images/x_pop.gif" alt="팝업닫기" /></a>
+        <div class="layer relayer1 layer6">
+            <span class="sub_tit">Pro.라이선스(OS Windows CE 5.0/6.0)</span>
+            <p class="sub_txt">기본적으로 OS  Core 버전 라이선스가 되어있으며, 개발에 사용되는 기능(Component)에 따라서 Pro. 버전의 OS를 변경 할 수 있는 라이선스</p>
+            <span class="red redtxt">[주의] 별도의 추가 기능 및 O/S Customize는 당사로 문의 하시기 바랍니다. </span>
+            <div class="box">
+                <div class="layer_adapt">
+                    <div class="tit">
+                        <span>적용가능 <br class="__m"> 제품</span>
+                    </div>
+                    <div class="txt">
+                        <p>IEC - Series</p>
+                    </div>
+                </div>
+                <div class="layer_btn">
+                    <a href="#">자세히 보기</a>
+                </div>
+            </div>
+        </div><!-- //layer6 -->
+    </div><!-- //overlayer6 layerwrap2-->
+    <div class="overlayer overlayer7 layerwrap2">
+        <a href="#none" class="x_pop"><img src="~/template/images/x_pop.gif" alt="팝업닫기" /></a>
+        <div class="layer relayer layer7">
+            <div class="desc">
+                <span class="sub_tit">Smart Kit</span>
+                <p class="sub_txt">IEC-Series의 Extension Port의 실험 및 스터디를 하기 위한 보드<br />Extension Port를 사용하여 하드웨어 I/O  기능을 학습</p>
+                <div class="img __m">
+                    <img src="~/template/images/layer7_img1.jpg" alt="Smart Kit" />
+                </div>
+                <div class="box">
+                    <div class="layer_adapt">
+                        <div class="tit">
+                            <span>적용가능 <br class="__m"> 제품</span>
+                        </div>
+                        <div class="txt">
+                            <p>IEC - Series 전 제품</p>
+                        </div>
+                    </div>
+                    <div class="layer_btn">
+                        <a href="#">자세히 보기</a>
+                    </div>
+                </div>
+            </div>
+            <div class="img __p">
+                <img src="~/template/images/layer7_img1.jpg" alt="Smart Kit" />
+            </div>
+        </div><!-- //layer7 -->
+    </div><!-- //overlayer7 layerwrap2-->
+    <div class="overlayer overlayer8 layerwrap2">
+        <a href="#none" class="x_pop"><img src="~/template/images/x_pop.gif" alt="팝업닫기" /></a>
+        <div class="layer relayer layer8">
+            <div class="desc">
+                <span class="sub_tit">SN485 - Board<em>(Sound AMP Speaker &amp; 485 Transceiver)</em></span>
+                <p class="sub_txt">IEC266-Lite Series의 스피커 출력 및 485 지원을 위한 장치</p>
+                <div class="img __m">
+                    <img src="~/template/images/layer8_img1.jpg" alt="SN485 - Board(Sound AMP Speaker & 485 Transceiver)" />
+                </div>
+                <div class="box">
+                    <div class="layer_adapt">
+                        <div class="tit">
+                            <span>적용가능 <br class="__m"> 제품</span>
+                        </div>
+                        <div class="txt">
+                            <p>IEC266Lite - Series</p>
+                        </div>
+                    </div>
+                    <div class="layer_btn">
+                        <a href="#">자세히 보기</a>
+                    </div>
+                </div>
+            </div>
+            <div class="img __p">
+                <img src="~/template/images/layer8_img1.jpg" alt="SN485 - Board(Sound AMP Speaker & 485 Transceiver)" />
+            </div>
+        </div><!-- //layer8 -->
+    </div><!-- //overlayer8 layerwrap2 -->
+</div><!-- //wraplayer -->
+<!-- //popup -->
+
+<div class="big_wraplayer big_wraplayer1">
+    <div class="big_overlayer big_overlayer1">
+        <a href="#none" class="x_pop"><img src="~/template/images/x_pop.gif" alt="팝업닫기" /></a>
+        <div class="big big3">
+            <ul class="roll"></ul>
+        </div><!-- //_big -->
+        <div class="slide_pager slide_pager3">
+
+        </div>
+        <script>compare_roll3.init();</script>
+    </div>
+</div>
+
+<div class="big_wraplayer big_wraplayer2">
+    <div class="big_overlayer big_overlayer2">
+        <a href="#none" class="x_pop"><img src="~/template/images/x_pop.gif" alt="팝업닫기" /></a>
+        <div class="big big4">
+            <ul class="roll"></ul>
+        </div><!-- //_big -->
+        <div class="slide_pager slide_pager4">
+
+        </div>
+        <script>compare_roll4.init();</script>
+    </div>
+</div>
+
+
+<div id="loading-modal" class="modal" style="display:none">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+
+        <h1>Loading...</h1>
+
+
+    </div>
+
+</div>
+
+
+<!-- //서브 컨텐츠 // 이 아래부터 공통 -->
+@section Scripts{
+    <script>
+
+        $(function () {
+            $('.option input:checkbox').on('click', function () {
+                //$('#loading-modal').show();
+                search();
+            });
+
+            resetUI(true);
+
+        });
+
+
+        function search() {
+            $.ajax({
+                type: 'POST',
+                url: '/Hardware/Compare',
+                data: $('#prod-compare-form').serialize(),
+                success: function (data) {
+                    console.log(data);
+                    $('#resultCount').text('검색결과(0건)');
+
+                    if (data.searchResult != null && data.searchResult.length > 0) {
+                        showSearchResult();
+
+                        $('.result_list').empty();
+                        $('#resultCount').text('검색결과(' + data.searchResult.length + '건)');
+                        $(data.searchResult).each(function () {
+                            var html = '<li>' +
+                                '<span class="box">' +
+                                '<label><input type="checkbox" name="SearchResult" value="' + this + '" />&nbsp; <span class="vam">' + this + '</span></label>' +
+                                '</span>' +
+                                '</li>';
+                            $('.result_list').append(html);
+                        });
+                    }
+                    else {
+                        //hideSearchResult();
+
+                        $('.result_list').empty();
+                        var html = '<h2>해당 상품을 찾을수 없습니다.</h2>';
+                        $('.result_list').append(html);
+                    }
+
+                    $('#loading-modal').hide();
+                },
+                error: function (textStatus, errorThrown) {
+                    Success = false;//doesnt goes here
+                    $('#loading-modal').hide();
+                }
+            });
+        }
+
+        function compare(prod1, prod2) {
+            //$('#loading-modal').show();
+            $.ajax({
+                type: 'POST',
+                url: '/Hardware/CompareProducts',
+                data: { prod1: prod1, prod2: prod2 },
+                success: function (data) {
+                    console.log(data);
+                    resetUI(false);
+
+                    $('.slide2').hide();
+                    $('#prodName2').hide();
+
+                    if (data.product1 != null && data.product1.images != null) {
+                        showCompareResult();
+
+                        $('.big1 .roll').empty();
+                        $('.slide_pager1').empty();
+                        $('.big3 .roll').empty();
+                        $('.slide_pager3').empty();
+
+                        var i = 0;
+                        $(data.product1.images).each(function () {
+                            var html = '<li><img src="' + this + '" class="big_modal big_modal1" /></li>';
+                            $('.big1 .roll').append(html);
+
+                            var html2 = '<a data-slide-index="' + i + '" href="#none"><img src="' + this + '" /></a>';
+                            $('.slide_pager1').append(html2);
+
+                            var html3 = '<li><img src="' + this + '" /></li>';
+                            $('.big3 .roll').append(html3);
+
+                            var html4 = '<a data-slide-index="' + i + '" href="#none"><img src="' + this + '" width="60" /></a>';
+                            $('.slide_pager3').append(html4);
+
+                            i++;
+                        });
+
+                        var screenType = (data.product1.bezel_Type.indexOf('Bezel') > -1 ? '옵션 Bezel 장착' : 'OpenFrameType');
+
+                        if (data.product1.product_Name.indexOf('IEC1000') > -1)
+                            $('#name1').css('color', '#59779C');
+                        else if (data.product1.product_Name.indexOf('IEC667') > -1)
+                            $('#name1').css('color', '#14ae1f');
+                        else if (data.product1.product_Name.indexOf('IEC226') > -1)
+                            $('#name1').css('color', '#31beff');
+                        else
+                            $('#name1').css('color', '');
+
+                        var prodName, bezel;
+                        prodName = data.product1.product_Name.replace('B1','').replace('B2','');
+                        bezel = data.product1.product_Name.replace(prodName, '');
+
+                        $('#name1').html('<span class="opt">' + screenType + '</span>' + prodName + '<em class="gray">' + bezel + '</em>'); 
+                        $('#price1').html('판매가 ' + data.product1.price + '<span class="vat">(VAT별도)</span>');
+                        $('#prodName1').text(data.product1.product_Name);
+                        $('#cpu1').text(data.product1.cpU_Detail);
+                        $('#flash1').text(data.product1.flash_Detail);
+                        $('#power1').text(data.product1.power);
+                        $('#lcd1').text(data.product1.lcD_Size);
+
+                        $('#buy1').attr("href", data.product1.url);
+                        //$('#price1').text(data.product1.product_Price);
+                        $('#backlight1').text(data.product1.backlight);
+                        $('#bezel1').text((data.product1.bezel_Type.indexOf('Bezel Type') > -1 ? '●' : '-'));
+                        $('#smartIO2_1').text((data.product1.smartIO2.indexOf('Smart I/O - II') > -1 ? '●' : '-'));
+                        $('#smartIO3_1').text((data.product1.smartIO3.indexOf('Smart I/O - III') > -1 ? '●' : '-'));
+                        $('#smartVid1').text((data.product1.smartVideo.length > 0 ? '●' : '-'));
+                        $('#smartBat1').text(data.product1.smartBattery.length > 0 ? '●' : '-');
+                        $('#USBWlan1').text(data.product1.lan.length > 0 ? '●' : '-');
+                        $('#proLicence1').text(data.product1.proLicense.length > 0 ? '●' : '-');
+                        $('#smartKit1').text(data.product1.smartKit.length > 0 ? '●' : '-');
+                        $('#sn485_1').text(data.product1.rS485.length > 0 ? '●' : '-');
+                        $('#prodSize1').text(data.product1.lcD_Size);
+                        $('#contact1').text(data.product1.manager);
+
+                        $('#cache1').text(data.product1.cache);
+                        $('#Ram1').text(data.product1.ram);
+                        $('#SdMemory1').text(data.product1.sD_Memory);
+                        $('#Audio1').text(data.product1.audio);
+                        $('#Touch1').text(data.product1.touch);
+                        $('#Rtc1').text(data.product1.rtc);
+                        $('#VoltageRange1').text(data.product1.voltageRange);
+                        $('#OperatingTemperature1').text(data.product1.operatingTemperature);
+                        $('#StorageTemperature1').text(data.product1.storageTemperature);
+                        $('#AspectRatio1').text(data.product1.aspectRatio);
+                        $('#Resolution1').text(data.product1.resolution);
+                        $('#Color1').text(data.product1.color);
+                        $('#Luminance1').text(data.product1.luminance);
+                        $('#BacklightOnOff1').text(data.product1.backlightOnOff);
+                        $('#RS2321').text(data.product1.rS232);
+                        $('#RS4851').text(data.product1.rS485);
+                        $('#TTL1').text(data.product1.ttl);
+                        $('#USBHost1').text(data.product1.usB_HOST);
+                        $('#USBDevice1').text(data.product1.usbDevice);
+                        $('#Ethernet1').text(data.product1.ethernet);
+                        $('#WLAN1').text(data.product1.wlan);
+                        $('#I2C1').text(data.product1.i2C);
+                        $('#CameraI_F1').text(data.product1.cameraI_F);
+                        $('#Extension_Port_I_II1').text(data.product1.extension_Port_I_II);
+                        $('#GPIO1').text(data.product1.gpio);
+                        $('#PWM1').text(data.product1.pwm);
+                        $('#ADConverter1').text(data.product1.aD_Converter);
+                    }
+
+                    if (data.product2 != null && data.product2.images != null) {
+                        showCompareResult();
+                        $('.slide2').show();
+                        $('#prodName2').show();
+
+                        $('.big2 .roll').empty();
+                        $('.slide_pager2').empty();
+                        $('.big4 .roll').empty();
+                        $('.slide_pager4').empty();
+
+                        var i = 0;
+                        $(data.product2.images).each(function () {
+                            var html = '<li><img src="' + this + '" class="big_modal big_modal2" /></li>';
+                            $('.big2 .roll').append(html);
+
+                            var html2 = '<a data-slide-index="' + i + '" href="#none"><img src="' + this + '" /></a>';
+                            $('.slide_pager2').append(html2);
+
+                            var html3 = '<li><img src="' + this + '" /></li>';
+                            $('.big4 .roll').append(html3);
+
+                            var html4 = '<a data-slide-index="' + i + '" href="#none"><img src="' + this + '" width="60" /></a>';
+                            $('.slide_pager4').append(html4);
+
+                            i++;
+                        });
+
+                        var screenType = (data.product2.bezel_Type.indexOf('Bezel') > -1 ? '옵션 Bezel 장착' : 'OpenFrameType');
+
+                        if (data.product2.product_Name.indexOf('IEC1000') > -1)
+                            $('#name2').css('color', '#59779C');
+                        else if (data.product2.product_Name.indexOf('IEC667') > -1)
+                            $('#name2').css('color', '#14ae1f');
+                        else if (data.product2.product_Name.indexOf('IEC226') > -1)
+                            $('#name2').css('color', '#31beff');
+                        else
+                            $('#name2').css('color', '');
+
+                        var prodName, bezel;
+                        prodName = data.product2.product_Name.replace('B1','').replace('B2','');
+                        bezel = data.product2.product_Name.replace(prodName, '');
+
+                        $('#name2').html('<span class="opt">' + screenType + '</span>' + prodName + '<em class="gray">'+ bezel +'</em>');
+                        $('#price2').html('판매가 ' + data.product2.price + '<span class="vat">(VAT별도)</span>');
+                        $('#prodName2').text(data.product2.product_Name);
+                        $('#cpu2').text(data.product2.cpU_Detail);
+                        $('#flash2').text(data.product2.flash_Detail);
+                        $('#power2').text(data.product2.power);
+                        $('#lcd2').text(data.product2.lcD_Size);
+
+                        $('#buy2').attr("href", data.product2.url);
+                        //$('#price2').text(data.product2.product_Price);
+                        $('#backlight2').text(data.product2.backlight);
+                        $('#bezel2').text((data.product2.bezel_Type.indexOf('Bezel Type') > -1 ? '●' : '-'));
+                        $('#smartIO2_2').text((data.product2.smartIO2.indexOf('Smart I/O - II') > -1 ? '●' : '-'));
+                        $('#smartIO3_2').text((data.product2.smartIO3.indexOf('Smart I/O - III') > -1 ? '●' : '-'));
+                        $('#smartVid2').text(data.product2.smartVideo.length > 0 ? '●' : '-');
+                        $('#smartBat2').text(data.product2.smartBattery.length > 0 ? '●' : '-');
+                        $('#USBWlan2').text(data.product2.lan.length > 0 ? '●' : '-');
+                        $('#proLicence2').text(data.product2.proLicense.length > 0 ? '●' : '-');
+                        $('#smartKit2').text(data.product2.smartKit.length > 0 ? '●' : '-');
+                        $('#sn485_2').text(data.product2.rS485.length > 0 ? '●' : '-');
+                        $('#prodSize2').text(data.product2.lcD_Size);
+                        $('#contact2').text(data.product2.manager);
+
+                        $('#cache2').text(data.product2.cache);
+                        $('#Ram2').text(data.product2.ram);
+                        $('#SdMemory2').text(data.product2.sD_Memory);
+                        $('#Audio2').text(data.product2.audio);
+                        $('#Touch2').text(data.product2.touch);
+                        $('#Rtc2').text(data.product2.rtc);
+                        $('#VoltageRange2').text(data.product2.voltageRange);
+                        $('#OperatingTemperature2').text(data.product2.operatingTemperature);
+                        $('#StorageTemperature2').text(data.product2.storageTemperature);
+                        $('#AspectRatio2').text(data.product2.aspectRatio);
+                        $('#Resolution2').text(data.product2.resolution);
+                        $('#Color2').text(data.product2.color);
+                        $('#Luminance2').text(data.product2.luminance);
+                        $('#BacklightOnOff2').text(data.product2.backlightOnOff);
+                        $('#RS2322').text(data.product2.rS232);
+                        $('#RS4852').text(data.product2.rS485);
+                        $('#TTL2').text(data.product2.ttl);
+                        $('#USBHost2').text(data.product2.usB_HOST);
+                        $('#USBDevice2').text(data.product2.usbDevice);
+                        $('#Ethernet2').text(data.product2.ethernet);
+                        $('#WLAN2').text(data.product2.wlan);
+                        $('#I2C2').text(data.product2.i2C);
+                        $('#CameraI_F2').text(data.product2.cameraI_F);
+                        $('#Extension_Port_I_II2').text(data.product2.extension_Port_I_II);
+                        $('#GPIO2').text(data.product2.gpio);
+                        $('#PWM2').text(data.product2.pwm);
+                        $('#ADConverter2').text(data.product2.aD_Converter);
+                    }
+
+                    //compare_roll1.init();
+                    //compare_roll2.init();
+
+                    slider1.redrawSlider();
+                    slider2.redrawSlider();
+                    slider3.redrawSlider();
+                    slider4.redrawSlider();
+
+                    slider1.reloadSlider();
+                    slider2.reloadSlider();
+                    slider3.reloadSlider();
+                    slider4.reloadSlider();
+
+                    applyBlueColorToMatchingRow();
+
+                    $('#loading-modal').hide();
+                },
+                error: function (textStatus, errorThrown) {
+                    Success = false;//doesnt goes here
+                    $('#loading-modal').hide();
+                }
+            });
+        }
+
+        function hideSearchResult() {
+            $('.resultSearch').hide();
+        }
+
+        function showSearchResult() {
+            $('.resultSearch').show();
+        }
+
+        function hideCompareResult() {
+            $('.resultCompare').hide();
+        }
+
+        function showCompareResult() {
+            $('.resultCompare').show();
+        }
+
+        function resetUI(hideResult) {
+            $('#name1').html('');
+            $('#price1').html('');
+            $('#prodName1').html('');
+            $('#cpu1').text('');
+            $('#flash1').text('');
+            $('#power1').text('');
+            $('#lcd1').text('');
+
+            $('#buy1').attr("href", '#');
+            //$('#price1').text(data.product1.product_Price);
+            $('#backlight1').text('');
+            $('#bezel1').text('');
+            $('#smartIO2_1').text('');
+            $('#smartIO3_1').text('');
+            $('#smartVid1').text('');
+            $('#smartBat1').text('');
+            $('#USBWlan1').text('');
+            $('#proLicence1').text('');
+            $('#smartKit1').text('');
+            $('#sn485_1').text('');
+            $('#prodSize1').text('');
+            $('#contact1').text('');
+
+            $('#name2').html('');
+            $('#price2').html('');
+            $('#prodName2').text('');
+            $('#cpu2').text('');
+            $('#flash2').text('');
+            $('#power2').text('');
+            $('#lcd2').text('');
+
+            $('#buy2').attr("href", '');
+            //$('#price2').text(data.product2.product_Price);
+            $('#backlight2').text('');
+            $('#bezel2').text('');
+            $('#smartIO2_2').text('');
+            $('#smartIO3_2').text('');
+            $('#smartVid2').text('');
+            $('#smartBat2').text('');
+            $('#USBWlan2').text('');
+            $('#proLicence2').text('');
+            $('#smartKit2').text('');
+            $('#sn485_2').text('');
+            $('#prodSize2').text('');
+            $('#contact2').text('');
+
+            if (hideResult) {
+                hideSearchResult();
+                hideCompareResult();
+            }
+        }
+
+        $('body').on('click', '.result_list input:checkbox', function () {
+            var checked = $(this).is(':checked');
+            if (checked) {
+                if ($('.result_list input:checkbox:checked').length == 1) {
+                    $($(this).closest('li')).siblings().removeClass('chk1 chk2');
+                    $($(this).closest('li')).removeClass('chk1 chk2');
+                    $($(this).closest('li')).addClass('chk1');
+                    compare($(this).val(), '');
+                }
+                else if ($('.result_list input:checkbox:checked').length == 2) {
+                    $($(this).closest('li')).siblings().removeClass('chk2');
+                    $($(this).closest('li')).removeClass('chk2');
+                    $($(this).closest('li')).addClass('chk2');
+
+                    var prod1 = $('.chk1 input:checkbox').val();
+                    compare(prod1, $(this).val());
+                }
+                else if ($('.result_list input:checkbox:checked').length > 2) {
+                    return false;
+                }
+            }
+            else {
+                if ($('.result_list input:checkbox:checked').length == 1) {
+                    $($(this).closest('li')).siblings().removeClass('chk1 chk2');
+                    $($(this).closest('li')).removeClass('chk1 chk2');
+                    $($($('.result_list input:checkbox:checked')[0]).closest('li')).addClass('chk1');
+                    //$($(this).closest('li')).addClass('chk1');
+                    var prod1 = $('.chk1 input:checkbox').val();
+                    compare(prod1, '');
+                }
+                else if ($('.result_list input:checkbox:checked').length == 2) {
+                    $($(this).closest('li')).siblings().removeClass('chk2');
+                    $($(this).closest('li')).removeClass('chk2');
+                    $($(this).closest('li')).addClass('chk2');
+                    compare('', '');
+                }
+                else {
+                    $($(this).closest('li')).siblings().removeClass('chk1 chk2');
+                    $($(this).closest('li')).removeClass('chk1 chk2');
+                    hideCompareResult();
+                }
+            }
+        });
+
+        function applyBlueColorToMatchingRow() {
+            $('.specTbl1 tr').each(function () { 
+                $(this).removeClass('blue');
+                var cell1 = $($(this).find('td')[0]).text();
+                var cell2 = $($(this).find('td')[1]).text();
+                if (cell1 != cell2) {
+                    $(this).addClass('blue');
+                }
+            })
+
+            $('.specTbl2 tr').each(function () {
+                $(this).removeClass('blue');
+                var cell1 = $($(this).find('td')[0]).text();
+                var cell2 = $($(this).find('td')[1]).text();
+                if (cell1 != cell2) {
+                    $(this).addClass('blue');
+                }
+            })
+
+            $('.specTbl3 tr').each(function () {
+                $(this).removeClass('blue');
+                var cell1 = $($(this).find('td')[0]).text();
+                var cell2 = $($(this).find('td')[1]).text();
+                if (cell1 != cell2) {
+                    $(this).addClass('blue');
+                }
+            })
+
+            $('.specTbl4 tr').each(function () {
+                $(this).removeClass('blue');
+                var cell1 = $($(this).find('td')[0]).text();
+                var cell2 = $($(this).find('td')[1]).text();
+                if (cell1 != cell2) {
+                    $(this).addClass('blue');
+                }
+            })
+
+            $('.specTbl5 tr').each(function () {
+                $(this).removeClass('blue');
+                var cell1 = $($(this).find('td')[0]).text();
+                var cell2 = $($(this).find('td')[1]).text();
+                if (cell1 != cell2) {
+                    $(this).addClass('blue');
+                }
+            })
+
+            $('.specTbl6 tr').each(function () {
+                $(this).removeClass('blue');
+                var cell1 = $($(this).find('td')[0]).text();
+                var cell2 = $($(this).find('td')[1]).text();
+                if (cell1 != cell2) {
+                    $(this).addClass('blue');
+                }
+            })
+        }
+
+
+        $('.chk_none').click(function () {
+            $('input:checkbox').removeAttr('checked', 'checked');
+            $(this).val('uncheck all');
+            $('#resultCount').text('검색결과(0건)');
+
+            //$('.resultSearch').hide();
+            //$('.resultCompare').hide();
+        });
+
+
+    </script>
+}

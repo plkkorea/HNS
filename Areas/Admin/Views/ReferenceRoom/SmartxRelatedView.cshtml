@@ -1,0 +1,34 @@
+﻿@model HNS.Entities.SmartXRelated
+@{
+    ViewData["Title"] = "Smartx Related View";
+    ViewData["BreadCrumb"] = "게시판관리,SamartX Framework Versions";
+    ViewData["CurrentMenu"] = "게시판관리";
+    ViewData["CurrentMenuItem"] = "SamartX Framework Versions";
+}
+
+<div class="bbs-write">
+    <dl>
+        <dt><label for="title">Title</label></dt>
+        <dd><input type="text" id="wr_subject" name="wr_subject" title="제목 입력" readonly value="@Model.Title"></dd>
+    </dl>
+    <dl>
+        <dt>Version</dt>
+        <dd><input type="text" id="wr_1" name="wr_1" title="URL 입력" readonly value="@Model.Version"></dd>
+    </dl>
+    <dl class="content" style="height:auto;">
+        <dt>내용</dt>
+        <dd>
+            @Html.Raw(Model.Content)
+        </dd>
+    </dl>
+</div>
+
+
+<div class="btn_confirm01 btn_confirm">
+    <a href="@Url.Action("SmartXRelatedEdit", "ReferenceRoom", new { id=Model.Id })">
+        편집
+    </a>
+    <a href="@Url.Action("SmartXRelatedAdmin", "ReferenceRoom")">
+        다시 목록으로
+    </a>
+</div>

@@ -1,0 +1,277 @@
+﻿@model HNS.Entities.TechNote
+@{
+    ViewData["Title"] = "TechNote Edit";
+    ViewData["BreadCrumb"] = "게시판관리,TECHNOTE";
+    ViewData["CurrentMenu"] = "게시판관리";
+    ViewData["CurrentMenuItem"] = "TECHNOTE";
+}
+
+
+<form asp-action="TechNoteEdit" asp-controller="ReferenceRoom" method="post" id="frmTechNote" enctype="multipart/form-data">
+    <div class="bbs-write">
+        <dl>
+            <dt><label for="title">작성자</label></dt>
+            <dd><input type="text" asp-for="m_name" value="@User.Identity.Name" readonly></dd>
+        </dl>
+        <dl>
+            <dt>제목</dt>
+            <dd><input type="text" asp-for="m_title" required></dd>
+        </dl>
+        <dl class="content" style="height:auto;">
+            <dt>개요</dt>
+            <dd><textarea rows="20" asp-for="m_summary"></textarea></dd>
+        </dl>
+        <dl class="content" style="height:auto;">
+            <dt>분류</dt>
+            <dd>
+                <ul class="chk_5 classifications">
+                    <li>
+                        <label><input type="checkbox" name="classifications" value="Knowhow" @(Model != null && Model.classifications != null && Model.classifications.Contains("Knowhow") ? "checked" : "") />&nbsp; Knowhow</label>
+                    </li>
+                    <li>
+                        <label><input type="checkbox" name="classifications" value="Trouble Shooting" @(Model != null && Model.classifications != null && Model.classifications.Contains("Trouble Shooting") ? "checked" : "") />&nbsp; Trouble Shooting</label>
+                    </li>
+                    <li>
+                        <label><input type="checkbox" name="classifications" value="SmartX Framework" @(Model != null && Model.classifications != null && Model.classifications.Contains("SmartX Framework") ? "checked" : "") />&nbsp; SmartX Framework </label>
+                    </li>
+                    <li>
+                        <label><input type="checkbox" name="classifications" value="Test Report" @(Model != null && Model.classifications != null && Model.classifications.Contains("Test Report") ? "checked" : "") />&nbsp; Test Report</label>
+                    </li>
+                    <li>
+                        <label><input type="checkbox" name="classifications" value="Debugging" @(Model != null && Model.classifications != null && Model.classifications.Contains("Debugging") ? "checked" : "") />&nbsp; Debugging</label>
+                    </li>
+                </ul>
+            </dd>
+        </dl>
+        <dl class="content" style="height:auto;">
+            <dt>적용 플랫폼</dt>
+            <dd>
+                <ul class="chk_12 applicableFramework">
+                    <li><label><input type="checkbox" name="applicableFramework" value="IEC266" @(Model != null && Model.applicableFramework != null && Model.applicableFramework.Contains("IEC266") ? "checked" : "") />&nbsp; IEC266</label></li>
+                    <li><label><input type="checkbox" name="applicableFramework" value="IEC667" @(Model != null && Model.applicableFramework != null && Model.applicableFramework.Contains("IEC667") ? "checked" : "") />&nbsp; IEC667</label></li>
+                    <li><label><input type="checkbox" name="applicableFramework" value="IEC1000" @(Model != null && Model.applicableFramework != null && Model.applicableFramework.Contains("IEC1000") ? "checked" : "") />&nbsp; IEC1000</label></li>
+                    <li><label><input type="checkbox" name="applicableFramework" value="Windows CE 5.0" @(Model != null && Model.applicableFramework != null && Model.applicableFramework.Contains("Windows CE 5.0") ? "checked" : "") />&nbsp; Windows CE 5.0</label></li>
+                    <li><label><input type="checkbox" name="applicableFramework" value="Windows CE 6.0" @(Model != null && Model.applicableFramework != null && Model.applicableFramework.Contains("Windows CE 6.0") ? "checked" : "") />&nbsp; Windows CE 6.0</label></li>
+                    <li><label><input type="checkbox" name="applicableFramework" value="Windows CE 7.0" @(Model != null && Model.applicableFramework != null && Model.applicableFramework.Contains("Windows CE 7.0") ? "checked" : "") />&nbsp; Windows CE 7.0</label></li>
+                    <li><label><input type="checkbox" name="applicableFramework" value=".NET Compact Framework 2.0" @(Model != null && Model.applicableFramework != null && Model.applicableFramework.Contains(".NET Compact Framework 2.0") ? "checked" : "") />&nbsp; .NET Compact Framework 2.0</label></li>
+                    <li><label><input type="checkbox" name="applicableFramework" value=".NET Compact Framework 3.5" @(Model != null && Model.applicableFramework != null && Model.applicableFramework.Contains(".NET Compact Framework 3.5") ? "checked" : "") />&nbsp; .NET Compact Framework 3.5</label></li>
+                    <li><label><input type="checkbox" name="applicableFramework" value="C#" @(Model != null && Model.applicableFramework != null && Model.applicableFramework.Contains("C#") ? "checked" : "") />&nbsp; C#</label></li>
+                    <li><label><input type="checkbox" name="applicableFramework" value="VB.NET" @(Model != null && Model.applicableFramework != null && Model.applicableFramework.Contains("VB.NET") ? "checked" : "") />&nbsp; VB.NET</label></li>
+                    <li><label><input type="checkbox" name="applicableFramework" value="C++" @(Model != null && Model.applicableFramework != null && Model.applicableFramework.Contains("C++") ? "checked" : "") />&nbsp; C++</label></li>
+                </ul>
+            </dd>
+        </dl>
+        <dl>
+            <dt>키워드</dt>
+            <dd><input type="text" asp-for="m_keywords"></dd>
+        </dl>
+        <dl>
+            <dt>코멘트</dt>
+            <dd><input type="text" asp-for="m_comment"></dd>
+        </dl>
+
+        <dl>
+            <dt>
+                첨부파일
+                @if (Model != null && !string.IsNullOrWhiteSpace(Model.m_file_name))
+            {
+                <a target="_blank" href="@Url.Action("DownloadTechNoteFile", "ReferenceRoom", new { id = Model.Id })"><img src="~/template/images/sub54_down.gif" alt="@Model.m_file_name" title="@Model.m_file_name" /></a>
+        }
+            </dt>
+            <dd>
+                <input type="file" asp-for="m_file_name" id="file_add" />
+            </dd>
+        </dl>
+        <dl class="content" style="height:auto;">
+            <dt>내용</dt>
+            <dd>
+                <a href="javascript:;" id="linkSwitchEditor1" class="linkSwitchEditor">[Rich Text Editor로 변경]</a>
+                <textarea asp-for="m_content" rows="20"></textarea>
+            </dd>
+        </dl>
+        <dl class="content" style="height:auto;">
+            <dt>
+                <label>
+                    <input type="checkbox" asp-for="m_displayCodeCSharp" />
+                    예제코드 C#
+                </label>
+            </dt>
+            <dd>
+                <a href="javascript:;" id="linkSwitchEditor2" class="linkSwitchEditor">[Rich Text Editor로 변경]</a>
+                <textarea rows="20" asp-for="m_codeCSharp"></textarea>
+            </dd>
+        </dl>
+        <dl class="content" style="height:auto;">
+            <dt>
+                <label>
+                    <input type="checkbox" asp-for="m_displayCodeVBNet" />
+                    예제코드 VB.NET
+                </label>
+            </dt>
+            <dd>
+                <a href="javascript:;" id="linkSwitchEditor3" class="linkSwitchEditor">[Rich Text Editor로 변경]</a>
+                <textarea rows="20" asp-for="m_codeVBNet"></textarea>
+            </dd>
+        </dl>
+        <dl class="content" style="height:auto;">
+            <dt>
+                <label>
+                    <input type="checkbox" asp-for="m_displayCodeCPP" />
+                    예제코드 C++
+                </label>
+            </dt>
+            <dd>
+                <a href="javascript:;" id="linkSwitchEditor4" class="linkSwitchEditor">[Rich Text Editor로 변경]</a>
+                <textarea rows="20" asp-for="m_codeCPP"></textarea>
+            </dd>
+        </dl>
+        <dl class="content" style="height:auto;">
+            <dt>
+                참고항목
+            </dt>
+            <dd>
+                <a href="javascript:;" id="linkSwitchEditor5" class="linkSwitchEditor">[Rich Text Editor로 변경]</a>
+                <textarea rows="20" asp-for="m_referenceItem"></textarea>
+            </dd>
+        </dl>
+
+    </div>
+
+
+    @if (Model?.Id > 0)
+    {
+        <div class="btn_confirm01 btn_confirm">
+            <input type="submit" value="수정" class="btn-ty1 light" accesskey="s">
+            <a href="@Url.Action("TechNote", "ReferenceRoom")">
+                취소
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="btn_confirm01 btn_confirm">
+            <input type="submit" value="작성" class="btn-ty1 light" accesskey="s">
+            <a href="@Url.Action("TechNote", "ReferenceRoom")">
+                취소
+            </a>
+        </div>
+    }
+
+
+</form>
+
+
+@section Scripts
+    {
+    <script src="~/lib/ckeditor/ckeditor.js"></script>
+
+    <script>
+        $(function () {
+            //CKEDITOR.replace('m_content');
+            //CKEDITOR.replace('m_codeCSharp');
+            //CKEDITOR.replace('m_codeVBNet');
+            //CKEDITOR.replace('m_codeCPP');
+            //CKEDITOR.replace('m_referenceItem');
+
+            $('body').on('click', '#linkSwitchEditor1', function () {
+                if (CKEDITOR.instances.m_content) {
+                    CKEDITOR.instances.m_content.destroy();
+                    $(this).text('[Rich Text Editor로 변경]');
+                }
+                else {
+                    CKEDITOR.replace('m_content');
+                    $(this).text('[Simple Text Editor로 전환]');
+                }
+            });
+
+            $('body').on('click', '#linkSwitchEditor2', function () {
+                if (CKEDITOR.instances.m_codeCSharp) {
+                    CKEDITOR.instances.m_codeCSharp.destroy();
+                    $(this).text('[Rich Text Editor로 변경]');
+                }
+                else {
+                    CKEDITOR.replace('m_codeCSharp');
+                    $(this).text('[Simple Text Editor로 전환]');
+                }
+            });
+
+            $('body').on('click', '#linkSwitchEditor3', function () {
+                if (CKEDITOR.instances.m_codeVBNet) {
+                    CKEDITOR.instances.m_codeVBNet.destroy();
+                    $(this).text('[Rich Text Editor로 변경]');
+                }
+                else {
+                    CKEDITOR.replace('m_codeVBNet');
+                    $(this).text('[Simple Text Editor로 전환]');
+                }
+            });
+
+            $('body').on('click', '#linkSwitchEditor4', function () {
+                if (CKEDITOR.instances.m_codeCPP) {
+                    CKEDITOR.instances.m_codeCPP.destroy();
+                    $(this).text('[Rich Text Editor로 변경]');
+                }
+                else {
+                    CKEDITOR.replace('m_codeCPP');
+                    $(this).text('[Simple Text Editor로 전환]');
+                }
+            });
+
+            $('body').on('click', '#linkSwitchEditor5', function () {
+                if (CKEDITOR.instances.m_referenceItem) {
+                    CKEDITOR.instances.m_referenceItem.destroy();
+                    $(this).text('[Rich Text Editor로 변경]');
+                }
+                else {
+                    CKEDITOR.replace('m_referenceItem');
+                    $(this).text('[Simple Text Editor로 전환]');
+                }
+            });
+
+        })
+
+        $(function () {
+            var requiredCheckboxes = $("input[name='applicableFramework']");
+            requiredCheckboxes.change(function () {
+                if (requiredCheckboxes.is(':checked')) {
+                    requiredCheckboxes.removeAttr('required');
+                } else {
+                    requiredCheckboxes.attr('required', 'required');
+                }
+            });
+        });
+
+        $(function () {
+            var requiredCheckboxes = $("input[name='classifications']");
+            requiredCheckboxes.change(function () {
+                if (requiredCheckboxes.is(':checked')) {
+                    requiredCheckboxes.removeAttr('required');
+                } else {
+                    requiredCheckboxes.attr('required', 'required');
+                }
+            });
+        });
+
+        //dom ready handler
+        $(function () {
+            //form submit handler
+            $('#frmTechNote').submit(function (e) {
+                //check atleat 1 checkbox is checked
+                if (!$("input[name='applicableFramework']").is(':checked')) {
+                    alert("분류와 적용 플렛폼을 최소 한개를 선택해 주세요.")
+                    //prevent the default form submit if it is not checked
+                    e.preventDefault();
+                }
+
+                //check atleat 1 checkbox is checked
+                if (!$("input[name='classifications']").is(':checked')) {
+                    alert("분류와 적용 플렛폼을 최소 한개를 선택해 주세요")
+                    //prevent the default form submit if it is not checked
+                    e.preventDefault();
+                }
+            })
+        })
+
+    </script>
+
+}

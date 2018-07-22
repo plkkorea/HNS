@@ -1,0 +1,26 @@
+﻿@model Exception
+@{
+    ViewData["Title"] = "Access denied";
+}
+
+<div class="sub_content sub01_02">
+    <div class="_inner">
+        <br />
+        <br />
+        <br />
+        <h1 class="text-danger" style="color:red;">예상치 못한 에러가 발생했습니다.</h1>
+        <p class="text-danger">요청하신 사항을 진행하지 못하였습니다. </p>
+        <br />
+        <br />
+        <br />
+    </div>
+    <!-- 서브에만 들어가는 탑 버튼-->
+    <a href="#" class="go_top"><img src="/template/images/go_top.png" alt="맨 위로"></a>
+</div>
+
+@if(Model != null)
+{
+    <script>
+        console.log('@Model');
+    </script>
+}

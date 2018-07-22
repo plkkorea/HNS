@@ -1,0 +1,88 @@
+﻿@model HNS.Entities.Faq
+@{
+    ViewData["Title"] = "FAQ";
+    ViewData["BreadCrumb"] = "게시판관리,FAQ";
+    ViewData["CurrentMenu"] = "게시판관리";
+    ViewData["CurrentMenuItem"] = "FAQ";
+}
+
+
+<form asp-action="FAQEdit" asp-controller="Community" method="post">
+    <div class="bbs-write">
+        <dl>
+            <dt><label for="title">작성자</label></dt>
+            <dd><input type="text" asp-for="m_name" readonly required></dd>
+        </dl>
+        <dl>
+            <dt>제목</dt>
+            <dd><input type="text" asp-for="m_title" required></dd>
+        </dl>
+        <dl>
+            <dt>키워드</dt>
+            <dd><input type="text" asp-for="m_keyword"></dd>
+        </dl>
+        <dl>
+            <dt>코멘트</dt>
+            <dd><input type="text" asp-for="m_comment"></dd>
+        </dl>
+
+
+        <dl class="content" style="height:auto;">
+            <dt>본문</dt>
+            <dd>
+                <a href="#" id="linkSwitchEditor">[Rich Text Editor로 변경]</a>
+                <textarea asp-for="m_content" rows="20"></textarea>
+            </dd>
+        </dl>
+    </div>
+
+
+    @if (Model?.Id > 0)
+    {
+        <div class="btn_confirm01 btn_confirm">
+            <input type="submit" value="수정" class="btn-ty1 light" accesskey="s">
+            <a href="@Url.Action("FAQ", "Community")">
+                취소
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="btn_confirm01 btn_confirm">
+            <input type="submit" value="작성" class="btn-ty1 light" accesskey="s">
+            <a href="@Url.Action("FAQ", "Community")">
+                취소
+            </a>
+        </div>
+    }
+
+
+</form>
+
+
+@section Scripts
+    {
+    <script src="~/lib/ckeditor/ckeditor.js"></script>
+
+    <script>
+        $(function () {
+            //CKEDITOR.replace('m_content');
+
+            $('body').on('click', '#linkSwitchEditor', function () {
+                if (CKEDITOR.instances.m_content) {
+                    CKEDITOR.instances.m_content.destroy();
+                    $(this).text('[Rich Text Editor로 변경]');
+                }
+                else {
+                    CKEDITOR.replace('m_content');
+                    $(this).text('[Simple Text Editor로 전환]');
+                }
+            });
+
+        })
+
+        
+
+    </script>
+
+}

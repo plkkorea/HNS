@@ -1,0 +1,197 @@
+﻿
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta property="og:title" content="">
+    <meta property="og:image" content="">
+    <meta property="og:description" content="">
+    <meta name="description" content="" />
+    <meta name="keywords" content="">
+    <title>(주)HNS</title>
+    <link rel="stylesheet" type="text/css" href="~/template/css/common.css" />
+    <link rel="stylesheet" type="text/css" href="~/template/css/global.css?ver=1801131130" />
+    <link rel="stylesheet" type="text/css" href="~/template/css/respond.css?ver=18011111330" />
+    <link rel="stylesheet" type="text/css" href="~/template/css/template.css" />
+    <link rel="stylesheet" type="text/css" href="~/template/css/custom.css" />
+
+    @RenderSection("Styles", required: false)
+
+    <script src="~/template/js/jquery.min.js"></script>
+    <script src="~/template/js/jquery.wipetouch.js"></script>
+    <script src="~/template/js/global.js?ver=180613"></script>
+    <script src="~/template/js/SiteMaster.js?ver=180613"></script>
+    <script src="~/template/js/custom.js?ver=180613"></script>
+
+    @await Component.InvokeAsync("VisitorCount")
+    @*@await Component.InvokeAsync("HeaderScript")*@
+
+    <!--[if lt IE 9]>
+    <script src="~/template/js/html5.js"></script>
+    <![endif]-->
+    <!--[if IE]>
+
+    <link href="~/template/css/IE.css" rel="stylesheet" type="text/css" />
+
+        <![endif]-->
+
+</head>
+<body>
+
+    <!--
+    @if (!string.IsNullOrWhiteSpace(User.Identity.Name))
+    {
+        <div id="top_login_bar" class="top_login_bar">
+            <div class="inner">
+                @*Space for any message*@
+
+                @if (User.IsInRole("Administrators"))
+                {
+                    <a href="@Url.Action("Index", "Admin", new { area="Admin" })">Go to Admin Panel</a>
+                }
+
+                <div class="login_right_box">
+                    <form asp-controller="Account" asp-action="Logout" method="post">
+                        @Html.AntiForgeryToken()
+                        Welcome <strong>@User.Identity.Name</strong>  |
+                        <button type="submit" class="logout-button">Logout</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div id="top_login_bar" class="top_login_bar">
+            <div class="inner">
+                @*Space for any message*@
+
+                <div class="login_right_box">
+                    <a href="@Url.Action("Login", "Account")">Login</a>
+                </div>
+            </div>
+        </div>
+    }
+
+        -->
+    @*<div id="top" class="top_wrap" style="display:none;">
+
+        </div>*@
+
+    <div id="wrap" class="_main">
+
+        @await Component.InvokeAsync("TopMenu")
+
+        <script>
+
+        @if (!string.IsNullOrWhiteSpace(ViewBag.ErrorMsg))
+    {
+        <text>
+            $(document).ready(function () {
+                var msg = fromCharCodes('@ViewBag.ErrorMsg.ToString()');
+            alert(msg);
+            });
+        </text>
+}
+
+        @if (!string.IsNullOrWhiteSpace(ViewBag.SuccessMsg))
+    {
+        <text>
+            $(document).ready(function () {
+                var msg = fromCharCodes('@ViewBag.SuccessMsg.ToString()');
+            alert(msg);
+            });
+        </text>
+}
+
+        @if (TempData["ErrorMsg"] != null && !string.IsNullOrWhiteSpace(TempData["ErrorMsg"].ToString()))
+    {
+        <text>
+            $(document).ready(function () {
+                var msg = fromCharCodes('@TempData["ErrorMsg"].ToString()');
+            alert(msg);
+            });
+        </text>
+}
+
+        @if (TempData["SuccessMsg"] != null && !string.IsNullOrWhiteSpace(TempData["SuccessMsg"].ToString()))
+    {
+        <text>
+            $(document).ready(function () {
+                var msg = fromCharCodes('@TempData["SuccessMsg"].ToString()');
+                alert(msg);
+            });
+        </text>
+}
+
+        </script>
+
+        <!-- 서브 컨텐츠 // 이 위까지 공통 -->
+
+
+        @RenderBody()
+
+
+        <footer id="_footer">
+            <div class="inner">
+                <div class="foot_logo"><img src="~/template/images/foot_logo.jpg" alt="" /></div>
+                <strong class="foot_tit">(주)에이치앤에스</strong>
+                <span class="foot_info">
+                    서울특별시 금천구 가산디지털1로 88, 1406호 (가산동,  IT프리미어타워) <br />
+                    대표전화 02-6402-8001 / 팩스 02-6442-9775 / 이메일 : hns@hnsts.co.kr<br />
+                    대표이사 : 김진효 / 사업자등록번호 119-86-31548 <br />
+                </span>
+                <p class="warn">이미지 및 컨텐츠의 저작권은 (주)에이치앤에스에 있으며, 무단복제나 도용은 저작권법에 의거하여 처벌 받을 수 있습니다.</p>
+                <div class="link">
+                    <a href="#">개인정보취급방침</a>
+                    <em>|</em>
+                    <a href="#">이메일수집거부</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    @RenderSection("Bottom", required: false)
+
+    <script>
+
+        function fromCharCodes(str) {
+            var answer = "";
+
+            var codeArray = str.replace(/&#/g, "").split(";");
+
+            var code;
+
+            for (var i = 0; i < codeArray.length; i++) {
+                if (codeArray[i] == '.') {
+                    answer += '.';
+                }
+                else {
+                    code = new Number("0" + codeArray[i]);
+
+                    if (!isNaN(code.valueOf())) {
+                        answer += String.fromCharCode(code);
+                    }
+                    else {
+                        if (codeArray[i].indexOf(' ') >= 0) {
+                            answer += ' ';
+                            code = new Number("0" + codeArray[i].replace(' ', ''));
+                            answer += String.fromCharCode(code);
+                        }
+                    }
+                }
+            }
+
+            return answer;
+        }
+
+    </script>
+
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>

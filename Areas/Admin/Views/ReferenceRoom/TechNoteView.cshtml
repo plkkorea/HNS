@@ -1,0 +1,96 @@
+﻿@model HNS.Entities.TechNote
+@{
+    ViewData["Title"] = "TechNote View";
+    ViewData["BreadCrumb"] = "게시판관리,TECHNOTE";
+    ViewData["CurrentMenu"] = "게시판관리";
+    ViewData["CurrentMenuItem"] = "TECHNOTE";
+}
+
+
+<div class="bbs-write">
+    <dl>
+        <dt><label for="title">Id</label></dt>
+        <dd><input type="text" id="wr_subject" name="wr_subject" title="제목 입력" readonly value="@Model.Id"></dd>
+    </dl>
+    <dl>
+        <dt>작성일</dt>
+        <dd><input type="text" id="wr_1" name="wr_1" title="URL 입력" readonly value="@Model.m_date.ToString("yyyy-MM-dd")"></dd>
+    </dl>
+    <dl>
+        <dt>수정일</dt>
+        <dd><input type="text" id="wr_1" name="wr_1" title="URL 입력" readonly value="@Model.m_date_modified.ToString("yyyy-MM-dd")"></dd>
+    </dl>
+    <dl>
+        <dt>조회수</dt>
+        <dd><input type="text" id="wr_subject" name="wr_subject" title="제목 입력" readonly value="@Model.m_read"></dd>
+    </dl>
+    <dl>
+        <dt>분류</dt>
+        <dd><input type="text" id="wr_1" name="wr_1" title="URL 입력" readonly value="@Model.m_classifications"></dd>
+    </dl>
+    <dl>
+        <dt>플랫폼</dt>
+        <dd><input type="text" id="wr_subject" name="wr_subject" title="제목 입력" readonly value="@Model.m_applicableFramework"></dd>
+    </dl>
+
+    <dl>
+        <dt>키워드</dt>
+        <dd><input type="text" id="wr_subject" name="wr_subject" title="제목 입력" readonly value="@Model.m_keywords"></dd>
+    </dl>
+    <dl>
+        <dt>코멘트</dt>
+        <dd><input type="text" id="wr_subject" name="wr_subject" title="코멘트" readonly value="@Model.m_comment"></dd>
+    </dl>
+
+    <dl>
+        <dt>첨부파일</dt>
+        <dd><a target="_blank" href="@Url.Action("DownloadTechNoteFile", "ReferenceRoom", new { id = Model.Id })" class="file_add">@Model.m_file_name</a></dd>
+    </dl>
+
+    <dl class="content" style="height:auto;">
+        <dt>Content</dt>
+        <dd>
+            @Html.Raw(Model.m_content)
+        </dd>
+    </dl>
+
+    <dl class="content" style="height:auto;">
+        <dt>C# 예제코드</dt>
+        <dd>
+            @Html.Raw(Model.m_codeCSharp)
+        </dd>
+    </dl>
+
+    <dl class="content" style="height:auto;">
+        <dt>VB.NET 예제코드</dt>
+        <dd>
+            @Html.Raw(Model.m_codeVBNet)
+        </dd>
+    </dl>
+
+    <dl class="content" style="height:auto;">
+        <dt>C++ 예제코드</dt>
+        <dd>
+            @Html.Raw(Model.m_codeCPP)
+        </dd>
+    </dl>
+
+    <dl class="content" style="height:auto;">
+        <dt>참고</dt>
+        <dd>
+            @Html.Raw(Model.m_referenceItem)
+        </dd>
+    </dl>
+
+</div>
+
+
+<div class="btn_confirm01 btn_confirm">
+    <a href="@Url.Action("TechNoteEdit", "ReferenceRoom", new { id=Model.Id })">
+        편집
+    </a>
+    <a href="@Url.Action("TechNote", "ReferenceRoom")">
+        다시 목록으로
+    </a>
+</div>
+

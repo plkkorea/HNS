@@ -1,0 +1,110 @@
+﻿@model HNS.Entities.Notice
+@{
+    ViewData["Title"] = "Notice View";
+    HNS.Entities.PrevNext prevNext = new HNS.Entities.PrevNext();
+}
+
+@if (ViewBag.NextPrev != null)
+{
+    prevNext = ViewBag.NextPrev;
+}
+
+<div class="sub_content notice">
+    <div class="_inner">
+        <div class="notview_top">
+            <!-- 사용자 -->
+            <a href="@Url.Action("NoticeView", "Community", new { id = prevNext.Prev })" class="go_prev">이전</a>
+            <a href="@Url.Action("Notice", "Community")" class="go_list">목록</a>
+            <a href="@Url.Action("NoticeView", "Community", new { id=prevNext.Next })" class="go_next">다음</a>
+        </div>
+
+        @if (User.IsInRole("Administrators"))
+        {
+            <div class="notview_top">
+                <!-- 관리자 -->
+                @*Delete Button*@
+                <a href="@Url.Action("NoticeDelete", "Community", new { id = Model.Id })" class="go_prev" onclick="return confirm('삭제 하시겠습니까?');">삭제</a>
+                @*Edit Button*@
+                <a href="@Url.Action("NoticeEdit", "Community", new { id = Model.Id })" class="go_next" onclick="setAction(0);return false;">수정</a>
+            </div>
+        }
+        <!-- .go_pop : 게시판 비밀번호 팝업 창 클래스 // 팝업 창 코드는 푸터 위에 -->
+
+        <div class="notview_box">
+            <strong class="bigtit">@Model.m_title</strong>
+            <div class="info">
+                <span class="stit">작성자</span>
+                <span class="desc">HNS</span>
+                <em></em>
+                <span class="stit">작성일</span>
+                <span class="desc">@Model.m_date.Value.ToString("yyyy-MM-dd")</span>
+                <em></em>
+                <span class="stit">조회수</span>
+                <span class="desc">@Model.m_read</span>
+            </div>
+            <div class="content" style="width:100%; word-wrap:break-word; display:inline-block;overflow-wrap: break-word;">
+                <!--
+                -notice 템플릿-
+                1. 클래스 명 앞에 'hns_' 가 붙는 곳을 한 단위로 보시면 됩니다.
+                2. template.css로 기존 css와 분리되어 있습니다.
+                -->
+
+                @Html.Raw(Model.m_content)
+
+            </div>
+        </div>
+    </div>
+    <!-- 서브에만 들어가는 탑 버튼-->
+    <a href="#" class="go_top"><img src="~/template/images/go_top.png" alt="맨 위로"></a>
+</div><!-- //sub_content -->
+<!-- //서브 컨텐츠 // 이 아래부터 공통 -->
+
+@section Scripts
+    {
+    <script>
+        $(function () {
+            if (document.referrer.toLowerCase().indexOf('/notice') >= 0 &&
+                document.referrer.toLowerCase().indexOf('/noticeedit') == -1 &&
+                document.referrer.toLowerCase().indexOf('/noticeview') == -1) {
+                $('.go_list').attr('href', document.referrer);
+            }
+        })
+    </script>
+
+    <script>
+        @*///type=action type. 0=Edit, 1=Delete*@
+        //function setAction(type) {
+        //    $('#ActionType').val(type);
+        //}
+
+        //$(function () {
+        //    $("#notice-confirm").submit(function () {
+        //        $('.error').hide();
+        //        $.ajax({
+        //            url: "/Community/Confirm",
+        //            type: "post",
+        //            data: $(this).serialize(),
+        //            error: function (XMLHttpRequest, textStatus, errorThrown) {
+        //                $('.error').text(XMLHttpRequest.responseText);
+        //                $('.error').show();
+        //                return false;go_list
+        //            },
+        //            success: function (data) {
+        //                $('.layer_wrap').fadeOut(300);
+        //                var action = $('#ActionType').val();
+        //                var id = $('#Id').val();
+        //                if (action == 0) {
+        //                    window.location = "/Community/NoticeEdit/" + id;
+        //                }
+        //                else if (action == 1) {
+        //                    window.location = "/Community/NoticeDelete/" + id;
+        //                }
+        //                return true;
+        //            }
+        //        });
+        //        return false;
+        //    });
+        //});
+
+    </script>
+}

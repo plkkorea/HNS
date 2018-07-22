@@ -1,0 +1,79 @@
+﻿@model HNS.ViewModels.TechNoteViewModel
+@{
+    ViewData["Title"] = "Tech Note";
+    ViewData["BreadCrumb"] = "게시판관리,TECHNOTE";
+    ViewData["CurrentMenu"] = "게시판관리";
+    ViewData["CurrentMenuItem"] = "TECHNOTE";
+}
+
+<style>
+    .long-text {
+        display: none
+    }
+</style>
+
+
+
+<fieldset class="bbs-list">
+    <legend>게시글 목록</legend>
+
+    <a href="@Url.Action("TechNoteEdit", "ReferenceRoom")" class="btn-new">추가</a>
+
+    @if (Model != null && Model.TechNotes != null && Model.TechNotes.RowCount > 0)
+    {
+        <table summary="전체 목록">
+            <colgroup>
+                <col width="10%">
+                <col width="30%">
+                <col width="10%">
+                <col width="10%">
+                <col width="10%">
+                <col width="10%">
+                <col width="10%">
+                <col width="10%">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">내용</th>
+                    <th scope="col">날짜</th>
+                    <th scope="col">File</th>
+                    <th scope="col">분류</th>
+                    <th scope="col">보기</th>
+                    <th scope="col">편집</th>
+                    <th scope="col">삭제</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.TechNotes.Results)
+                {
+                    <tr>
+                        <td>@item.SerialNo</td>
+                        <td style="text-align:left;"><a href="@Url.Action("TechNoteView", "ReferenceRoom", new { id=item.Id})" class="subject">@item.m_title</a></td>
+                        <td>@item.m_date.ToString("yyyy-MM-dd")</td>
+                        <td>
+                            @if (Model != null && !string.IsNullOrWhiteSpace(item.m_file_name))
+                            {
+                                <a target="_blank" href="@Url.Action("DownloadTechNoteFile", "ReferenceRoom", new { id = item.Id })"><img src="~/template/images/sub54_down.gif" alt="@item.m_file_name" title="@item.m_file_name" /></a>
+                            }
+                        </td>
+                        <td><input type="text" value="@item.m_classifications" readonly /></td>
+                        <td><a href="@Url.Action("TechNoteView", "ReferenceRoom", new { id=item.Id})">보기</a></td>
+                        <td><a href="@Url.Action("TechNoteEdit", "ReferenceRoom", new { id=item.Id})">편집</a></td>
+                        <td><a onclick="return confirm('삭제 하시겠습니까?');" href="@Url.Action("TechNoteDelete", "ReferenceRoom", new { id=item.Id})">삭제</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="paging_wrap">
+            <div class="paging">
+                <pager pager-model="@Model.TechNotes"></pager>
+            </div>
+        </div>
+    }
+    else
+    {
+        <h2>No record found.</h2>
+    }
+</fieldset>

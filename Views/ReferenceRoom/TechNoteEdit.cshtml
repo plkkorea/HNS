@@ -1,0 +1,175 @@
+﻿@model HNS.Entities.TechNote
+@{
+    ViewData["Title"] = "TechNote Edit";
+}
+
+<!-- 서브 컨텐츠 // 이 위까지 공통 -->
+<div class="sub_content sub05_04">
+    <div class="_inner">
+        <form asp-action="TechNoteEdit" asp-controller="ReferenceRoom" method="post" enctype="multipart/form-data">
+            <table class="technotewrite_tbl">
+                <colgroup>
+                    <col class="tbl1" />
+                    <col class="tbl2" />
+                </colgroup>
+                <tr>
+                    <th scope="row">작성자</th>
+                    <td><span class="name">HNS</span></td>
+                </tr>
+                <tr>
+                    <th scope="row">제목</th>
+                    <td><input type="text" asp-for="m_title" class="technote_input" required /></td>
+                </tr>
+                <tr>
+                    <th scope="row" class="vt">개요</th>
+                    <td>
+                        <textarea asp-for="m_summary" required class="technote_txt noresize" rows="5"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">분류</th>
+                    <td class="chk">
+                        <ul class="chk_5">
+                            <li>
+                                <label><input type="checkbox" name="classifications" value="Knowhow" @(Model != null && Model.classifications != null && Model.classifications.Contains("Knowhow") ? "checked" : "") />&nbsp; Knowhow</label>
+                            </li>
+                            <li>
+                                <label><input type="checkbox" name="classifications" value="Trouble Shooting" @(Model != null && Model.classifications != null && Model.classifications.Contains("Trouble Shooting") ? "checked" : "") />&nbsp; Trouble Shooting</label>
+                            </li>
+                            <li>
+                                <label><input type="checkbox" name="classifications" value="SmartX Framework" @(Model != null && Model.classifications != null && Model.classifications.Contains("SmartX Framework") ? "checked" : "") />&nbsp; SmartX Framework </label>
+                            </li>
+                            <li>
+                                <label><input type="checkbox" name="classifications" value="Test Report" @(Model != null && Model.classifications != null && Model.classifications.Contains("Test Report") ? "checked" : "") />&nbsp; Test Report</label>
+                            </li>
+                            <li>
+                                <label><input type="checkbox" name="classifications" value="Debugging" @(Model != null && Model.classifications != null && Model.classifications.Contains("Debugging") ? "checked" : "") />&nbsp; Debugging</label>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row" class="vt">적용 플랫폼</th>
+                    <td>
+                        <ul class="chk">
+                            <li><label><input type="checkbox" name="applicableFramework" value="IEC266" @(Model != null && Model.applicableFramework != null && Model.applicableFramework.Contains("IEC266") ? "checked" : "") />&nbsp; IEC266</label></li>
+                            <li><label><input type="checkbox" name="applicableFramework" value="IEC667" @(Model != null && Model.applicableFramework != null && Model.applicableFramework.Contains("IEC667") ? "checked" : "") />&nbsp; IEC667</label></li>
+                            <li><label><input type="checkbox" name="applicableFramework" value="IEC1000" @(Model != null && Model.applicableFramework != null && Model.applicableFramework.Contains("IEC1000") ? "checked" : "") />&nbsp; IEC1000</label></li>
+                            <li><label><input type="checkbox" name="applicableFramework" value="Windows CE 5.0" @(Model != null && Model.applicableFramework != null && Model.applicableFramework.Contains("Windows CE 5.0") ? "checked" : "") />&nbsp; Windows CE 5.0</label></li>
+                            <li><label><input type="checkbox" name="applicableFramework" value="Windows CE 6.0" @(Model != null && Model.applicableFramework != null && Model.applicableFramework.Contains("Windows CE 6.0") ? "checked" : "") />&nbsp; Windows CE 6.0</label></li>
+                            <li><label><input type="checkbox" name="applicableFramework" value="Windows CE 7.0" @(Model != null && Model.applicableFramework != null && Model.applicableFramework.Contains("Windows CE 7.0") ? "checked" : "") />&nbsp; Windows CE 7.0</label></li>
+                            <li><label><input type="checkbox" name="applicableFramework" value=".NET Compact Framework 2.0" @(Model != null && Model.applicableFramework != null && Model.applicableFramework.Contains(".NET Compact Framework 2.0") ? "checked" : "") />&nbsp; .NET Compact Framework 2.0</label></li>
+                            <li><label><input type="checkbox" name="applicableFramework" value=".NET Compact Framework 3.5" @(Model != null && Model.applicableFramework != null && Model.applicableFramework.Contains(".NET Compact Framework 3.5") ? "checked" : "") />&nbsp; .NET Compact Framework 3.5</label></li>
+                            <li><label><input type="checkbox" name="applicableFramework" value="C#" @(Model != null && Model.applicableFramework != null && Model.applicableFramework.Contains("C#") ? "checked" : "") />&nbsp; C#</label></li>
+                            <li><label><input type="checkbox" name="applicableFramework" value="VB.NET" @(Model != null && Model.applicableFramework != null && Model.applicableFramework.Contains("VB.NET") ? "checked" : "") />&nbsp; VB.NET</label></li>
+                            <li><label><input type="checkbox" name="applicableFramework" value="C++" @(Model != null && Model.applicableFramework != null && Model.applicableFramework.Contains("C++") ? "checked" : "") />&nbsp; C++</label></li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">키워드</th>
+                    <td><input type="text" asp-for="m_keywords" class="technote_input" /></td>
+                </tr>
+                <tr>
+                    <th scope="row">첨부파일</th>
+                    <td>
+                        <div class="fileadd_box">
+                            <label for="file_add">
+                                <input type="text" id="filename" class="" readonly="readonly">
+                                <span class="btn">파일첨부</span>
+                            </label>
+                            <input type="file" asp-for="m_file_name" id="file_add" title="" class="hide" onchange="fileNameInput()" />
+                        </div>
+                    </td>
+                </tr>
+                @if (Model != null && !string.IsNullOrWhiteSpace(Model.m_file_name))
+                {
+                    <tr>
+                        <th scope="row"></th>
+                        <td>
+                            <div>
+                                <a href="@Url.Action("DownloadTechNoteFile", "ReferenceRoom", new { id = Model.Id })">@Model.m_file_name</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <th scope="row" class="vt">내용</th>
+                    <td>
+                        <textarea class="technote_txt noresize" asp-for="m_content" required rows="30"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label><input asp-for="m_displayCodeCSharp" type="checkbox" /><br />예제코드<br />C#</label>
+                    </th>
+                    <td>
+                        <textarea class="technote_txt noresize" asp-for="m_codeCSharp" rows="5"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label><input asp-for="m_displayCodeVBNet" type="checkbox" /><br />예제코드<br />VB.NET</label>
+                    </th>
+                    <td>
+                        <textarea class="technote_txt noresize" asp-for="m_codeVBNet" rows="5"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label><input asp-for="m_displayCodeCPP" type="checkbox" /><br />예제코드<br />C++</label>
+                    </th>
+                    <td>
+                        <textarea class="technote_txt noresize" asp-for="m_codeCPP" rows="5"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label>참고항목</label>
+                    </th>
+                    <td>
+                        <textarea class="technote_txt noresize" asp-for="m_referenceItem" rows="5"></textarea>
+                    </td>
+                </tr>
+            </table>
+            @if (Model?.Id > 0)
+            {
+                <!-- 수정일 경우 -->
+                <div class="notwrite_bot">
+                    <button type="submit" class="write">수정</button>
+                    <a href="@Url.Action("TechNote", "ReferenceRoom")" class="cancel">취소</a>
+                </div>
+            }
+            else
+            {
+                <div class="notwrite_bot">
+                    <button type="submit" class="write">작성</button>
+                    <a href="@Url.Action("TechNote", "ReferenceRoom")" class="cancel">취소</a>
+                </div>
+            }
+            <!-- .go_pop : 게시판 비밀번호 팝업 창 클래스 // 팝업 창 코드는 푸터 위에 -->
+            <!-- //수정일 경우 -->
+        </form>
+    </div>
+    <!-- 서브에만 들어가는 탑 버튼-->
+    <a href="#" class="go_top"><img src="~/template/images/go_top.png" alt="맨 위로"></a>
+</div><!-- //sub_content -->
+<!-- //서브 컨텐츠 // 이 아래부터 공통 -->
+
+
+@section Scripts
+    {
+    <script src="~/lib/ckeditor/ckeditor.js"></script>
+
+    <script>
+        $(function () {
+            CKEDITOR.replace('m_content');
+            CKEDITOR.replace('m_codeCSharp');
+            CKEDITOR.replace('m_codeVBNet');
+            CKEDITOR.replace('m_codeCPP');
+            CKEDITOR.replace('m_referenceItem');
+        })
+
+    </script>
+
+}

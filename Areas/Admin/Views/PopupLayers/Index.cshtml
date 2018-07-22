@@ -1,0 +1,61 @@
+﻿@model IList<HNS.Entities.PopupLayer>
+@{
+    ViewData["Title"] = "팝업관리";
+    ViewData["BreadCrumb"] = "기타관리, 팝업관리";
+    ViewData["CurrentMenu"] = "기타관리";
+    ViewData["CurrentMenuItem"] = "팝업관리";
+}
+
+<fieldset class="bbs-list">
+    <legend>목록</legend>
+
+    <a href="@Url.Action("PopupLayersEdit", "PopupLayers")" class="btn-new">추가</a>
+
+    @if (Model != null && Model.Count > 0)
+    {
+        <table summary="전체 목록">
+            <colgroup>
+                <col width="10%">
+                <col width="30%">
+                <col width="10%">
+                <col width="10%">
+                <col width="10%">
+                <col width="10%">
+                <col width="10%">
+                <col width="10%">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">설명</th>
+                    <th scope="col">날짜</th>
+                    <th scope="col">게시일</th>
+                    <th scope="col">종료일</th>
+                    <th scope="col">보기</th>
+                    <th scope="col">편집</th>
+                    <th scope="col">삭제</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>@item.Id</td>
+                    <td style="text-align:left;"><a href="@Url.Action("PopupLayersView", "PopupLayers", new { id=item.Id})" class="subject">@item.Description</a></td>
+                    <td>@item.CreatedOn.ToString("yyyy-MM-dd")</td>
+                    <td>@item.StartDate.ToString("yyyy-MM-dd")</td>
+                    <td>@item.EndDate.ToString("yyyy-MM-dd")</td>
+                    <td><a href="@Url.Action("PopupLayersView", "PopupLayers", new { id=item.Id})">보기</a></td>
+                    <td><a href="@Url.Action("PopupLayersEdit", "PopupLayers", new { id=item.Id})">편집</a></td>
+                    <td><a onclick="return confirm('삭제 하시겠습니까?');" href="@Url.Action("PopupLayersDelete", "PopupLayers", new { id=item.Id})">삭제</a></td>
+                </tr>
+                }
+            </tbody>
+        </table>
+
+    }
+    else
+    {
+        <h2>No record found.</h2>
+    }
+</fieldset>

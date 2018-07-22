@@ -1,0 +1,36 @@
+﻿@model HNS.Entities.Faq
+@{
+    ViewData["Title"] = Model.m_title;
+}
+
+<!-- 서브 컨텐츠 // 이 위까지 공통 -->
+<div class="sub_content notice">
+    <div class="_inner" style="overflow-wrap: break-word;">
+        <table class="notwrite_tbl">
+            <colgroup>
+                <col width="14%" />
+                <col />
+            </colgroup>
+            <tr>
+                <th scope="row">작성자</th>
+                <td>@(Model == null ? "HNS" : Model.m_name)</td>
+            </tr>
+            <tr>
+                <th scope="row">제목</th>
+                <td>
+                    <span>@Model.m_title</span>
+                </td>
+            </tr>
+        </table>
+
+        <br /><br />
+
+        @Html.Raw(Model.m_content)
+
+        <!-- .go_pop : 게시판 비밀번호 팝업 창 클래스 // 팝업 창 코드는 푸터 위에 -->
+        <!-- //수정일 경우 -->
+    </div>
+    <!-- 서브에만 들어가는 탑 버튼-->
+    <a href="#" class="go_top"><img src="~/template/images/go_top.png" alt="맨 위로"></a>
+</div><!-- //sub_content -->
+<!-- //서브 컨텐츠 // 이 아래부터 공통 -->

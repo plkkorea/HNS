@@ -1,0 +1,60 @@
+﻿@model List<HNS.Entities.SmartXRelated>
+@{
+    ViewData["Title"] = "Smartx Related";
+}
+
+<div class="sub_content">
+    <div class="_inner">
+
+        <div class="notlist_top">
+            <div class="sch">
+                <a href="@Url.Action("SmartXRelatedEdit", "ReferenceRoom")">
+                    <button type="submit">더하다</button>
+                </a>
+            </div>
+            <div class="cnt">
+                
+            </div>
+        </div>
+
+
+        @if (Model != null && Model.Count > 0)
+        {
+            <table class="qna_tbl">
+                <colgroup>
+                    <col class="tbl1">
+                    <col class="tbl2">
+                    <col class="tbl3 __p">
+                    <col class="tbl4">
+                    <col class="tbl5">
+                    <col class="tbl6 __p">
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <th scope="col">No.</th>
+                        <th scope="col">내용</th>
+                        <th scope="col">날짜</th>
+                        <th scope="col">번역</th>
+                        <th scope="col">보기</th>
+                        <th scope="col">편집</th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td><a href="@Url.Action("SmartXRelatedView", "ReferenceRoom", new { id=item.Id})" class="subject">@item.Title</a></td>
+                            <td>@item.DateTime.ToString("yyyy-MM-dd")</td>
+                            <td>@item.Version</td>
+                            <td><a href="@Url.Action("SmartXRelatedView", "ReferenceRoom", new { id=item.Id})">View</a></td>
+                            <td><a href="@Url.Action("SmartXRelatedEdit", "ReferenceRoom", new { id=item.Id})">Edit</a></td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+
+        }
+
+    </div>
+</div>

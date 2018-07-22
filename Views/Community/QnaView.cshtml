@@ -1,0 +1,214 @@
+﻿@model HNS.Entities.Qna
+@{
+    ViewData["Title"] = "QnA View";
+}
+
+<style>
+
+    .notview_top button {
+        display: inline-block;
+        width: 78px;
+        height: 34px;
+        line-height: 34px;
+        font-size: 18px;
+        font-weight: 600;
+        margin: 0 5px;
+        margin-top: 10px;
+    }
+</style>
+
+<!-- 서브 컨텐츠 // 이 위까지 공통 -->
+<div class="sub_content notice">
+    <div class="_inner">
+        <div class="notview_top">
+            <!-- 사용자 -->
+            <a href="javascript:;" id="btnReply" class="go_reply">답글</a>
+            <a href="javascript:;" class="go_edit go_pop" onclick="setAction(0);">수정</a>
+
+            <a href="javascript:;" class="go_delete go_pop" onclick="setAction(1);">삭제</a>
+            <a href="@Url.Action("Qna","Community")" class="go_list">목록</a>
+        </div>
+        <!-- .go_pop : 게시판 비밀번호 팝업 창 클래스 // 팝업 창 코드는 푸터 위에 -->
+
+        <div class="notview_box qnaview_box">
+            <!-- qnaview_box 클래스 추가 -->
+            <strong class="bigtit">@Model.m_title</strong>
+            @*<strong class="bigtit">======@Model.m_title======</strong>*@
+            <div class="info">
+                <span class="stit">작성자</span>
+                <span class="desc">@Model.m_name</span>
+                <em></em>
+                <span class="stit">작성일</span>
+                <span class="desc">@Model.m_date.ToString("yyyy-MM-dd")</span>
+                <em></em>
+                <span class="stit">조회수</span>
+                <span class="desc">@Model.m_read</span><br />
+                <span class="stit">첨부파일 </span>
+                <span class="desc">
+                    <a href="@Url.Action("DownloadQnAFile", "Community" , new { id=Model.Id })">@Model.m_file_name</a>
+                </span>
+            </div>
+            <div class="content" style="overflow-wrap: break-word;">
+                <div class="optbox">
+                    <span class="box">[제품종류] &nbsp;&nbsp;&nbsp;&nbsp; @Model.m_prod_type</span>
+                    <span class="box">[개발환경] &nbsp;&nbsp;&nbsp;&nbsp; @Model.m_dev_env</span>
+                </div>
+                <br />
+
+                <div id="qna-reply-box" class="qnawrite_tbl" style="display:none;">
+
+                    <h2>답글</h2>
+
+                    <form asp-action="QnaEdit" asp-controller="Community" method="post" enctype="multipart/form-data">
+                        <input type="hidden" id="m_ref" name="m_ref" value="@Model.m_ref" />
+                        <input type="hidden" id="m_level" name="m_level" value="@(Model.m_level.Value + 1)" />
+                        <input type="hidden" id="m_step" name="m_step" value="@(Model.m_step.Value + 1)" />
+                        <table class="qnawrite_tbl">
+                            <colgroup>
+                                <col class="tbl1">
+                                <col class="tbl2">
+                                <col class="tbl3">
+                                <col class="tbl4">
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <th scope="row"><span class="red">제목</span></th>
+                                    <td colspan="3">
+                                        <input type="text" class="qna_input" readonly id="m_title" name="m_title" value="[답변] @Model.m_title" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><span class="red">작성자</span></th>
+                                    <td colspan="3">
+                                        <input type="text" class="qna_input" id="m_name" name="m_name" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="vt"><span class="red">내용</span></th>
+                                    <td colspan="3">
+                                        <textarea class="qna_txt noresize" rows="20" required="" id="m_content" name="m_content"></textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        <span>첨부파일</span>
+                                    </th>
+                                    <td colspan="3">
+                                        <div class="fileadd_box">
+                                            <label for="file_add">
+                                                <input type="text" id="filename" class="" readonly="readonly" placeholder="">
+                                                <span class="btn" onclick="$('#m_file_name').click();">파일첨부</span>
+                                            </label>
+                                            <input type="file" id="file_add" title="" class="hide" onchange="fileNameInput()" data-val="true" data-val-maxlength="The field m_file_name must be a string or array type with a maximum length of '1000'." data-val-maxlength-max="1000" name="m_file_name">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><span class="red">비밀번호</span></th>
+                                    <td colspan="3">
+                                        <input type="password" class="pw" required="" data-val="true" data-val-maxlength="The field m_passwd must be a string or array type with a maximum length of '1000'." data-val-maxlength-max="1000" id="m_passwd" name="m_passwd">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+                        <div class="notview_top">
+                            <button type="submit" class="go_list">답글</button>
+
+                            <button type="button" onclick="$('#qna-reply-box').toggle();" class="go_reply">취소</button>
+                        </div>
+                    </form>
+                </div>
+
+                <br />
+
+                @Html.Raw(Model.m_content.Replace(Environment.NewLine, "<BR />").Replace("\\r ?\\n", "<BR />"))
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- 서브에만 들어가는 탑 버튼-->
+    <a href="#" class="go_top"><img src="~/template/images/go_top.png" alt="맨 위로"></a>
+</div><!-- //sub_content -->
+<!-- //서브 컨텐츠 // 이 아래부터 공통 -->
+<!-- 수정/삭제/버튼 클릭 시 비밀번호 창 페이지 먼저 표시해주세요 -->
+<div class="layer_wrap">
+    <div class="pop_layer">
+        <div class="box">
+            <strong class="tit">비밀번호</strong>
+            <form asp-action="ConfirmQna" asp-controller="Community" method="post" id="notice-confirm">
+                <input type="password" id="Password" name="Password" class="pop_pw" />
+                <span class="error ui-state-error" style="display:none;"></span>
+                <input type="hidden" name="Id" id="Id" value="@Model.Id" />
+                <input type="hidden" id="ActionType" name="ActionType" />
+                <div class="btn_box">
+                    <button type="button" id="btnConfirmed" class="pop_ok">확인</button>
+                    <a href="javascript:;" class="pop_close">취소</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+    {
+
+    <script src="~/lib/ckeditor/ckeditor.js"></script>
+
+    <script>
+
+        function setAction(type) {
+            $('#ActionType').val(type);
+        }
+
+        $(function () {
+
+            $('body').on('click', '#btnReply', function () {
+                $('#qna-reply-box').toggle();
+            });
+
+            if (document.referrer.toLowerCase().indexOf('/qna') >= 0 &&
+                document.referrer.toLowerCase().indexOf('/qnaedit') == -1 &&
+                document.referrer.toLowerCase().indexOf('/qnaview') == -1) {
+                $('.go_list').attr('href', document.referrer);
+            }
+        })
+
+        $(function () {
+
+            $('body').on('click', '#btnConfirmed', function () {
+                var form = $("#notice-confirm");
+
+                $.ajax({
+                    url: "/Community/ConfirmQna",
+                    type: "post",
+                    data: $(form).serialize(),
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        $('.error').text(XMLHttpRequest.responseText);
+                        $('.error').show();
+                        return false;
+                    },
+                    success: function (data) {
+                        $('.layer_wrap').fadeOut(300);
+                        var action = $('#ActionType').val();
+                        var id = $('#Id').val();
+                        if (action == 0) {
+                            window.location = "/Community/QnaEdit/" + id;
+                        }
+                        else if (action == 1) {
+                            window.location = "/Community/QnaDelete/" + id;
+                        }
+                        return true;
+                    }
+                });
+
+            })
+
+        });
+
+    </script>
+}

@@ -1,0 +1,50 @@
+﻿@model IList<HNS.Entities.VisitorsInfo>
+@{
+    ViewData["Title"] = "방문객집계";
+    ViewData["BreadCrumb"] = "기타관리, 방문객집계";
+    ViewData["CurrentMenu"] = "기타관리";
+    ViewData["CurrentMenuItem"] = "방문객집계";
+
+    var totalVisits = Model.Sum(m => m.NoOfVisitors);
+
+}
+
+<fieldset class="bbs-list">
+    <legend>목록</legend>
+
+    @if (Model != null && Model.Count > 0)
+    {
+        <h2 style="font-size:16px;">Lifetime Visits: @totalVisits</h2>
+
+        <table summary="전체 목록">
+            <colgroup>
+                <col width="10%">
+                <col width="50%">
+                <col width="10%">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">날짜</th>
+                    <th scope="col">방문객</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.OrderByDescending(m=>m.VisitorDate).Take(31))
+                {
+                    <tr>
+                        <td>@item.id</td>
+                        <td>@item.VisitorDate.ToString("yyyy-MM-dd")</td>
+                        <td>@item.NoOfVisitors</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <span>*최근 30일간의 기록을 보실수 있습니다.</span>
+    }
+    else
+    {
+        <h2>기록을 찾을수 없습니다.</h2>
+    }
+</fieldset>

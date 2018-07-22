@@ -1,0 +1,59 @@
+﻿@model HNS.Entities.Qna
+@{
+    ViewData["Title"] = "QnA";
+    ViewData["BreadCrumb"] = "게시판관리,QnA";
+    ViewData["CurrentMenu"] = "게시판관리";
+    ViewData["CurrentMenuItem"] = "QnA";
+}
+
+<div class="bbs-write">
+    <dl>
+        <dt><label for="title">ID</label></dt>
+        <dd><input type="text" id="wr_subject" name="wr_subject" title="제목 입력" readonly value="@Model.Id"></dd>
+    </dl>
+    <dl>
+        <dt>날짜</dt>
+        <dd><input type="text" id="wr_1" name="wr_1" title="URL 입력" readonly value="@Model.m_date"></dd>
+    </dl>
+    <dl>
+        <dt><label for="title">Email</label></dt>
+        <dd><input type="text" id="wr_subject" name="wr_subject" title="제목 입력" readonly value="@Model.m_email"></dd>
+    </dl>
+    <dl>
+        <dt>
+            파일
+            @if (Model != null && !string.IsNullOrWhiteSpace(Model.m_file_name))
+            {
+                <a href="@Url.Action("DownloadQnAFile", "Community", new { id = Model.Id })"><img src="~/template/images/sub54_down.gif" alt="@Model.m_file_name" title="@Model.m_file_name" /></a>
+            }
+        </dt>
+        <dd><input type="text" id="wr_1" name="wr_1" title="URL 입력" readonly value="@Model.m_file_name"></dd>
+    </dl>
+    <dl>
+        <dt><label for="title">View Count</label></dt>
+        <dd><input type="text" id="wr_subject" name="wr_subject" title="제목 입력" readonly value="@Model.m_read"></dd>
+    </dl>
+
+    <dl>
+        <dt>제목</dt>
+        <dd><input type="text" id="wr_subject" name="wr_subject" title="제목 입력" readonly value="@Model.m_title"></dd>
+    </dl>
+
+    <dl class="content" style="min-height:200px;">
+        <dt style="padding-top: 0px;">본문</dt>
+        <dd style="height:250px;padding-top: 0px; overflow:scroll;">
+            @Html.Raw(Model.m_content.Replace(Environment.NewLine, "<BR />").Replace("\\r ?\\n", "<BR />")))
+        </dd>
+    </dl>
+</div>
+
+
+<div class="btn_confirm01 btn_confirm">
+    <a href="@Url.Action("QnaEdit", "Community", new { id=Model.Id })">
+        편집
+    </a>
+    <a href="@Url.Action("Qna", "Community")">
+        다시 목록으로
+    </a>
+</div>
+

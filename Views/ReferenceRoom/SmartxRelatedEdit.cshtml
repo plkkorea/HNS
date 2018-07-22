@@ -1,0 +1,64 @@
+﻿@model HNS.Entities.SmartXRelated
+@{
+    ViewData["Title"] = "Smartx Related";
+}
+
+<div class="sub_content sub05_02">
+    <div class="_inner">
+        <form asp-action="SmartXRelatedEdit" asp-controller="ReferenceRoom" method="post">
+            <table class="qnawrite_tbl">
+                <colgroup>
+                    <col class="tbl1">
+                    <col class="tbl2">
+                    <col class="tbl3">
+                    <col class="tbl4">
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <th scope="row"><span class="red">내용</span></th>
+                        <td><input type="text" asp-for="Title" class="qna_input"></td>
+                        <th scope="row"><span>번역</span></th>
+                        <td><input type="text" asp-for="Version" class="qna_input"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="vt"><span class="red">함유량</span></th>
+                        <td colspan="3">
+                            <textarea id="Content" asp-for="Content" class="qna_txt noresize" rows="20"></textarea>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            @if (Model?.Id > 0)
+            {
+                <!-- 수정일 경우 -->
+                <div class="notwrite_bot">
+                    <button type="submit" class="write">수정</button>
+                    <a href="@Url.Action("SmartXRelatedAdmin", "ReferenceRoom")" class="cancel">취소</a>
+                </div>
+            }
+            else
+            {
+                <div class="notwrite_bot">
+                    <button type="submit" class="write">작성</button>
+                    <a href="@Url.Action("SmartXRelatedAdmin", "ReferenceRoom")" class="cancel">취소</a>
+                </div>
+            }
+
+        </form>
+    </div>
+    <!-- 서브에만 들어가는 탑 버튼-->
+    <a href="#" class="go_top"><img src="~/template/images/go_top.png" alt="맨 위로"></a>
+</div><!-- //sub_content -->
+<!-- //서브 컨텐츠 // 이 아래부터 공통 -->
+@section Scripts
+    {
+    <script src="~/lib/ckeditor/ckeditor.js"></script>
+
+    <script>
+        $(function () {
+            CKEDITOR.replace('Content');
+        })
+    </script>
+
+}

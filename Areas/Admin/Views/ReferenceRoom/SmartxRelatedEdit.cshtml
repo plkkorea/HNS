@@ -1,0 +1,78 @@
+﻿@model HNS.Entities.SmartXRelated
+@{
+    ViewData["Title"] = "Smartx Related";
+    ViewData["BreadCrumb"] = "게시판관리,SamartX Framework Versions";
+    ViewData["CurrentMenu"] = "게시판관리";
+    ViewData["CurrentMenuItem"] = "SamartX Framework Versions";
+}
+
+<form asp-action="SmartXRelatedEdit" asp-controller="ReferenceRoom" method="post">
+    <div class="bbs-write">
+        <dl>
+            <dt><label for="title">Title</label></dt>
+            <dd><input type="text" id="wr_subject" asp-for="Title" title="제목 입력" required value="@(Model != null && !string.IsNullOrWhiteSpace(Model.Title) ? Model.Title : "")"></dd>
+        </dl>
+        <dl>
+            <dt>Version</dt>
+            <dd><input type="text" id="wr_1" asp-for="Version" title="URL 입력" required value="@(Model != null && !string.IsNullOrWhiteSpace(Model.Version) ? Model.Version : "")"></dd>
+        </dl>
+        <dl class="content" style="height:auto;">
+            <dt>내용</dt>
+            <dd>
+                <a href="#" id="linkSwitchEditor">[Rich Text Editor로 변경]</a>
+                <textarea asp-for="Content"></textarea>
+            </dd>
+        </dl>
+
+        @if (Model?.Id > 0)
+        {
+            <div class="btn_confirm01 btn_confirm">
+                <input type="submit" value="수정" class="btn-ty1 light" accesskey="s">
+                <a href="@Url.Action("SmartXRelatedAdmin", "ReferenceRoom")">
+                    취소
+                </a>
+            </div>
+        }
+        else
+        {
+            <div class="btn_confirm01 btn_confirm">
+                <input type="submit" value="작성" class="btn-ty1 light" accesskey="s">
+                <a href="@Url.Action("SmartXRelatedAdmin", "ReferenceRoom")">
+                    취소
+                </a>
+            </div>
+        }
+
+
+    </div>
+</form>
+
+
+<!-- //서브 컨텐츠 // 이 아래부터 공통 -->
+@section Scripts
+    {
+    <script src="~/lib/ckeditor/ckeditor.js"></script>
+
+    <script>
+        //$(function () {
+        //    CKEDITOR.replace('Content');
+        //})
+
+        $(function () {
+
+            $('body').on('click', '#linkSwitchEditor', function () {
+                if (CKEDITOR.instances.Content) {
+                    CKEDITOR.instances.Content.destroy();
+                    $(this).text('[Rich Text Editor로 변경]');
+                }
+                else {
+                    CKEDITOR.replace('Content');
+                    $(this).text('[Simple Text Editor로 전환]');
+                }
+            });
+
+        })
+
+    </script>
+
+}

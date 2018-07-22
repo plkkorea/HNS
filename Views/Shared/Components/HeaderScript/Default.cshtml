@@ -1,0 +1,8 @@
+﻿@model HNS.Entities.HeaderScript
+
+@if (Model != null && !string.IsNullOrWhiteSpace(Model.Script))
+{
+    <script>
+        @Html.Raw(Model.Script)
+    </script>
+}

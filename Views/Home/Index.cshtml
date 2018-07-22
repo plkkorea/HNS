@@ -1,0 +1,553 @@
+﻿@model HNS.ViewModels.HomePageViewModel
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_IndexLayout.cshtml";
+}
+
+<h2 class="hide">메인 비주얼</h2>
+<div id="_vis">
+    <div class="_roll">
+        <div class="_vis" style="background:#1388f5;">
+            <a href="#">
+                <img src="template/images/vis1.jpg" alt="DUMMY" class="__p" />
+                <img src="template/images/vis1m.jpg" alt="VISUAL" class="__m" />
+            </a>
+        </div>
+        <div class="_vis" style="background:#33b6e1;">
+            <a href="#">
+                <img src="template/images/vis2.jpg" alt="DUMMY" class="__p" />
+                <img src="template/images/vis2m.jpg" alt="VISUAL" class="__m" />
+            </a>
+        </div>
+        <div class="_vis" style="background:#00a99d;">
+            <a href="#">
+                <img src="template/images/vis3.jpg" alt="DUMMY" class="__p" />
+                <img src="template/images/vis3m.jpg" alt="VISUAL" class="__m" />
+            </a>
+        </div>
+        <div class="_vis" style="background:#c6c6c6;">
+            <a href="#">
+                <img src="template/images/vis4.jpg" alt="DUMMY" class="__p" />
+                <img src="template/images/vis4m.jpg" alt="VISUAL" class="__m" />
+            </a>
+        </div>
+    </div>
+    <script>vis.init();</script>
+</div><!-- //_vis -->
+<!-- .ch_con 클릭시 .main1_dev 안보임 // 상단도 마찬가지 -->
+<!-- .ch_dev 클릭시 .main1_con 안보임 // 상단도 마찬가지 -->
+
+<h2 class="hide">구매자 / 개발자</h2>
+<section id="main1" class="main1_wrap main1_con">
+    <div class="main1_menu">
+        <a href="#none" class="con">구매자</a>
+        <a href="#none" class="dev ch_dev">개발자</a>
+    </div><!-- //main1_menu -->
+    <div class="inner">
+        <strong class="main1_tit1">구매자<span>CATEGORY</span></strong>
+        <ul class="main1_category">
+            <li>
+                <a href=@Url.Action("Application", "Hardware") class="box">
+                    <div class="img">
+                        <img src="template/images/main1_ico1.png" alt="" />
+                    </div>
+                    <div class="info">
+                        <strong class="tit">제품 응용분야</strong>
+                        <span class="txt">Applocations</span>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href=@Url.Action("Lineup", "Hardware") class="box">
+                    <div class="img">
+                        <img src="template/images/main1_ico2.png" alt="" />
+                    </div>
+                    <div class="info">
+                        <strong class="tit">제품 라인업</strong>
+                        <span class="txt">Line Up</span>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href=@Url.Action("Compare", "Hardware") class="box">
+                    <div class="img">
+                        <img src="template/images/main1_ico3.png" alt="" />
+                    </div>
+                    <div class="info">
+                        <strong class="tit">제품 비교 검색</strong>
+                        <span class="txt">Product comparison</span>
+                    </div>
+                </a>
+            </li>
+            <li class="category_roll">
+                <div class="box">
+                    <div class="img">
+                        <img src="template/images/main1_ico4.png" alt="" />
+                    </div>
+                    <div class="info">
+                        <div class="roll">
+                            <a href=@Url.Action("IEC1000", "Hardware")>
+                                <strong class="tit">IEC1000 - Series</strong>
+                                <span class="txt">IEC - Series</span>
+                            </a>
+                            <a href=@Url.Action("IEC667", "Hardware")>
+                                <strong class="tit">IEC667 - Series</strong>
+                                <span class="txt">IEC - Series</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <a href=@Url.Action("SmartIO", "Hardware") class="box">
+                    <div class="img">
+                        <img src="template/images/main1_ico5.png" alt="" />
+                    </div>
+                    <div class="info">
+                        <strong class="tit">Smart I/O - Series</strong>
+                        <span class="txt">I/O interface product</span>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href=@Url.Action("Option", "Hardware") class="box">
+                    <div class="img">
+                        <img src="template/images/main1_ico6.png" alt="" />
+                    </div>
+                    <div class="info">
+                        <strong class="tit">기타옵션 제품</strong>
+                        <span class="txt">Optional Product</span>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href=@Url.Action("SmartxFramework", "Software") class="box">
+                    <div class="img">
+                        <img src="template/images/main1_ico7.png" alt="" />
+                    </div>
+                    <div class="info">
+                        <strong class="tit">SmartX Framework 소개</strong>
+                        <span class="txt">SmartX Framework Intro.</span>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.smartx.co.kr/" class="box">
+                    <div class="img">
+                        <img src="template/images/main1_ico8.png" alt="" />
+                    </div>
+                    <div class="info">
+                        <strong class="tit">HNS 쇼핑몰</strong>
+                        <span class="txt">HNS Shopping Mall</span>
+                    </div>
+                </a>
+            </li>
+        </ul><!-- //main1_category -->
+    </div><!-- //inner -->
+    <div class="ex_category">
+        <div class="ex_box">
+            <div class="inner">
+                <a href="#none" class="ex_btn ch_dev">
+                    <span>개발자</span><img src="template/images/main1_ex_ico1.gif" alt="전환" />
+                </a>
+                <strong class="main1_tit2">개발자<span>CATEGORY</span></strong>
+                <ul class="ex_box_list">
+                    <li class="list1">
+                        <a href=@Url.Action("ProductRelated", "ReferenceRoom")>
+                            <div class="img">
+                                <img src="template/images/ex_list_ico1.gif" alt="" />
+                            </div>
+                            <div class="txt">제품 관련 자료실</div>
+                        </a>
+                    </li>
+                    <li class="list2">
+                        <a href=@Url.Action("Smartxrelated", "ReferenceRoom")>
+                            <div class="img">
+                                <img src="template/images/ex_list_ico2.gif" alt="" />
+                            </div>
+                            <div class="txt">SmartX 관련 자료실</div>
+                        </a>
+                    </li>
+                    <li class="list3">
+                        <a href=@Url.Action("DrawingNApprover", "ReferenceRoom")>
+                            <div class="img">
+                                <img src="template/images/ex_list_ico3.gif" alt="" />
+                            </div>
+                            <div class="txt">도면 및 승인원</div>
+                        </a>
+                    </li>
+                    <li class="list4">
+                        <a href=@Url.Action("TechNote", "ReferenceRoom")>
+                            <div class="img">
+                                <img src="template/images/ex_list_ico4.gif" alt="" />
+                            </div>
+                            <div class="txt">Tech Note</div>
+                        </a>
+                    </li>
+                    <li class="list5">
+                        <a href=@Url.Action("ConnectedDevice", "ReferenceRoom")>
+                            <div class="img">
+                                <img src="template/images/ex_list_ico5.gif" alt="" />
+                            </div>
+                            <div class="txt">Connected Device</div>
+                        </a>
+                    </li>
+                    <li class="list6">
+                        <a href=@Url.Action("FAQ", "Community")>
+                            <div class="img">
+                                <img src="template/images/ex_list_ico6.gif" alt="" />
+                            </div>
+                            <div class="txt">자주하는 질문</div>
+                        </a>
+                    </li>
+                    <li class="list7">
+                        <a href=@Url.Action("Qna", "Community")>
+                            <div class="img">
+                                <img src="template/images/ex_list_ico7.gif" alt="" />
+                            </div>
+                            <div class="txt">Q&amp;A</div>
+                        </a>
+                    </li>
+                    <li class="list8">
+                        <a href=@Url.Action("RemoteTechSupport", "CustomerSupport")>
+                            <div class="img">
+                                <img src="template/images/ex_list_ico8.gif" alt="" />
+                            </div>
+                            <div class="txt">원격기술지원</div>
+                        </a>
+                    </li>
+                </ul><!-- //ex_box_list -->
+            </div>
+        </div><!-- //ex_box -->
+    </div><!-- //ex_category -->
+</section><!-- //main1_wrap -->
+<!-- 개발자 작업 -->
+<section id="main1" class="main1_wrap main1_dev">
+    <div class="main1_menu">
+        <a href="#none" class="con ch_con"id="purchaserTab">구매자</a>
+        <a href="#none" class="dev"id="developerTab">개발자</a>
+    </div><!-- //main1_menu -->
+    <div class="inner">
+        <strong class="main1_tit1">개발자<span>CATEGORY</span></strong>
+        <ul class="main1_category">
+            <li>
+                <a href=@Url.Action("ProductRelated", "ReferenceRoom") class="box">
+                    <div class="img">
+                        <img src="template/images/main1_dev1.png" alt="" />
+                    </div>
+                    <div class="info">
+                        <strong class="tit">제품 관련 자료실</strong>
+                        <span class="txt">Product Data</span>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href=@Url.Action("Smartxrelated", "ReferenceRoom") class="box">
+                    <div class="img">
+                        <img src="template/images/main1_dev2.png" alt="" />
+                    </div>
+                    <div class="info">
+                        <strong class="tit">SmartX Framework 자료실</strong>
+                        <span class="txt">Ref.Data</span>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href=@Url.Action("DrawingNApprover", "ReferenceRoom") class="box">
+                    <div class="img">
+                        <img src="template/images/main1_dev3.png" alt="" />
+                    </div>
+                    <div class="info">
+                        <strong class="tit">도면 및 승인원</strong>
+                        <span class="txt">CAD &amp; Spec.Approval</span>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href=@Url.Action("TechNote", "ReferenceRoom") class="box">
+                    <div class="img">
+                        <img src="template/images/main1_dev4.png" alt="" />
+                    </div>
+                    <div class="info">
+                        <strong class="tit">Tech Note</strong>
+                        <span class="txt">기술자료</span>
+                    </div>
+                </a>
+            </li>
+            <li class="dev_etc">
+                <a href=@Url.Action("ConnectedDevice", "ReferenceRoom") class="box">
+                    <div class="img">
+                        <img src="template/images/main1_dev5.png" alt="" />
+                    </div>
+                    <div class="info">
+                        <strong class="tit">Connected Device</strong>
+                        <span class="txt">장치연결 기술자료</span>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href=@Url.Action("FAQ", "Community") class="box">
+                    <div class="img">
+                        <img src="template/images/main1_dev6.png" alt="" />
+                    </div>
+                    <div class="info">
+                        <strong class="tit">자주하는 질문</strong>
+                        <span class="txt">FAQ</span>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href=@Url.Action("ProductPurchaseGuide", "CustomerSupport") class="box">
+                    <div class="img">
+                        <img src="template/images/main1_dev7.png" alt="" />
+                    </div>
+                    <div class="info">
+                        <strong class="tit">Q&amp;A</strong>
+                        <span class="txt">문의하기</span>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href=@Url.Action("RemoteTechSupport", "CustomerSupport") class="box">
+                    <div class="img">
+                        <img src="template/images/main1_dev8.png" alt="" />
+                    </div>
+                    <div class="info">
+                        <strong class="tit">원격기술지원</strong>
+                        <span class="txt">Remote Rupport</span>
+                    </div>
+                </a>
+            </li>
+        </ul><!-- //main1_category -->
+    </div><!-- //inner -->
+    <div class="ex_category">
+        <div class="ex_box">
+            <div class="inner">
+                <a href="#none" class="ex_btn ch_con">
+                    <span>구매자</span><img src="template/images/main1_ex_ico1.gif" alt="전환" />
+                </a>
+                <strong class="main1_tit2">구매자<span>CATEGORY</span></strong>
+                <ul class="ex_box_list">
+                    <li class="list1">
+                        <a href=@Url.Action("Application", "Hardware")>
+                            <div class="img">
+                                <img src="template/images/ex_list_dev1.gif" alt="" />
+                            </div>
+                            <div class="txt">제품 응용분야</div>
+                        </a>
+                    </li>
+                    <li class="list2">
+                        <a href=@Url.Action("Lineup", "Hardware")>
+                            <div class="img">
+                                <img src="template/images/ex_list_dev2.gif" alt="" />
+                            </div>
+                            <div class="txt">제품 라인업</div>
+                        </a>
+                    </li>
+                    <li class="list3">
+                        <a href=@Url.Action("Compare", "Hardware")>
+                            <div class="img">
+                                <img src="template/images/ex_list_dev3.gif" alt="" />
+                            </div>
+                            <div class="txt">제품 비교 검색</div>
+                        </a>
+                    </li>
+                    <li class="list4">
+                        <div class="img">
+                            <img src="template/images/ex_list_dev4.gif" alt="" />
+                        </div>
+                        <div class="txt_wrap">
+                            <div class="roll">
+                                <a href=@Url.Action("IEC667", "Hardware")>
+                                    <div class="txt">IEC667 -<br class="__m">Series</div>
+                                </a>
+                                <a href=@Url.Action("IEC1000", "Hardware")>
+                                    <div class="txt">IEC1000 -<br class="__m">Series</div>
+                                </a>
+                            </div>
+                        </div><!-- //txt_wrap -->
+                    </li>
+                    <li class="list5">
+                        <a href=@Url.Action("SmartIO", "Hardware")>
+                            <div class="img">
+                                <img src="template/images/ex_list_dev5.gif" alt="" />
+                            </div>
+                            <div class="txt">Smart I/O - Series</div>
+                        </a>
+                    </li>
+                    <li class="list6">
+                        <a href=@Url.Action("Option", "Hardware")>
+                            <div class="img">
+                                <img src="template/images/ex_list_dev6.gif" alt="" />
+                            </div>
+                            <div class="txt">기타옵션 제품</div>
+                        </a>
+                    </li>
+                    <li class="list7">
+                        <a href=@Url.Action("SmartxFramework", "Software")>
+                            <div class="img">
+                                <img src="template/images/ex_list_dev7.gif" alt="" />
+                            </div>
+                            <div class="txt">SmartX Framework<br />소개</div>
+                        </a>
+                    </li>
+                    <li class="list8">
+                        <a href="http://www.smartx.co.kr/">
+                            <div class="img">
+                                <img src="template/images/ex_list_dev8.gif" alt="" />
+                            </div>
+                            <div class="txt">HNS 쇼핑몰</div>
+                        </a>
+                    </li>
+                </ul><!-- //ex_box_list -->
+            </div>
+        </div><!-- //ex_box -->
+    </div><!-- //ex_category -->
+</section><!-- //main1_wrap -->
+<!-- // 개발자 작업 -->
+
+<h2 class="hide">메인컨텐츠</h2>
+<section id="main2" class="main2_wrap">
+    <div class="inner">
+        <div class="not_box">
+            <strong class="not_tit">
+                공지사항
+                <a href="@Url.Action("Notice", "Community")" class="not_more">MORE +</a>
+            </strong>
+
+            @if (Model.Notices != null && Model.Notices.Count > 0)
+            {
+                var firstNotice = Model.Notices.FirstOrDefault();
+                Model.Notices.Remove(firstNotice);
+
+
+                <div class="not_big">
+                    <a href="@Url.Action("NoticeView", "Community", new {id=firstNotice.Id })">
+                        <span class="subject">@firstNotice.m_title.Truncate(40)</span>
+                        <p class="txt">
+                            <span>
+                                <iframe src="~/Community/NoticeViewerForIframe/@firstNotice.Id" scrolling="no" style="border:none;width:100%;height: 20px;"></iframe>
+                            </span>
+                            <em class="date">@(firstNotice.m_date.HasValue ? firstNotice.m_date.Value.ToString("yyyy-MM-dd") : "")</em>
+                        </p>
+                    </a>
+                </div>
+
+                <ul class="not_list">
+                    @foreach (var notice in Model.Notices)
+                    {
+                        <li>
+                            <a href="@Url.Action("NoticeView", "Community", new {id=notice.Id })">
+                                @notice.m_title.Truncate(55)
+                                <em class="date">@(notice.m_date.HasValue ? notice.m_date.Value.ToString("yyyy-MM-dd") : "")</em>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            }
+        </div><!-- //notice_box -->
+        <ul class="quick_box">
+            <li>
+                <a href="#">
+                    <span>
+                        <img src="template/images/quick_ico1.png" alt="개발안내" />
+                    </span>
+                    <em>개발 안내</em>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <span>
+                        <img src="template/images/quick_ico2.png" alt="구매처 안내" />
+                    </span>
+                    <em>구매처 안내</em>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <span>
+                        <img src="template/images/quick_ico3.png" alt="A/S 안내" />
+                    </span>
+                    <em>A/S 안내</em>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <span>
+                        <img src="template/images/quick_ico4.png" alt="카다로그" />
+                    </span>
+                    <em>카다로그</em>
+                </a>
+            </li>
+        </ul><!-- //quick_box -->
+        <div class="cs_box">
+            <div class="tel">
+                <strong class="tit">대표전화</strong>
+                <div class="top">
+                    <strong class="num"><a href="tel:02-6402-8001">02-6402-8001</a></strong>
+                    <em class="fax">FAX. 02-6442-9775</em>
+                    <span class="info">업무시간  09:00 ~ 18:00   월 ~ 금요일<br class="__m" /><em>(주말, 공휴일 휴무)</em></span>
+                </div>
+                <div class="bot">
+                    <div class="tel_bot1"><img src="template/images/cs_tel_ico1.gif" alt="" />내선번호 1. 제품/구매안내</div>
+                    <div class="tel_bot2"><img src="template/images/cs_tel_ico1.gif" alt="" />내선번호 2. H/W 기술문의</div>
+                    <div class="tel_bot3"><img src="template/images/cs_tel_ico1.gif" alt="" />내선번호 3. S/W 기술문의 </div>
+                    <div class="tel_bot4"><img src="template/images/cs_tel_ico1.gif" alt="" />내선번호 4. A/S 기술문의</div>
+                </div>
+            </div>
+            <div class="delivery">
+                <strong class="tit">주문 및 출고안내</strong>
+                <div class="top">
+                    <span class="due">오후 4시 이전 발주 접수 및 결제 완료시</span>
+                    <strong class="del">익/일/출/고</strong>
+                    <span class="info">저희 에이치앤에스 <em>결제조건은 선 결제 원칙</em>으로 합니다. <br />발주/구매 문의 sales@hnsts.co.kr</span>
+                </div>
+                <div class="bot">
+                    <div class="del_bot1"><img src="template/images/cs_del_ico1.gif" alt="" />국민은행 421737 - 04 - 010101</div>
+                    <div class="del_bot2"><img src="template/images/cs_del_ico2.gif" alt="" />신한은행 140-011-106105</div>
+                    <div class="del_bot3"><img src="template/images/cs_del_ico3.gif" alt="" />우리은행 1005 - 701 - 791343</div>
+                    <div class="del_bot4"><img src="template/images/cs_del_ico4.gif" alt="" />하나은행 428-910021-73704</div>
+                    <div class="del_bot5"><img src="template/images/cs_del_ico5.gif" alt="" />기업은행 02 - 6402 - 8001</div>
+                    <div class="del_bot6">예금주 : (주)에이치앤에스</div>
+                </div>
+            </div>
+        </div><!-- //cs_box -->
+    </div>
+</section><!-- //main2_wrap -->
+@if (TempData["Popup"] != null)
+{
+    <div id="myModal" class="modal" style="display:none;">
+
+        Modal content
+        <div class="modal-content">
+            <span class="close btn_popup_close">&times;</span>
+
+            <div>
+                @(Html.Raw(((HNS.Entities.PopupLayer)TempData["Popup"]).Content))
+            </div>
+
+            <div class="popup_btn_container">
+                <label class="popup_checkbox">
+                    <input type="checkbox" />
+                    오늘 다시 보지 않기
+                </label>
+                @*<button class="btn_popup_close" type="button">Close</button>*@
+            </div>
+        </div>
+
+        
+
+    </div>
+
+}
+
+
+@section Scripts
+{
+    <script>
+        $(function () { 
+            if (ex_box_list_slider)
+                ex_box_list_slider.redrawSlider();
+        })
+    </script>
+}

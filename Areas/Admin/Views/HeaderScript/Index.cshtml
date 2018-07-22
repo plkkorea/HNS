@@ -1,0 +1,40 @@
+﻿@model HNS.Entities.HeaderScript
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_DefaultLayout.cshtml";
+
+    ViewData["Title"] = "Header Script";
+    ViewData["BreadCrumb"] = "기타관리,Header Script";
+    ViewData["CurrentMenu"] = "기타관리";
+    ViewData["CurrentMenuItem"] = "Header Script";
+}
+
+<p>
+    <h3>Below script will be injected to every pages. It is helpful for adding your own custom script, such as Google Analytics script and other tracking scripts.</h3>
+</p>
+<br />
+<br />
+
+<form asp-action="Index" asp-controller="HeaderScript" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="bbs-write">
+        <dl>
+            <dt><label for="title">Active</label></dt>
+            <dd><input type="checkbox" asp-for="Active" readonly></dd>
+        </dl>
+        <dl class="content" style="height:auto;">
+            <dt>Script</dt>
+            <dd>
+                <textarea asp-for="Script" rows="20"></textarea>
+            </dd>
+        </dl>
+    </div>
+
+
+    <div class="btn_confirm01 btn_confirm">
+        <input type="submit" value="수정" class="btn-ty1 light" accesskey="s">
+    </div>
+
+</form>

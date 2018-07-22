@@ -1,0 +1,90 @@
+﻿@model HNS.ViewModels.NoticeViewModel
+@{
+    ViewData["Title"] = "Notice";
+}
+
+<div class="sub_content notice">
+    <div class="_inner">
+
+        <div class="notlist_top">
+            <div class="sch">
+                <form asp-action="Notice" asp-controller="Community" method="post">
+                    <select class="notlist_sel" asp-for="NoticeSearchCriteria.SearchType">
+                        <option value="0">제목</option>
+                        <option value="1">내용</option>
+                        <option value="2">제목 + 내용</option>
+                    </select>
+                    <input asp-for="NoticeSearchCriteria.SearchString" type="text" class="notlist_input" />
+                    <button type="submit">검색</button>
+                </form>
+            </div>
+            <div class="cnt">
+                총 @Model.Notices.RowCount 건의 글(@(Model.Notices.CurrentPage)/@Model.Notices.PageCount)
+            </div>
+        </div><!-- //notlist_top -->
+
+        <table class="notlist_tbl">
+            <colgroup>
+                <col class="tbl1" />
+                <col class="tbl2" />
+                <col class="tbl3" />
+                <col class="tbl4" />
+            </colgroup>
+            <tr>
+                <th scope="col">번호</th>
+                <th scope="col">제목</th>
+                <th scope="col">작성일</th>
+                <th scope="col" class="__p">조회수</th>
+            </tr>
+
+            @foreach (var notice in Model.ImportantNotices)
+            {
+                <tr class="import gray">
+                    @if (notice.m_important)
+                    {
+                        <td><span class="red">중요</span></td>
+                    }
+                    else
+                    {
+                        <td>@notice.Id</td>
+                    }
+                    <td>
+                        <a href="@Url.Action("NoticeView", "Community", new { id=notice.Id })" class="subject">@notice.m_title.Truncate(50)</a>
+                    </td>
+                    <td>@(notice.m_date.HasValue ? notice.m_date.Value.ToString("yyyy-MM-dd") : "")</td>
+                    <td class="__p">@notice.m_read</td>
+                </tr>
+            }
+
+            @foreach (var notice in Model.Notices.Results)
+            {
+                <tr class="@(notice.m_important ? @"import":"")">
+                    <td>@notice.SerialNo</td>
+                    <td>
+                        <a href="@Url.Action("NoticeView", "Community", new { id=notice.Id })" class="subject">
+                            @notice.m_title.Truncate(50)
+                            @{
+                                if (DateTime.Now.AddHours(-24) < notice.m_date.Value)
+                                {
+                                    <img src="~/template/images/notlist_new.gif" alt="뉴">
+                                }
+                            }
+                        </a>
+                    </td>
+                    <td>@(notice.m_date.HasValue ? notice.m_date.Value.ToString("yyyy-MM-dd") : "")</td>
+                    <td class="__p">@notice.m_read</td>
+                </tr>
+            }
+        </table>
+        <div class="paging_wrap">
+            <div class="paging">
+
+                <pager pager-model="@Model.Notices"></pager>
+
+            </div>
+        </div>
+    </div>
+    <!-- 서브에만 들어가는 탑 버튼-->
+    <a href="#" class="go_top"><img src="~/template/images/go_top.png" alt="맨 위로"></a>
+</div><!-- //sub_content -->
+<!-- //서브 컨텐츠 // 이 아래부터 공통 -->

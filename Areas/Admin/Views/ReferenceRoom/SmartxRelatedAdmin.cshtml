@@ -1,0 +1,59 @@
+﻿@model List<HNS.Entities.SmartXRelated>
+@{
+    ViewData["Title"] = "Smartx Related";
+    ViewData["BreadCrumb"] = "게시판관리,SamartX Framework Versions";
+    ViewData["CurrentMenu"] = "게시판관리";
+    ViewData["CurrentMenuItem"] = "SamartX Framework Versions";
+}
+
+<form name="fboardlist" id="fboardlist" action="" method="post">
+    <fieldset class="bbs-list">
+        <legend>게시글 목록</legend>
+
+        <a href="@Url.Action("SmartxRelatedEdit", "ReferenceRoom")" class="btn-new">추가</a>
+
+        @if (Model != null && Model.Count > 0)
+    {
+        <table summary="전체 목록">
+            <colgroup>
+                <col width="10%">
+                <col width="30%">
+                <col width="20%">
+                <col width="10%">
+                <col width="10%">
+                <col width="10%">
+                <col width="10%">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">내용</th>
+                    <th scope="col">날짜</th>
+                    <th scope="col">번역</th>
+                    <th scope="col">보기</th>
+                    <th scope="col">편집</th>
+                    <th scope="col">삭제</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.SerialNo</td>
+                    <td style="text-align:left;"><a href="@Url.Action("SmartXRelatedView", "ReferenceRoom", new { id=item.Id})" class="subject">@item.Title</a></td>
+                    <td>@item.DateTime.ToString("yyyy-MM-dd")</td>
+                    <td>@item.Version</td>
+                    <td><a href="@Url.Action("SmartXRelatedView", "ReferenceRoom", new { id=item.Id})">보기</a></td>
+                    <td><a href="@Url.Action("SmartXRelatedEdit", "ReferenceRoom", new { id=item.Id})">편집</a></td>
+                    <td><a onclick="return confirm('삭제 하시겠습니까?');" href="@Url.Action("SmartXRelatedDelete", "ReferenceRoom", new { id=item.Id})">삭제</a></td>
+                </tr>
+        }
+            </tbody>
+        </table>
+}
+else
+{
+    <h2>No record found.</h2>
+}
+    </fieldset>
+</form>

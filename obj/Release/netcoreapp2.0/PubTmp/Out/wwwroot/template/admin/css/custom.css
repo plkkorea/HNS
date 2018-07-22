@@ -1,0 +1,56 @@
+﻿.validation-summary-valid{
+    display:none;
+}
+
+.text-danger {
+    color: red;
+    font-weight: bold;
+    background-color: lightyellow;
+    border: 1px solid #d9dca5;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.btn-new {
+    background-color: lightgray;
+    padding: 8px 20px;
+    line-height: 5;
+}
+
+.error-msg {
+    padding: 10px;
+    background-color: #fbc6ce;
+    margin: 5px;
+}
+
+.success-msg {
+    padding: 10px;
+    background-color: #dcfbd8;
+    margin: 5px;
+}
+
+#aside .snb .deps2 li .active {
+    color: #fff;
+    text-decoration: underline;
+    background: url(../images/snb_d2_bul_on.gif) 0 5px no-repeat;
+    border: none;
+}
+
+.paging_wrap .paging .active {
+    font-weight: bold;
+    background-color: #ccc;
+}
+
+#linkSwitchEditor {
+    color: blue;
+    font-size: 12px;
+    text-decoration: underline;
+    line-height: 2;
+}
+
+.linkSwitchEditor {
+    color: blue;
+    font-size: 12px;
+    text-decoration: underline;
+    line-height: 2;
+}

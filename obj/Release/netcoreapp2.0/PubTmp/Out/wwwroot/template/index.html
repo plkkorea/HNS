@@ -1,0 +1,742 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<meta property="og:title" content="">
+<meta property="og:image" content="">
+<meta property="og:description" content="">
+<meta name="description" content=""/>
+<meta name="keywords" content="">
+<title>(주)HNS</title>
+<link rel="stylesheet" type="text/css" href="./css/common.css"/>
+<link rel="stylesheet" type="text/css" href="./css/global.css?ver=1801131130"/>
+<link rel="stylesheet" type="text/css" href="./css/respond.css?ver=18011111330"/>
+<link rel="stylesheet" type="text/css" href="./css/template.css"/>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/jquery.wipetouch.js"></script>
+<script src="./js/global.js?ver=180612"></script>
+<!--[if lt IE 9]>
+<script src="./js/html5.js"></script>
+<![endif]--></head>
+<body>
+
+<div id="top" class="top_wrap">
+    <div class="inner">
+        <span class="info">안녕하세요. (주)에이치앤에스입니다.<br />
+        <strong class="esp"><em>방문 목적이 제품 구매의 경우 구매관련 버튼을, 개발관련의 경우 개발관련 버튼을 클릭</em>해 주시기 바랍니다.</strong><br />
+        클릭 시 해당관련 추천 카테고리 우선으로 보여집니다.             
+        </span>
+        <div class="btn_wrap">
+            <button type="button" class="top_btn1 active close ch_con">구매관련</button>
+            <button type="button" class="top_btn2 close ch_dev">개발관련</button>
+        </div>
+        <!-- .ch_con 클릭시 .main1_dev 안보임 // 하단도 마찬가지 -->
+        <!-- .ch_dev 클릭시 .main1_con 안보임 // 하단도 마찬가지 -->
+        <a href="#none" class="top_xbtn close">닫기</a>
+    </div>
+</div>
+<div id="wrap" class="_main"><!-- 메인페이지: class="_main", 서브페이지: class="_sub" -->
+    <div id="header">
+        <div class="inner">
+            <div class="top">
+                <h1 class="logo"><a href="./index.html"><img src="./images/logo.png" class="logo1" alt="(주)에이치엔에스" /><img src="./images/logo1.png" class="logo2" alt="(주)에이치엔에스" /></a></h1>
+                
+                <div class="tnb_box">
+                    <a href="#none" class="con ch_con">구매자</a>         
+                    <a href="#none" class="dev ch_dev">개발자</a>
+                    <a href="#" class="sch">검색</a>
+                    <button type="button" class="_btn _menu _menuon"><img src="./images/top-menu.png" alt="MENU" /></button> 
+                    <button type="button" class="_btn _menu _menuoff"><img src="./images/nav-close.png" alt="닫기" /></button>   
+                </div>                              
+            </div>
+        </div><!-- //inner -->
+        <div class="gnb_wrap">
+            <h2 class="hide">주메뉴</h2>
+            <ul class="_gnb">
+                <li>
+                    <a href="#">회사소개</a>
+                    <ul>
+                        <li><a href="#">인사말</a></li>
+                        <li><a href="#">사업분야</a></li>
+                        <li><a href="#">연혁</a></li>
+                        <li><a href="#">연락처 및 위치</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">하드웨어</a>
+                    <ul>
+                        <li><a href="#">제품 응용분야</a></li>
+                        <li><a href="#">제품 라인업</a></li>
+                        <li><a href="#">제품 비교검색</a></li>
+                        <li><a href="#">IEC1000-Series</a></li>
+                        <li><a href="#">IEC667-Series</a></li>
+                        <li><a href="#">IEC266-Series</a></li>
+                        <li><a href="#">Smart I/O - Series</a></li>
+                        <li><a href="#">기타옵션 제품</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">소프트웨어</a>
+                    <ul>
+                        <li><a href="#">SmartX Framework 소개</a></li>
+                        <li><a href="#">개발 툴</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">개발문의</a>
+                    <ul>
+                        <li><a href="#">개발안내</a></li>
+                        <li><a href="#">UI 디자인</a></li>
+                        <li><a href="#">개발자 프로모션</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">자료실</a>
+                    <ul>                        
+                        <li><a href="#">제품관련</a></li>
+                        <li><a href="#">SmartX Framework 관련</a></li>
+                        <li><a href="#">도면 및 승인원</a></li>
+                        <li><a href="#">Tech Note</a></li>
+                        <li><a href="#">Connectd Device</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">커뮤니티</a>
+                    <ul>                        
+                        <li><a href="#">공지사항</a></li>
+                        <li><a href="#">자주하는 질문</a></li>
+                        <li><a href="#">Q&amp;A</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">고객지원</a>
+                    <ul>                        
+                        <li><a href="#">A/S 안내</a></li>
+                        <li><a href="#">원격기술지원</a></li>
+                        <li><a href="#">제품 구매안내</a></li>
+                        <li><a href="#">통합검색</a></li>               
+                    </ul>
+                </li>
+            </ul> 
+            <div class="btn_gnb_fix">
+                <input type="checkbox" id="gnb_fix" name="gnb_fix" class="btn_gnb_chk" />         
+                <label for="gnb_fix"></label>
+            </div>                              
+        </div><!-- //inner -->
+    </div><!-- //header -->
+    <nav id="_nav">
+        <div class="_inner">            
+            <ul class="_gnb">
+                <li>
+                    <a href="#">회사소개</a>
+                    <ul>
+                        <li><a href="#">인사말</a></li>
+                        <li><a href="#">사업분야</a></li>
+                        <li><a href="#">연혁</a></li>
+                        <li><a href="#">연락처 및 위치</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">하드웨어</a>
+                    <ul>
+                        <li><a href="#">제품 응용분야</a></li>
+                        <li><a href="#">제품 라인업</a></li>
+                        <li><a href="#">제품 비교검색</a></li>
+                        <li><a href="#">IEC1000-Series</a></li>
+                        <li><a href="#">IEC667-Series</a></li>
+                        <li><a href="#">IEC266-Series</a></li>
+                        <li><a href="#">Smart I/O - Series</a></li>
+                        <li><a href="#">기타옵션 제품</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">소프트웨어</a>
+                    <ul>
+                        <li><a href="#">SmartX Framework 소개</a></li>
+                        <li><a href="#">개발 툴</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">개발문의</a>
+                    <ul>
+                        <li><a href="#">개발안내</a></li>
+                        <li><a href="#">UI 디자인</a></li>
+                        <li><a href="#">개발자 프로모션</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">자료실</a>
+                    <ul>                        
+                        <li><a href="#">제품관련</a></li>
+                        <li><a href="#">SmartX Framework 관련</a></li>
+                        <li><a href="#">도면 및 승인원</a></li>
+                        <li><a href="#">Tech Note</a></li>
+                        <li><a href="#">Connectd Device</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">커뮤니티</a>
+                    <ul>                        
+                        <li><a href="#">공지사항</a></li>
+                        <li><a href="#">자주하는 질문</a></li>
+                        <li><a href="#">Q&amp;A</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">고객지원</a>
+                    <ul>                        
+                        <li><a href="#">A/S 안내</a></li>
+                        <li><a href="#">원격기술지원</a></li>
+                        <li><a href="#">제품 구매안내</a></li>
+                        <li><a href="#">통합검색</a></li>               
+                    </ul>
+                </li>
+            </ul>
+        </div>              
+    </nav><!-- //_nav -->
+
+    <h2 class="hide">메인 비주얼</h2>
+    <div id="_vis">
+        <div class="_roll">
+            <div class="_vis" style="background:#1388f5;">
+                <a href="#">
+                    <img src="./images/vis1.jpg" alt="DUMMY" class="__p"/>
+                    <img src="./images/vis1m.jpg" alt="VISUAL" class="__m"/>
+                </a>
+            </div>
+            <div class="_vis" style="background:#33b6e1;">
+                <a href="#">
+                    <img src="./images/vis2.jpg" alt="DUMMY" class="__p"/>
+                    <img src="./images/vis2m.jpg" alt="VISUAL" class="__m"/>
+                </a>
+            </div>
+            <div class="_vis" style="background:#00a99d;">
+                <a href="#">
+                    <img src="./images/vis3.jpg" alt="DUMMY" class="__p"/>
+                    <img src="./images/vis3m.jpg" alt="VISUAL" class="__m"/>
+                </a>
+            </div>
+            <div class="_vis" style="background:#c6c6c6;">
+                <a href="#">
+                    <img src="./images/vis4.jpg" alt="DUMMY" class="__p"/>
+                    <img src="./images/vis4m.jpg" alt="VISUAL" class="__m"/>
+                </a>
+            </div>
+        </div>      
+        <script>vis.init();</script>
+    </div><!-- //_vis -->
+
+    <!-- .ch_con 클릭시 .main1_dev 안보임 // 상단도 마찬가지 -->
+    <!-- .ch_dev 클릭시 .main1_con 안보임 // 상단도 마찬가지 -->
+
+    <h2 class="hide">구매자 / 개발자</h2>
+    <section id="main1" class="main1_wrap main1_con">
+        <div class="main1_menu">
+            <a href="#none" class="con" id="purchaserTab">구매자</a>
+            <a href="#none" class="dev ch_dev" id="developerTab">개발자</a>
+        </div><!-- //main1_menu -->
+        <div class="inner">            
+            <strong class="main1_tit1">구매자<span>CATEGORY</span></strong>
+            <ul class="main1_category">
+                <li>
+                    <a href="#" class="box">
+                        <div class="img">
+                            <img src="./images/main1_ico1.png" alt="" />
+                        </div>
+                        <div class="info">
+                            <strong class="tit">제품 응용분야</strong>
+                            <span class="txt">Applocations</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="box">
+                        <div class="img">
+                            <img src="./images/main1_ico2.png" alt="" />
+                        </div>
+                        <div class="info">
+                            <strong class="tit">제품 라인업</strong>
+                            <span class="txt">Line Up</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="box">
+                        <div class="img">
+                            <img src="./images/main1_ico3.png" alt="" />
+                        </div>
+                        <div class="info">
+                            <strong class="tit">제품 비교 검색</strong>
+                            <span class="txt">Product comparison</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="category_roll">
+                    <div class="box">
+                        <div class="img">
+                            <img src="./images/main1_ico4.png" alt="" />
+                        </div>
+                        <div class="info">
+                            <div class="roll">
+                                <a href="#">
+                                    <strong class="tit">IEC1000 - Series</strong>
+                                    <span class="txt">IEC - Series</span>
+                                </a>
+                                <a href="#">
+                                    <strong class="tit">IEC667 - Series</strong>
+                                    <span class="txt">IEC - Series</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>                    
+                </li>                
+                <li>
+                    <a href="#" class="box">
+                        <div class="img">
+                            <img src="./images/main1_ico5.png" alt="" />
+                        </div>
+                        <div class="info">
+                            <strong class="tit">Smart I/O - Series</strong>
+                            <span class="txt">I/O interface product</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="box">
+                        <div class="img">
+                            <img src="./images/main1_ico6.png" alt="" />
+                        </div>
+                        <div class="info">                            
+                            <strong class="tit">기타옵션 제품</strong>
+                            <span class="txt">Optional Product</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="box">
+                        <div class="img">
+                            <img src="./images/main1_ico7.png" alt="" />                           
+                        </div>
+                        <div class="info">
+                            <strong class="tit">SmartX Framework 소개</strong>
+                            <span class="txt">SmartX Framework Intro.</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="box">
+                        <div class="img">
+                            <img src="./images/main1_ico8.png" alt="" />
+                        </div>
+                        <div class="info">
+                            <strong class="tit">HNS 쇼핑몰</strong>
+                            <span class="txt">HNS Shopping Mall</span>
+                        </div>
+                    </a>
+                </li>
+            </ul><!-- //main1_category -->
+        </div><!-- //inner -->
+        <div class="ex_category">            
+            <div class="ex_box">
+                <div class="inner">
+                    <a href="#none" class="ex_btn ch_dev">
+                        <span>개발자</span><img src="./images/main1_ex_ico1.gif" alt="전환" />
+                    </a>
+                    <strong class="main1_tit2">개발자<span>CATEGORY</span></strong>
+                    <ul class="ex_box_list">
+                        <li class="list1">
+                            <a href="#">
+                                <div class="img">
+                                    <img src="./images/ex_list_ico1.gif" alt="" />
+                                </div>
+                                <div class="txt">제품 관련 자료실</div>
+                            </a>
+                        </li>
+                        <li class="list2">
+                            <a href="#">
+                                <div class="img">
+                                    <img src="./images/ex_list_ico2.gif" alt="" />
+                                </div>
+                                <div class="txt">SmartX 관련 자료실</div>
+                            </a>
+                        </li>
+                        <li class="list3">
+                            <a href="#">
+                                <div class="img">
+                                    <img src="./images/ex_list_ico3.gif" alt="" />
+                                </div>
+                                <div class="txt">도면 및 승인원</div>
+                            </a>
+                        </li>
+                        <li class="list4">
+                            <a href="#">
+                                <div class="img">
+                                    <img src="./images/ex_list_ico4.gif" alt="" />
+                                </div>
+                                <div class="txt">Tech Note</div>
+                            </a>
+                        </li>
+                        <li class="list5">
+                            <a href="#">
+                                <div class="img">
+                                    <img src="./images/ex_list_ico5.gif" alt="" />
+                                </div>
+                                <div class="txt">Connected Device</div>
+                            </a>
+                        </li>
+                        <li class="list6">
+                            <a href="#">
+                                <div class="img">
+                                    <img src="./images/ex_list_ico6.gif" alt="" />
+                                </div>
+                                <div class="txt">자주하는 질문</div>
+                            </a>
+                        </li>
+                        <li class="list7">
+                            <a href="#">
+                                <div class="img">
+                                    <img src="./images/ex_list_ico7.gif" alt="" />
+                                </div>
+                                <div class="txt">Q&amp;A</div>
+                            </a>
+                        </li>
+                        <li class="list8">
+                            <a href="#">
+                                <div class="img">
+                                    <img src="./images/ex_list_ico8.gif" alt="" />
+                                </div>
+                                <div class="txt">원격기술지원</div>
+                            </a>
+                        </li>
+                    </ul><!-- //ex_box_list -->
+                </div>
+            </div><!-- //ex_box -->
+        </div><!-- //ex_category -->
+    </section><!-- //main1_wrap -->
+
+    <!-- 개발자 작업 -->
+    <section id="main1" class="main1_wrap main1_dev">
+        <div class="main1_menu">
+            <a href="#none" class="con ch_con" id="purchaserTab">구매자</a>
+            <a href="#none" class="dev"id="developerTab" >개발자</a>
+        </div><!-- //main1_menu -->
+        <div class="inner">            
+            <strong class="main1_tit1">개발자<span>CATEGORY</span></strong>
+            <ul class="main1_category">
+                <li>
+                    <a href="#" class="box">
+                        <div class="img">
+                            <img src="./images/main1_dev1.png" alt="" />
+                        </div>
+                        <div class="info">
+                            <strong class="tit">제품 관련 자료실</strong>
+                            <span class="txt">Product Data</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="box">
+                        <div class="img">
+                            <img src="./images/main1_dev2.png" alt="" />
+                        </div>
+                        <div class="info">
+                            <strong class="tit">SmartX Framework 자료실</strong>
+                            <span class="txt">Ref.Data</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="box">
+                        <div class="img">
+                            <img src="./images/main1_dev3.png" alt="" />
+                        </div>
+                        <div class="info">
+                            <strong class="tit">도면 및 승인원</strong>
+                            <span class="txt">CAD &amp; Spec.Approval</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="box">
+                        <div class="img">
+                            <img src="./images/main1_dev4.png" alt="" />
+                        </div>
+                        <div class="info">
+                            <strong class="tit">Tech Note</strong>
+                            <span class="txt">기술자료</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="dev_etc">
+                    <a href="#" class="box">
+                        <div class="img">
+                            <img src="./images/main1_dev5.png" alt="" />
+                        </div>
+                        <div class="info">
+                            <strong class="tit">Connected Device</strong>
+                            <span class="txt">장치연결 기술자료</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="box">
+                        <div class="img">
+                            <img src="./images/main1_dev6.png" alt="" />
+                        </div>
+                        <div class="info">                            
+                            <strong class="tit">자주하는 질문</strong>
+                            <span class="txt">FAQ</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="box">
+                        <div class="img">
+                            <img src="./images/main1_dev7.png" alt="" />                           
+                        </div>
+                        <div class="info">
+                            <strong class="tit">Q&amp;A</strong>
+                            <span class="txt">문의하기</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="box">
+                        <div class="img">
+                            <img src="./images/main1_dev8.png" alt="" />
+                        </div>
+                        <div class="info">
+                            <strong class="tit">원격기술지원</strong>
+                            <span class="txt">Remote Rupport</span>
+                        </div>
+                    </a>
+                </li>
+            </ul><!-- //main1_category -->
+        </div><!-- //inner -->
+        <div class="ex_category">            
+            <div class="ex_box">
+                <div class="inner">
+                    <a href="#none" class="ex_btn ch_con">
+                        <span>구매자</span><img src="./images/main1_ex_ico1.gif" alt="전환" />
+                    </a>
+                    <strong class="main1_tit2">구매자<span>CATEGORY</span></strong>
+                    <ul class="ex_box_list">
+                        <li class="list1">
+                            <a href="#">
+                                <div class="img">
+                                    <img src="./images/ex_list_dev1.gif" alt="" />
+                                </div>
+                                <div class="txt">제품 응용분야</div>
+                            </a>
+                        </li>
+                        <li class="list2">
+                            <a href="#">
+                                <div class="img">
+                                    <img src="./images/ex_list_dev2.gif" alt="" />
+                                </div>
+                                <div class="txt">제품 라인업</div>
+                            </a>
+                        </li>
+                        <li class="list3">
+                            <a href="#">
+                                <div class="img">
+                                    <img src="./images/ex_list_dev3.gif" alt="" />
+                                </div>
+                                <div class="txt">제품 비교 검색</div>
+                            </a>
+                        </li>
+                        <li class="list4">                            
+                            <div class="img">
+                                <img src="./images/ex_list_dev4.gif" alt="" />
+                            </div>                            
+                            <div class="txt_wrap">
+                                <div class="roll">
+                                    <a href="#">
+                                        <div class="txt">IEC667 -<br class="__m">Series</div>
+                                    </a>                               
+                                    <a href="#">
+                                        <div class="txt">IEC1000 -<br class="__m">Series</div>
+                                    </a>
+                                </div>                                
+                            </div><!-- //txt_wrap -->
+                        </li>
+                        <li class="list5">
+                            <a href="#">
+                                <div class="img">
+                                    <img src="./images/ex_list_dev5.gif" alt="" />
+                                </div>
+                                <div class="txt">Smart I/O - Series</div>
+                            </a>
+                        </li>
+                        <li class="list6">
+                            <a href="#">
+                                <div class="img">
+                                    <img src="./images/ex_list_dev6.gif" alt="" />
+                                </div>
+                                <div class="txt">기타옵션 제품</div>
+                            </a>
+                        </li>
+                        <li class="list7">
+                            <a href="#">
+                                <div class="img">
+                                    <img src="./images/ex_list_dev7.gif" alt="" />
+                                </div>
+                                <div class="txt">SmartX Framework<br />소개</div>
+                            </a>
+                        </li>
+                        <li class="list8">
+                            <a href="#">
+                                <div class="img">
+                                    <img src="./images/ex_list_dev8.gif" alt="" />
+                                </div>
+                                <div class="txt">HNS 쇼핑몰</div>
+                            </a>
+                        </li>
+                    </ul><!-- //ex_box_list -->
+                </div>
+            </div><!-- //ex_box -->
+        </div><!-- //ex_category -->
+    </section><!-- //main1_wrap -->    
+    <!-- // 개발자 작업 -->
+
+    <h2 class="hide">메인컨텐츠</h2>
+    <section id="main2" class="main2_wrap">
+        <div class="inner">
+            <div class="not_box">
+                <strong class="not_tit">공지사항
+                    <a href="#" class="not_more">MORE +</a>
+                </strong>
+                <div class="not_big">
+                    <a href="#">
+                        <span class="subject">SmartX framework [Ver.3.0.0] 업데이트 안내</span>
+                        <p class="txt"><span>신규 컴포넌트 SmartInputCounter, SmartComBobox, SmartSerial Port 추가 및 기존 컴포넌트 기능개선 하였습니다. </span>
+                            <em class="date">2017-12-14</em>
+                        </p>
+                    </a>
+                </div>
+                <ul class="not_list">
+                    <li>
+                        <a href="#">
+                            Sart I/O - II,III Base Board 및 Smart I/O-Block Series 핀 맵 안내 및 커넥터 연결안내
+                            <em class="date">2017-12-14</em>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            IEC 비(非)Lite-Series RS485 송수신 하드웨어 제어 적용안내
+                            <em class="date">2017-12-14</em>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            폼 디자인의 컴포넌트 개수에 따른 디자인창에서 화면갱신시간 안내
+                            <em class="date">2017-12-14</em>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Windows 10의 Windows 버전 업데이트 후 Mobile Device Center 연결 문제 및 Visual Studio 관련 이슈
+                            <em class="date">2017-12-14</em>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            SmartX Framework [Version 2.8.0] 업데이트 안내
+                            <em class="date">2017-12-14</em>
+                        </a>
+                    </li>
+                </ul>
+            </div><!-- //notice_box -->
+            <ul class="quick_box">
+                <li>
+                    <a href="#">      
+                        <span>                  
+                            <img src="./images/quick_ico1.png" alt="개발안내" />
+                        </span>
+                        <em>개발 안내</em>                        
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span>    
+                            <img src="./images/quick_ico2.png" alt="구매처 안내" />
+                        </span>
+                        <em>구매처 안내</em>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span>   
+                            <img src="./images/quick_ico3.png" alt="A/S 안내" />
+                        </span>
+                        <em>A/S 안내</em>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span>   
+                            <img src="./images/quick_ico4.png" alt="카다로그" />
+                        </span>
+                        <em>카다로그</em>
+                    </a>
+                </li>
+            </ul><!-- //quick_box -->
+            <div class="cs_box">
+                <div class="tel">
+                    <strong class="tit">대표전화</strong>
+                    <div class="top">
+                        <strong class="num"><a href="tel:02-6402-8001">02-6402-8001</a></strong>
+                        <em class="fax">FAX. 02-6442-9775</em>
+                        <span class="info">업무시간  09:00 ~ 18:00   월 ~ 금요일<br class="__m" /><em>(주말, 공휴일 휴무)</em></span>
+                    </div>
+                    <div class="bot">
+                        <div class="tel_bot1"><img src="./images/cs_tel_ico1.gif" alt="" />내선번호 1. 제품/구매안내</div>
+                        <div class="tel_bot2"><img src="./images/cs_tel_ico1.gif" alt="" />내선번호 2. H/W 기술문의</div>
+                        <div class="tel_bot3"><img src="./images/cs_tel_ico1.gif" alt="" />내선번호 3. S/W 기술문의 </div>
+                        <div class="tel_bot4"><img src="./images/cs_tel_ico1.gif" alt="" />내선번호 4. A/S 기술문의</div>
+                    </div>
+                </div>
+                <div class="delivery">
+                    <strong class="tit">주문 및 출고안내</strong>
+                    <div class="top">
+                        <span class="due">오후 4시 이전 발주 접수 및 결제 완료시</span>
+                        <strong class="del">익/일/출/고</strong>
+                        <span class="info">저희 에이치앤에스 <em>결제조건은 선 결제 원칙</em>으로 합니다. <br />발주/구매 문의 sales@hnsts.co.kr</span>
+                    </div>
+                    <div class="bot">
+                        <div class="del_bot1"><img src="./images/cs_del_ico1.gif" alt="" />국민은행 421737 - 04 - 010101</div>
+                        <div class="del_bot2"><img src="./images/cs_del_ico2.gif" alt="" />신한은행 140-011-106105</div>
+                        <div class="del_bot3"><img src="./images/cs_del_ico3.gif" alt="" />우리은행 1005 - 701 - 791343</div>
+                        <div class="del_bot4"><img src="./images/cs_del_ico4.gif" alt="" />하나은행 428-910021-73704</div>
+                        <div class="del_bot5"><img src="./images/cs_del_ico5.gif" alt="" />기업은행 02 - 6402 - 8001</div>
+                        <div class="del_bot6">예금주 : (주)에이치앤에스</div>
+                    </div>
+                </div>
+            </div><!-- //cs_box -->
+        </div>
+    </section><!-- //main2_wrap -->    
+
+    <footer id="_footer">
+        <div class="inner">    
+            <div class="foot_logo"><img src="./images/foot_logo.jpg" alt="" /></div>     
+            <strong class="foot_tit">(주)에이치앤에스</strong>
+            <span class="foot_info">
+                서울특별시 금천구 가산디지털1로 88, 1406호 (가산동,  IT프리미어타워) <br/>
+                대표전화 02-6402-8001 / 팩스 02-6442-9775 / 이메일 : hns@hnsts.co.kr<br/>
+                대표이사 : 김진효 / 사업자등록번호 119-86-31548 <br/>
+            </span>
+            <p class="warn">이미지 및 컨텐츠의 저작권은 (주)에이치앤에스에 있으며, 무단복제나 도용은 저작권법에 의거하여 처벌 받을 수 있습니다.</p>
+            <div class="link">
+                <a href="#">개인정보취급방침</a>
+                <em>|</em>
+                <a href="#">이메일수집거부</a>
+            </div>
+        </div>
+    </footer>  
+</div>
+
+</body>
+</html>

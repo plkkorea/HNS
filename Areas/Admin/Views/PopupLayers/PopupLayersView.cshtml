@@ -1,0 +1,50 @@
+﻿@model HNS.Entities.PopupLayer
+@{
+    ViewData["Title"] = "Popup Layers";
+    ViewData["BreadCrumb"] = "기타관리,Popup Layers";
+    ViewData["CurrentMenu"] = "기타관리";
+    ViewData["CurrentMenuItem"] = "Popup Layers";
+}
+
+<div class="bbs-write">
+    <dl>
+        <dt><label for="title">Id</label></dt>
+        <dd><input type="text" id="wr_subject" name="wr_subject" title="제목 입력" readonly value="@Model.Id"></dd>
+    </dl>
+    <dl>
+        <dt>활성화</dt>
+        <dd><input type="checkbox" asp-for="Active" disabled /></dd>
+    </dl>
+    <dl>
+        <dt>게시일</dt>
+        <dd><input type="text" asp-for="StartDate" disabled /></dd>
+    </dl>
+    <dl>
+        <dt>종료일</dt>
+        <dd><input type="text" asp-for="EndDate" disabled /></dd>
+    </dl>
+    <dl>
+        <dt>설명</dt>
+        <dd>
+            <textarea asp-for="Description" rows="10"></textarea>
+        </dd>
+    </dl>
+
+    <dl class="content" style="height:auto;">
+        <dt>내용</dt>
+        <dd>
+            @Html.Raw(Model.Content)
+        </dd>
+    </dl>
+</div>
+
+
+<div class="btn_confirm01 btn_confirm">
+    <a href="@Url.Action("PopupLayersEdit", "PopupLayers", new { id=Model.Id })">
+        편집
+    </a>
+    <a href="@Url.Action("Index", "PopupLayers")">
+        다시 목록으로
+    </a>
+</div>
+

@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="ko">
+<head>      
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="keywords" content="">
+<meta name="author" content="">
+<title>HNS 관리자</title>
+<link rel="stylesheet" href="./css/reset.css">
+<link rel="stylesheet" href="./css/common.css">
+<link rel="stylesheet" href="./css/admin.css">
+<link rel="stylesheet" href="./css/board.css">
+<script type="text/javascript" src="./js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="./js/jquery.easing.1.3.js"></script>    
+<script src="./js/jquery.menu.js"></script>
+</head>
+
+<body>
+
+<script>
+    var tempX = 0;
+    var tempY = 0;
+
+    function imageview(id, w, h)
+    {
+        menu(id);
+
+        var el_id = document.getElementById(id);
+
+        //submenu = eval(name+".style");
+        submenu = el_id.style;
+        submenu.left = tempX - ( w + 11 );
+        submenu.top  = tempY - ( h / 2 );
+
+        selectBoxVisible();
+
+        if (el_id.style.display != 'none')
+            selectBoxHidden(id);
+    }
+    
+    function showInfo(){
+        $("#adminInfo").show();
+    }
+         
+    function toggleInfo(){
+        $("#adminInfo").toggle();
+    }
+</script>
+<div id="utility">
+    <div class="var">
+        <p class="user-h"><a href="/">사용자 홈</a></p>
+        <dl class="log-info" onmouseover="showInfo();">
+            <dt><a href="javascript:toggleInfo();">관리자님 로그인</a></dt>
+            <dd id="adminInfo" style="display:none;">
+                <ul>                        
+                    <li><a href="#">관리자 로그아웃</a></li>
+                </ul>
+            </dd>
+        </dl>
+    </div>
+</div>
+
+<div id="wrap">
+    <div id="aside">
+        <h1><img src="./images/logo.png" alt="" /></h1>
+        <ul class="snb">
+            <li>
+                <a href="#"><span class="ico-money">환경설정</span></a>
+                <ul class="deps2 none">
+                <li>
+                    <a href="#">사이트정보관리</a></li>
+                    <li><a href="#" class="">검색엔진 최적화</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><span class="ico-money">관리자정보관리</span></a>
+                <ul class="deps2 none">
+                    <li>
+                        <a href="#" class="">관리자정보관리</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><span class="ico-money">게시판관리</span></a>
+                <ul class="deps2">
+                    <li><a href="#" class="on">게시판1</a></li>
+                    <li><a href="#" class="">게시판2</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><span class="ico-money">기타관리</span></a>
+                <ul class="deps2 none">
+                    <li><a href="#" class="">팝업레이어관리</a></li>
+                    <li><a href="#" class="">접속자집계</a></li>
+                </ul>
+            </li>
+        </ul>       
+    </div>
+    <!-- //aside -->
+    <div id="container">
+        <div class="head">
+            <h3><span class="sbjt">게시판관리</span></h3>
+            <div class="location">
+                <ul>
+                    <li><img src="./images/loc_ico_home.gif" alt="Home" /></li>
+                    <li>게시판관리</li>
+                    <li>게시판1</li>
+                </ul>
+            </div>
+        </div>
+        <script src="./js/jquery.register_form.js"></script>
+        <div class="contents">
+            <h4 class="sbjt2"><span>게시판1</span></h4>
+            <form name="fwrite" id="fwrite" action=""  method="post" enctype="multipart/form-data">
+            <div class="bbs-write">
+                <dl>
+                    <dt>공지설정</dt>
+                    <dd class="txt">                        
+                        <input type="checkbox" id="notice" name="notice" value="1"  /><label for="notice-op">체크 시 상단 공지사항으로 설정됩니다.</label>
+                    </dd>
+                </dl>               
+                <dl>
+                    <dt><label for="title">제목</label></dt>
+                    <dd><input type="text" id="wr_subject" name="wr_subject" title="제목 입력" value="" /></dd>
+                </dl>
+                <dl>
+                    <dt>URL 링크</dt>
+                    <dd><input type="text" id="wr_1" name="wr_1" title="URL 입력" value="" /></dd>
+                </dl>
+                <dl>
+                    <dt><label for="writer">작성자</label></dt>
+                    <dd class="txt">관리자</dd>
+                </dl>
+                <dl class="content" style="height:auto;">
+                    <dt>내용</dt>
+                    <dd><span class="sound_only">웹에디터 시작</span>
+                        <textarea id="wr_content" name="wr_content" class="smarteditor2" maxlength="65536" style="width:100%"></textarea>
+                        <span class="sound_only">웹 에디터 끝</span></dd>
+                </dl>
+                <dl style="height:auto;padding-bottom:4px;">
+                    <dt><span>첨부파일</span></dt>
+                    <dd id="addedPriceDiv">
+                        <div id="append_0">
+                            <input type="file" name="bf_file[]" style="width:95%" />
+                        </div>
+                    </dd>
+                </dl>
+            </div>
+            <div class="pg-nav">
+                <ul class="btn">
+                    <li><a href="#" onclick="" class="btn-ty1 light">글작성</a></li>
+                    <li><a href="#" class="btn-ty1 dark">목록</a></li>
+                </ul>
+            </div>
+            </form>
+        </div>
+
+<script>
+    function fwrite_submit(f)
+    {
+        if($.trim($("#wr_subject").val()) == "")
+        {
+            alert("제목을 입력하세요");
+            $("#wr_subject").focus()
+            return false;
+        }
+
+        var wr_content_editor_data = oEditors.getById['wr_content'].getIR();
+oEditors.getById['wr_content'].exec('UPDATE_CONTENTS_FIELD', []);
+if(jQuery.inArray(document.getElementById('wr_content').value.toLowerCase().replace(/^\s*|\s*$/g, ''), ['&nbsp;','<p>&nbsp;</p>','<p><br></p>','<div><br></div>','<p></p>','<br>','']) != -1){document.getElementById('wr_content').value='';}
+if (!wr_content_editor_data || jQuery.inArray(wr_content_editor_data.toLowerCase(), ['&nbsp;','<p>&nbsp;</p>','<p><br></p>','<p></p>','<br>']) != -1) { alert("내용을 입력해 주십시오."); oEditors.getById['wr_content'].exec('FOCUS'); return false; }
+
+        f.submit();
+        return true;
+    }
+</script>  
+        <div class="foot">COPYRIGHT ⓒ HNS. ALL RIGHTS RESERVED.</div>       
+    </div>
+    <!-- //container -->
+</div>
+<noscript>
+    <p>
+        귀하께서 사용하시는 브라우저는 현재 <strong>자바스크립트를 사용하지 않음</strong>으로 설정되어 있습니다.<br>
+        <strong>자바스크립트를 사용하지 않음</strong>으로 설정하신 경우는 수정이나 삭제시 별도의 경고창이 나오지 않으므로 이점 주의하시기 바랍니다.
+    </p>
+</noscript>
+    </div>
+</div>
+<!-- <p>실행시간 : 0.001662015914917 -->
+
+<script src="./js/admin.js"></script>
+<script>
+$(function(){
+    var hide_menu = false;
+    var mouse_event = false;
+    var oldX = oldY = 0;
+
+    $(document).mousemove(function(e) {
+        if(oldX == 0) {
+            oldX = e.pageX;
+            oldY = e.pageY;
+        }
+
+        if(oldX != e.pageX || oldY != e.pageY) {
+            mouse_event = true;
+        }
+    });
+
+    // 주메뉴
+    var $gnb = $(".gnb_1dli > a");
+    $gnb.mouseover(function() {
+        if(mouse_event) {
+            $(".gnb_1dli").removeClass("gnb_1dli_over gnb_1dli_over2 gnb_1dli_on");
+            $(this).parent().addClass("gnb_1dli_over gnb_1dli_on");
+            menu_rearrange($(this).parent());
+            hide_menu = false;
+        }
+    });
+
+    $gnb.mouseout(function() {
+        hide_menu = true;
+    });
+
+    $(".gnb_2dli").mouseover(function() {
+        hide_menu = false;
+    });
+
+    $(".gnb_2dli").mouseout(function() {
+        hide_menu = true;
+    });
+
+    $gnb.focusin(function() {
+        $(".gnb_1dli").removeClass("gnb_1dli_over gnb_1dli_over2 gnb_1dli_on");
+        $(this).parent().addClass("gnb_1dli_over gnb_1dli_on");
+        menu_rearrange($(this).parent());
+        hide_menu = false;
+    });
+
+    $gnb.focusout(function() {
+        hide_menu = true;
+    });
+
+    $(".gnb_2da").focusin(function() {
+        $(".gnb_1dli").removeClass("gnb_1dli_over gnb_1dli_over2 gnb_1dli_on");
+        var $gnb_li = $(this).closest(".gnb_1dli").addClass("gnb_1dli_over gnb_1dli_on");
+        menu_rearrange($(this).closest(".gnb_1dli"));
+        hide_menu = false;
+    });
+
+    $(".gnb_2da").focusout(function() {
+        hide_menu = true;
+    });
+
+    $('#gnb_1dul>li').bind('mouseleave',function(){
+        submenu_hide();
+    });
+
+    $(document).bind('click focusin',function(){
+        if(hide_menu) {
+            submenu_hide();
+        }
+    });
+
+    // 폰트 리사이즈 쿠키있으면 실행
+    var font_resize_act = get_cookie("ck_font_resize_act");
+    if(font_resize_act != "") {
+        font_resize("container", font_resize_act);
+    }
+});
+
+function submenu_hide() {
+    $(".gnb_1dli").removeClass("gnb_1dli_over gnb_1dli_over2 gnb_1dli_on");
+}
+
+function menu_rearrange(el)
+{
+    var width = $("#gnb_1dul").width();
+    var left = w1 = w2 = 0;
+    var idx = $(".gnb_1dli").index(el);
+
+    for(i=0; i<=idx; i++) {
+        w1 = $(".gnb_1dli:eq("+i+")").outerWidth();
+        w2 = $(".gnb_2dli > a:eq("+i+")").outerWidth(true);
+
+        if((left + w2) > width) {
+            el.removeClass("gnb_1dli_over").addClass("gnb_1dli_over2");
+        }
+
+        left += w1;
+    }
+}
+</script>
+</body>
+</html>
+

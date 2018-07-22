@@ -1,0 +1,58 @@
+﻿@model HNS.ViewModels.FaqViewModel
+@{
+    ViewData["Title"] = "FAQ";
+    ViewData["BreadCrumb"] = "게시판관리,FAQ";
+    ViewData["CurrentMenu"] = "게시판관리";
+    ViewData["CurrentMenuItem"] = "FAQ";
+}
+
+<fieldset class="bbs-list">
+    <legend>게시글 목록</legend>
+
+    <a href="@Url.Action("FAQEdit", "Community")" class="btn-new">추가</a>
+
+    @if (Model != null && Model.Faqs != null && Model.Faqs.RowCount > 0)
+    {
+        <table summary="전체 목록">
+            <colgroup>
+                <col width="10%">
+                <col width="30%">
+                <col width="10%">
+                <col width="20%">
+                <col width="10%">
+                <col width="10%">
+                <col width="10%">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">내용</th>
+                    <th scope="col">날짜</th>
+                    <th scope="col">키워드</th>
+                    <th scope="col">보기</th>
+                    <th scope="col">편집</th>
+                    <th scope="col">삭제</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Faqs.Results)
+                {
+                <tr>
+                    <td>@item.SerialNo</td>
+                    <td style="text-align:left;"><a href="@Url.Action("FAQView", "Community", new { id=item.Id})" class="subject">@item.m_title</a></td>
+                    <td>@item.m_date.ToString("yyyy-MM-dd")</td>
+                    <td>@item.m_keyword</td>
+                    <td><a href="@Url.Action("FAQView", "Community", new { id=item.Id})">보기</a></td>
+                    <td><a href="@Url.Action("FAQEdit", "Community", new { id=item.Id})">편집</a></td>
+                    <td><a onclick="return confirm('삭제 하시겠습니까?');" href="@Url.Action("FAQDelete", "Community", new { id=item.Id})">삭제</a></td>
+                </tr>
+                }
+            </tbody>
+        </table>
+
+    }
+    else
+    {
+        <h2>No record found.</h2>
+    }
+</fieldset>

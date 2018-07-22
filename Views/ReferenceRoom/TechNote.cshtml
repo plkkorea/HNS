@@ -1,0 +1,155 @@
+﻿@model HNS.ViewModels.TechNoteViewModel
+@{
+    ViewData["Title"] = "Tech Note";
+}
+
+<style>
+    .long-text {
+        display: none
+    }
+</style>
+
+<div class="sub_content sub05_04">
+    <div class="_inner">
+        <div class="sub54_top">
+            TechNote는 IEC-Series로 제품 개발시 유용하게 사용할 수 있는 기술자료와 노하우를 제공합니다.  제품개발시 유용하지만 찾기 어려운 기술자료나 노하우 자료들을 공유하기 위한 목적으로 만들어 졌으며 지속적인 업데이트를 통해 제품 개발의 편의성과 시간절약을 제공하도록 하겠습니다.
+        </div>
+        <div class="notlist_top">
+            <div class="sch">
+                <form asp-action="TechNote" asp-controller="ReferenceRoom" method="post">
+                    <select class="notlist_sel" asp-for="TechNoteSearchCriteria.SearchType">
+                        <option value="0">제목</option>
+                        <option value="1">내용</option>
+                        <option value="2">제목 + 내용</option>
+                    </select>
+                    <input asp-for="TechNoteSearchCriteria.SearchString" type="text" class="notlist_input" />
+                    <button type="submit">검색</button>
+                </form>
+            </div>
+            <div class="cnt">
+                총 @Model.TechNotes.RowCount 건의 글(@(Model.TechNotes.CurrentPage)/@Model.TechNotes.PageCount)
+            </div>
+        </div><!-- //notlist_top -->
+
+        @foreach (var tn in Model.TechNotes.Results)
+        {
+            <table class="technote_list">
+                <colgroup>
+                    <col class="w1" />
+                    <col class="w2" />
+                </colgroup>
+                <tr>
+                    <th scope="col" class="subject">@tn.SerialNo</th>
+                    <th scope="col" class="subject tal"><a href="@Url.Action("TechNoteView", "ReferenceRoom", new { id = tn.Id })">@tn.m_title</a></th>
+                </tr>
+                <tr>
+                    <td colspan="2" class="plr0">
+                        <div class="desc">
+                            <span class="tit">작성일</span>
+                            <span class="date">@tn.m_date.ToString("yyyy-MM-dd")</span>
+                            <span class="tit">수정일</span>
+                            <span class="date">@tn.m_date_modified.ToString("yyyy-MM-dd")</span>
+                            <span class="tit">첨부파일</span>
+                            <span class="file">
+                                @{
+                                    if (!string.IsNullOrWhiteSpace(tn.m_file_name))
+                                    {
+                                        <a href="@Url.Action("DownloadTechNoteFile", "ReferenceRoom", new { id = tn.Id })"><img src="~/template/images/sub54_down.gif" alt="@tn.m_file_name" /></a>
+                                    }
+                                    else
+                                    {
+                                        <text>&nbsp;</text>
+                                    }
+                                }
+                            </span>
+                            <!-- 첨부파일 없을 경우, 필히 공백(&nbsp;) 추가돼야 함 -->
+                            <span class="tit">조회수</span>
+                            <span class="cnt">@tn.m_read</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">분류</th>
+                    <td>@tn.m_classifications.Replace(",",", ")</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="vt">개요</th>
+                    <td>
+                        <a href="@Url.Action("TechNoteView", "ReferenceRoom", new { id=tn.Id })"
+                           class="more" data-more="0">
+                            <span class="short-text">
+                                @if (tn != null && tn.m_summary != null)
+                                {
+                                    @Html.Raw(tn.m_summary)
+                                }
+                                else
+                                {
+                                    @Html.Raw(tn != null && tn.m_summary != null ? tn.m_summary : "")
+                                }
+                            </span>
+                            </a>
+                            @if (tn != null && tn.m_summary != null)
+                            {
+                                <span class="long-text">
+
+                                    @Html.Raw(tn != null && tn.m_summary != null ? tn.m_summary : "")
+
+                                </span>
+                                <a href="@Url.Action("TechNoteView", "ReferenceRoom", new { id=tn.Id })"
+                                   class="more" data-more="0"><img src="~/template/images/sub54_more.gif" alt="더보기" /></a>
+                            }
+                    </td>
+                </tr>
+            </table>
+        }
+
+        <div class="paging_wrap">
+            <div class="paging">
+                <pager pager-model="@Model.TechNotes"></pager>
+            </div>
+        </div>
+    </div>
+    <!-- 서브에만 들어가는 탑 버튼-->
+    <a href="#" class="go_top"><img src="~/template/images/go_top.png" alt="맨 위로"></a>
+</div><!-- //sub_content -->
+<!-- //서브 컨텐츠 // 이 아래부터 공통 -->
+
+<style>
+    .bigtit{
+        overflow:hidden;
+    }
+</style>
+
+@section Scripts
+    {
+    <script>
+        $(function () {
+
+
+          
+
+
+            $(".show-more-button").on('click', function () {
+                // If text is shown less, then show complete
+                if ($(this).attr('data-more') == 0) {
+                    $(this).attr('data-more', 1);
+                    $(this).css('display', 'block');
+                    //$(this).text('Read Less');
+
+                    $(this).prev().css('display', 'none');
+                    $(this).prev().prev().css('display', 'inline');
+                }
+                // If text is shown complete, then show less
+                else if (this.getAttribute('data-more') == 1) {
+                    $(this).attr('data-more', 0);
+                    $(this).css('display', 'inline');
+                    //$(this).text('Read More');
+
+                    $(this).prev().css('display', 'inline');
+                    $(this).prev().prev().css('display', 'none');
+                }
+            });
+
+        })
+    </script>
+}

@@ -1,0 +1,115 @@
+﻿@model HNS.ViewModels.FaqViewModel
+@{
+    ViewData["Title"] = "FAQ";
+}
+
+<div class="sub_content faq">
+    <div class="_inner">
+
+        <div class="notlist_top">
+            <div class="sch">
+                <form asp-action="FAQ" asp-controller="Community" method="post">
+                    <select class="notlist_sel">
+                        <option value="0">제목</option>
+                        <option value="1">내용</option>
+                        <option value="2">제목 + 내용</option>
+                        <option value="3">작성자</option><!-- ?? -->
+                    </select>
+                    <input type="text" asp-for="FaqSearchCriteria.SearchString" class="notlist_input" />
+                    <button type="submit">검색</button>
+                </form>
+            </div>
+        </div><!-- //notlist_top -->
+
+        <div class="faqlist fold">
+            <div class="faqlist_tit">
+                <span class="faq_tit1">번호</span>
+                <span class="faq_tit2">제목</span>
+                <span class="faq_tit3">조회수</span>
+                <span class="faq_tit4">&nbsp;</span>
+            </div>
+
+            @foreach (var faq in Model.Faqs.Results)
+            {
+                <dl>
+                    <dt recordid="@faq.Id">
+                        <span class="num">@faq.SerialNo</span>
+                        <div class="q"><span class="subject"><em>Q</em>@faq.m_title</span></div>
+                        <span class="cnt">@faq.m_read</span>
+                    </dt>
+                    <dd>
+                        <span class="a">
+                            <iframe src="~/Community/FAQViewerForIframe/@faq.Id" scrolling="no" style="border:none;width:100%;"></iframe>
+                        </span>
+                        @if (!string.IsNullOrWhiteSpace(faq.m_keyword))
+                        {
+                            string keywordStr = "";
+                            <div class="keyword">
+                                <span>
+                                    관련 키워드  |
+                                    @foreach (var keyword in faq.m_keyword.Split(','))
+                                    {
+                                        if (!string.IsNullOrWhiteSpace(keyword))
+                                        {
+                                            keywordStr += keyword + ", ";
+                                        }
+                                    }
+                                    @keywordStr.TrimEnd(new char[] { ' ', ',' })
+
+                                </span>
+                            </div>
+                        }
+                    </dd>
+                </dl>
+            }
+
+        </div>
+
+        @*<div class="paging_wrap">
+                <div class="paging">
+
+                    <pager pager-model="@Model.Faqs"></pager>
+
+                </div>
+            </div>*@
+
+    </div>
+    <!-- 서브에만 들어가는 탑 버튼-->
+    <a href="#" class="go_top"><img src="~/template/images/go_top.png" alt="맨 위로"></a>
+</div><!-- //sub_content -->
+<!-- //서브 컨텐츠 // 이 아래부터 공통 -->
+@section Scripts
+    {
+
+    <script>
+        var row;
+
+        $(function () {
+            $('dl dt').on('click', function () {
+                var id = $(this).attr('recordid');
+                row = this;
+                if ($($(this).siblings()).height() == 0) {
+
+                    var height = $($($(this).siblings()).find('iframe'))[0].contentWindow.document.body.scrollHeight;
+                    $($($($(this).siblings()).find('iframe'))[0]).attr('height', height + 'px');
+
+                    $.ajax({
+                        url: "/Community/FaqViewed",
+                        type: "post",
+                        data: { id: id },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            return false;
+                        },
+                        success: function (data) {
+                            $($(row).find('.cnt')).text(data);
+                            return true;
+                        }
+                    });
+                }
+            })
+
+        })
+
+    </script>
+
+}

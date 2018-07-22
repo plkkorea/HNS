@@ -1,0 +1,100 @@
+﻿@model HNS.Entities.Qna
+@{
+    ViewData["Title"] = "QnA";
+    ViewData["BreadCrumb"] = "게시판관리,QnA";
+    ViewData["CurrentMenu"] = "게시판관리";
+    ViewData["CurrentMenuItem"] = "QnA";
+}
+
+
+<form asp-action="QnaEdit" asp-controller="Community" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="m_ref" />
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="bbs-write">
+        <dl>
+            <dt><label for="title">작성자</label></dt>
+            <dd><input type="text" asp-for="m_name" readonly></dd>
+        </dl>
+        <dl>
+            <dt>제목</dt>
+            <dd><input type="text" maxlength="50" asp-for="m_title" required></dd>
+        </dl>
+        <dl>
+            <dt>
+                파일
+                @if(Model != null && !string.IsNullOrWhiteSpace(Model.m_file_name))
+                {
+                    <a href = "@Url.Action("DownloadQnAFile", "Community", new { id = Model.Id })" ><img src="~/template/images/sub54_down.gif" alt="@Model.m_file_name" title="@Model.m_file_name" /></a>
+                }
+            </dt>
+            <dd><input type="file" asp-for="m_file_name"></dd>
+        </dl>
+        <dl>
+            <dt>비밀번호</dt>
+            <dd><input type="password" maxlength="10" asp-for="m_passwd" required></dd>
+        </dl>
+
+        <dl class="content" style="height:auto;">
+            <dt>본문</dt>
+            <dd>
+                <a href="#" id="linkSwitchEditor">[Rich Text Editor로 변경]</a>
+
+                <textarea asp-for="m_content" rows="20"></textarea>
+            </dd>
+        </dl>
+    </div>
+
+
+    @if (Model?.Id > 0)
+    {
+        <div class="btn_confirm01 btn_confirm">
+            <input type="submit" value="수정" class="btn-ty1 light" accesskey="s">
+            <a href="@Url.Action("Qna", "Community")">
+                취소
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="btn_confirm01 btn_confirm">
+            <input type="submit" value="작성" class="btn-ty1 light" accesskey="s">
+            <a href="@Url.Action("Qna", "Community")">
+                취소
+            </a>
+        </div>
+    }
+
+
+</form>
+
+
+@section Scripts
+    {
+    <script src="~/lib/ckeditor/ckeditor.js"></script>
+
+    <script>
+        //$(function () {
+        //    CKEDITOR.replace('m_content');
+        //})
+
+        $(function () {
+            //CKEDITOR.replace('m_content');
+
+            $('body').on('click', '#linkSwitchEditor', function () {
+                if (CKEDITOR.instances.m_content) {
+                    CKEDITOR.instances.m_content.destroy();
+                    $(this).text('[Rich Text Editor로 변경]');
+                }
+                else {
+                    CKEDITOR.replace('m_content');
+                    $(this).text('[Simple Text Editor로 전환]');
+                }
+            });
+
+        })
+
+    </script>
+
+}

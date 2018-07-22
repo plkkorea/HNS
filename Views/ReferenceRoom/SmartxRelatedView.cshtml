@@ -1,0 +1,52 @@
+﻿@model HNS.Entities.SmartXRelated
+@{
+    ViewData["Title"] = "Smartx Related View";
+}
+
+<div class="sub_content sub05_02">
+    <div class="_inner">
+        <table class="qnawrite_tbl">
+            <colgroup>
+                <col class="tbl1">
+                <col class="tbl2">
+                <col class="tbl3">
+                <col class="tbl4">
+            </colgroup>
+            <tbody>
+                <tr>
+                    <th scope="row"><span class="red">내용</span></th>
+                    <td><input type="text" asp-for="Title" readonly class="qna_input"></td>
+                    <th scope="row"><span>번역</span></th>
+                    <td><input type="text" asp-for="Version" readonly class="qna_input"></td>
+                </tr>
+                <tr>
+                    <th scope="row" class="vt"><span class="red">함유량</span></th>
+                    <td colspan="3">
+                        @Html.Raw(Model.Content)
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="notwrite_bot">
+            <a href="@Url.Action("SmartXRelatedEdit", "ReferenceRoom", new { id= Model.Id})" class="write">편집</a>
+            <a href="@Url.Action("SmartXRelatedAdmin", "ReferenceRoom")" class="cancel">뒤로</a>
+        </div>
+
+
+    </div>
+    <!-- 서브에만 들어가는 탑 버튼-->
+    <a href="#" class="go_top"><img src="~/template/images/go_top.png" alt="맨 위로"></a>
+</div><!-- //sub_content -->
+<!-- //서브 컨텐츠 // 이 아래부터 공통 -->
+@section Scripts
+    {
+    <script src="~/lib/ckeditor/ckeditor.js"></script>
+
+    <script>
+        $(function () {
+            CKEDITOR.replace('Content');
+        })
+    </script>
+
+}
